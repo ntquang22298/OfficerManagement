@@ -1,0 +1,71 @@
+entity Unit {
+	Name String,
+    Address String,
+    Phone String,
+    Website String
+    Type UnitType
+}
+
+entity Officer {
+	Code String,
+    FullName String,
+    AvatarUrl String,
+    VNUEmail String,
+    Degree OfficerDegree
+    Type OfficerType
+    
+}
+enum UnitType {
+	BOMON,
+    PHONGTHINGHIEM
+}
+enum OfficerType{
+	HT,
+    PHT,
+    TK,
+    PK,
+    CNBM,
+    PCNBM,
+    GV
+}
+enum OfficerDegree {
+	TS,
+    PGSTS,
+    ThS,
+    CN,
+    GSTS
+    
+}
+
+entity ResearchArea {
+	Name String
+}
+
+entity ConcernArea {
+	Name String
+}
+
+entity Diary {
+	Time ZonedDateTime,
+    Content String,
+}
+relationship OneToOne {
+
+    Officer {User} to User
+}
+relationship ManyToOne {
+	Diary {Officer} to Officer{Diaries}
+}
+relationship OneToMany {
+    Unit {Officers} to  Officer {Unit}
+    ResearchArea {childs} to ResearchArea {parent}
+    ConcernArea {childs} to ConcernArea {parent}
+    
+}
+relationship ManyToMany {
+
+	Officer {ResearchAreas} to ResearchArea {Officers}
+    Officer {ConcernAreas} to ConcernArea {Officers}
+
+
+}
