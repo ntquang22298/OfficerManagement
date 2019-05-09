@@ -1,0 +1,12 @@
+{
+  "officerManagementApp": {
+    "OfficerDegree": {
+      "null": "",
+      "TS": "TS",
+      "PGSTS": "PGSTS",
+      "ThS": "ThS",
+      "CN": "CN",
+      "GSTS": "GSTS"
+    }
+  }
+}

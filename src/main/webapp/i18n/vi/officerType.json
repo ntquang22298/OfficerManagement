@@ -1,0 +1,14 @@
+{
+  "officerManagementApp": {
+    "OfficerType": {
+      "null": "",
+      "HT": "HT",
+      "PHT": "PHT",
+      "TK": "TK",
+      "PK": "PK",
+      "CNBM": "CNBM",
+      "PCNBM": "PCNBM",
+      "GV": "GV"
+    }
+  }
+}

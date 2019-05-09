@@ -1,0 +1,9 @@
+{
+  "officerManagementApp": {
+    "UnitType": {
+      "null": "",
+      "BOMON": "BOMON",
+      "PHONGTHINGHIEM": "PHONGTHINGHIEM"
+    }
+  }
+}

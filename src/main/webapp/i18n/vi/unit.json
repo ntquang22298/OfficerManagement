@@ -1,0 +1,26 @@
+{
+  "officerManagementApp": {
+    "unit": {
+      "home": {
+        "title": "Units",
+        "createLabel": "Thêm mới một Unit",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Unit"
+      },
+      "created": "Một Unit mới được tạo với định danh {{ param }}",
+      "updated": "Một Unit cập nhật với định danh {{ param }}",
+      "deleted": "Một Unit đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Unit {{ id }}?"
+      },
+      "detail": {
+        "title": "Unit"
+      },
+      "name": "Name",
+      "address": "Address",
+      "phone": "Phone",
+      "website": "Website",
+      "type": "Type",
+      "officers": "Officers"
+    }
+  }
+}

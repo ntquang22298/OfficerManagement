@@ -1,0 +1,24 @@
+{
+  "officerManagementApp": {
+    "researchArea": {
+      "home": {
+        "title": "Research Areas",
+        "createLabel": "Create a new Research Area",
+        "createOrEditLabel": "Create or edit a Research Area"
+      },
+      "created": "A new Research Area is created with identifier {{ param }}",
+      "updated": "A Research Area is updated with identifier {{ param }}",
+      "deleted": "A Research Area is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Research Area {{ id }}?"
+      },
+      "detail": {
+        "title": "Research Area"
+      },
+      "name": "Name",
+      "childs": "Childs",
+      "parent": "Parent",
+      "officers": "Officers"
+    }
+  }
+}

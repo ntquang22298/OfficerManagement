@@ -1,0 +1,23 @@
+{
+  "officerManagementApp": {
+    "diary": {
+      "home": {
+        "title": "Diaries",
+        "createLabel": "Create a new Diary",
+        "createOrEditLabel": "Create or edit a Diary"
+      },
+      "created": "A new Diary is created with identifier {{ param }}",
+      "updated": "A Diary is updated with identifier {{ param }}",
+      "deleted": "A Diary is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Diary {{ id }}?"
+      },
+      "detail": {
+        "title": "Diary"
+      },
+      "time": "Time",
+      "content": "Content",
+      "officer": "Officer"
+    }
+  }
+}

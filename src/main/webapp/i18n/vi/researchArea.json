@@ -1,0 +1,24 @@
+{
+  "officerManagementApp": {
+    "researchArea": {
+      "home": {
+        "title": "Research Areas",
+        "createLabel": "Thêm mới một Research Area",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Research Area"
+      },
+      "created": "Một Research Area mới được tạo với định danh {{ param }}",
+      "updated": "Một Research Area cập nhật với định danh {{ param }}",
+      "deleted": "Một Research Area đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Research Area {{ id }}?"
+      },
+      "detail": {
+        "title": "Research Area"
+      },
+      "name": "Name",
+      "childs": "Childs",
+      "parent": "Parent",
+      "officers": "Officers"
+    }
+  }
+}

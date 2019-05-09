@@ -1,0 +1,79 @@
+{
+    "name": "Officer",
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "avatarUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "vNUEmail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "degree",
+            "fieldType": "OfficerDegree",
+            "fieldValues": "TS,PGSTS,ThS,CN,GSTS"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "OfficerType",
+            "fieldValues": "HT,PHT,TK,PK,CNBM,PCNBM,GV"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "officer",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "researchArea",
+            "otherEntityRelationshipName": "officers",
+            "relationshipName": "researchAreas",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "concernArea",
+            "otherEntityRelationshipName": "officers",
+            "relationshipName": "concernAreas",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unit",
+            "otherEntityRelationshipName": "officers",
+            "relationshipName": "unit",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "diary",
+            "otherEntityRelationshipName": "officer",
+            "relationshipName": "diaries"
+        }
+    ],
+    "changelogDate": "20190507090258",
+    "entityTableName": "officer",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,41 @@
+{
+    "name": "ConcernArea",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "concernArea",
+            "otherEntityRelationshipName": "parent",
+            "relationshipName": "childs"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "concernArea",
+            "otherEntityRelationshipName": "childs",
+            "relationshipName": "parent",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "officer",
+            "otherEntityRelationshipName": "concernAreas",
+            "relationshipName": "officers",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190507090300",
+    "entityTableName": "concern_area",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

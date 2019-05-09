@@ -1,0 +1,24 @@
+{
+  "officerManagementApp": {
+    "concernArea": {
+      "home": {
+        "title": "Concern Areas",
+        "createLabel": "Create a new Concern Area",
+        "createOrEditLabel": "Create or edit a Concern Area"
+      },
+      "created": "A new Concern Area is created with identifier {{ param }}",
+      "updated": "A Concern Area is updated with identifier {{ param }}",
+      "deleted": "A Concern Area is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Concern Area {{ id }}?"
+      },
+      "detail": {
+        "title": "Concern Area"
+      },
+      "name": "Name",
+      "childs": "Childs",
+      "parent": "Parent",
+      "officers": "Officers"
+    }
+  }
+}

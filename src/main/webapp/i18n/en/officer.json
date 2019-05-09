@@ -1,0 +1,31 @@
+{
+  "officerManagementApp": {
+    "officer": {
+      "home": {
+        "title": "Officers",
+        "createLabel": "Create a new Officer",
+        "createOrEditLabel": "Create or edit a Officer"
+      },
+      "created": "A new Officer is created with identifier {{ param }}",
+      "updated": "A Officer is updated with identifier {{ param }}",
+      "deleted": "A Officer is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Officer {{ id }}?"
+      },
+      "detail": {
+        "title": "Officer"
+      },
+      "code": "Code",
+      "fullName": "Full Name",
+      "avatarUrl": "Avatar Url",
+      "vNUEmail": "V NU Email",
+      "degree": "Degree",
+      "type": "Type",
+      "user": "User",
+      "researchAreas": "Research Areas",
+      "concernAreas": "Concern Areas",
+      "unit": "Unit",
+      "diaries": "Diaries"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="officerManagementApp.officer.home.title">Officers</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-officer" [routerLink]="['/officer/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="officerManagementApp.officer.home.createLabel">
+            Create new Officer
+            </span>
+        </button>
+    </h2>
+    <input class="form-control" type="text" [(ngModel)]="key"/>
+    <button (click)="findByUnit()">Find</button>
+    <br/>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="officers">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.code">Code</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.fullName">Full Name</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.avatarUrl">Avatar Url</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.vNUEmail">V NU Email</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.degree">Degree</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.type">Type</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.user">User</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.researchAreas">Research Areas</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.concernAreas">Concern Areas</span></th>
+            <th><span jhiTranslate="officerManagementApp.officer.unit">Unit</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let officer of officers ;trackBy: trackId">
+                <td><a [routerLink]="['/officer', officer.id, 'view' ]">{{officer.id}}</a></td>
+                <td>{{officer.code}}</td>
+                <td>{{officer.fullName}}</td>
+                <td>{{officer.avatarUrl}}</td>
+                <td>{{officer.vNUEmail}}</td>
+                <td jhiTranslate="{{'officerManagementApp.OfficerDegree.' + officer.degree}}">{{officer.degree}}</td>
+                <td jhiTranslate="{{'officerManagementApp.OfficerType.' + officer.type}}">{{officer.type}}</td>
+                <td>
+                    {{officer.user?.id}}
+                </td>
+                <td>
+                    <span *ngFor="let researchAreas of officer.researchAreas; let last = last">
+                            <a class="form-control-static" [routerLink]="['../research-area', researchAreas?.id, 'view' ]">{{researchAreas.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let concernAreas of officer.concernAreas; let last = last">
+                            <a class="form-control-static" [routerLink]="['../concern-area', concernAreas?.id, 'view' ]">{{concernAreas.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <div *ngIf="officer.unit">
+                        <a [routerLink]="['../unit', officer.unit?.id, 'view' ]" >{{officer.unit?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/officer', officer.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/officer', officer.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'officer', { outlets: { popup: officer.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

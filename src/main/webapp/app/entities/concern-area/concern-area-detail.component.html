@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="concernArea">
+            <h2><span jhiTranslate="officerManagementApp.concernArea.detail.title">Concern Area</span> {{concernArea.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="officerManagementApp.concernArea.name">Name</span></dt>
+                <dd>
+                    <span>{{concernArea.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="officerManagementApp.concernArea.parent">Parent</span></dt>
+                <dd>
+                    <div *ngIf="concernArea.parent">
+                        <a [routerLink]="['/concern-area', concernArea.parent?.id, 'view']">{{concernArea.parent?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/concern-area', concernArea.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{
+    "name": "Unit",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "website",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "UnitType",
+            "fieldValues": "BOMON,PHONGTHINGHIEM"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "officer",
+            "otherEntityRelationshipName": "unit",
+            "relationshipName": "officers"
+        }
+    ],
+    "changelogDate": "20190507090257",
+    "entityTableName": "unit",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

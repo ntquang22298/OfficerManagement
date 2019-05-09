@@ -1,0 +1,41 @@
+{
+    "name": "ResearchArea",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "researchArea",
+            "otherEntityRelationshipName": "parent",
+            "relationshipName": "childs"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "researchArea",
+            "otherEntityRelationshipName": "childs",
+            "relationshipName": "parent",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "officer",
+            "otherEntityRelationshipName": "researchAreas",
+            "relationshipName": "officers",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190507090259",
+    "entityTableName": "research_area",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

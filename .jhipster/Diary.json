@@ -1,0 +1,31 @@
+{
+    "name": "Diary",
+    "fields": [
+        {
+            "fieldName": "time",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "officer",
+            "otherEntityRelationshipName": "diaries",
+            "relationshipName": "officer",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190507090301",
+    "entityTableName": "diary",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

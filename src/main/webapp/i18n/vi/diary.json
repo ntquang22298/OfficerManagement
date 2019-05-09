@@ -1,0 +1,23 @@
+{
+  "officerManagementApp": {
+    "diary": {
+      "home": {
+        "title": "Diaries",
+        "createLabel": "Thêm mới một Diary",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Diary"
+      },
+      "created": "Một Diary mới được tạo với định danh {{ param }}",
+      "updated": "Một Diary cập nhật với định danh {{ param }}",
+      "deleted": "Một Diary đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Diary {{ id }}?"
+      },
+      "detail": {
+        "title": "Diary"
+      },
+      "time": "Time",
+      "content": "Content",
+      "officer": "Officer"
+    }
+  }
+}
