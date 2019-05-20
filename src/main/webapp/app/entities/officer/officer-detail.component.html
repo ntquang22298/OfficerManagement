@@ -1,51 +1,54 @@
-<div class="row justify-content-center">
+<!-- <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="officer">
-            <h2><span jhiTranslate="officerManagementApp.officer.detail.title">Officer</span> {{officer.id}}</h2>
+            <h2><span>Officer</span> {{officer.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="officerManagementApp.officer.code">Code</span></dt>
+                <dt><span>Code</span></dt>
                 <dd>
                     <span>{{officer.code}}</span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.fullName">Full Name</span></dt>
+                <dt><span>Full Name</span></dt>
                 <dd>
-                    <span>{{officer.fullName}}</span>
+                    <span
+                    >{{officer.fullName}}</span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.avatarUrl">Avatar Url</span></dt>
+                <dt><span>Avatar Url</span></dt>
                 <dd>
                     <span>{{officer.avatarUrl}}</span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.vNUEmail">V NU Email</span></dt>
+                <dt><span>V NU Email</span></dt>
                 <dd>
                     <span>{{officer.vNUEmail}}</span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.degree">Degree</span></dt>
+                <dt><span>Degree</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'officerManagementApp.OfficerDegree.' + officer.degree}}">{{officer.degree}}</span>
+                    <span>{{officer.degree}}</span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.type">Type</span></dt>
+                <dt><span>Type</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'officerManagementApp.OfficerType.' + officer.type}}">{{officer.type}}</span>
+                    <span>{{officer.type}}</span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.user">User</span></dt>
+                <dt><span>User</span></dt>
                 <dd>
                     {{officer.user?.id}}
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.researchAreas">Research Areas</span></dt>
+                <dt><span>Research Areas</span></dt>
                 <dd>
                     <span *ngFor="let researchAreas of officer.researchAreas; let last = last">
-                        <a [routerLink]="['/research-area', researchAreas?.id, 'view' ]">{{researchAreas.id}}</a>{{last ? '' : ', '}}
+                        <a
+                            [routerLink]="['/research-area', researchAreas?.id, 'view' ]">{{researchAreas.id}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.concernAreas">Concern Areas</span></dt>
+                <dt><span>Concern Areas</span></dt>
                 <dd>
                     <span *ngFor="let concernAreas of officer.concernAreas; let last = last">
-                        <a [routerLink]="['/concern-area', concernAreas?.id, 'view' ]">{{concernAreas.id}}</a>{{last ? '' : ', '}}
+                        <a
+                            [routerLink]="['/concern-area', concernAreas?.id, 'view' ]">{{concernAreas.id}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.officer.unit">Unit</span></dt>
+                <dt><span>Unit</span></dt>
                 <dd>
                     <div *ngIf="officer.unit">
                         <a [routerLink]="['/unit', officer.unit?.id, 'view']">{{officer.unit?.id}}</a>
@@ -53,17 +56,83 @@
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/officer', officer.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            <button type="button" [routerLink]="['/officer', officer.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
             </button>
         </div>
     </div>
+</div> -->
+<div *ngIf="officer">
+    <div class="row justify-content-center">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-info">
+            <div class="left-side">
+                <div class="personal-img"><img src="../../../../../../images/images.jpg"></div>
+            </div>
+            <div class="right-side">
+                <div class="label">
+                    <h3>
+                        Thông tin cán bộ
+                    </h3>
+                </div>
+                <div class="detail">
+                    <div class="info">
+                        <div class="row-a">
+                            <div class="icon-left">
+                                <fa-icon class="icon-left" icon="id-badge"></fa-icon>
+                            </div>
+                            <div class="text"><strong>Mã cán bộ</strong></div>
+                            <p> {{officer.id}}</p>
+                        </div>
+                        <div class="row-a">
+                            <div class="icon-left">
+                                <fa-icon class="icon-left" icon="user"></fa-icon>
+                            </div>
+                            <div class="text"><strong>Họ và tên</strong></div>
+                            <p> {{officer.fullName}}</p>
+                        </div>
+                        <div class="row-a">
+                            <div class="icon-left">
+                                <fa-icon class="icon-left" icon="envelope"></fa-icon>
+                            </div>
+                            <div class="text"><strong>VNU Email</strong></div>
+                            <p> {{officer.vNUEmail}}</p>
+                        </div>
+                        <div class="row-a">
+                            <div class="left">
+                                <div class="icon-left">
+                                    <fa-icon class="icon-left" icon="briefcase"></fa-icon>
+                                </div>
+                                <div class="text"><strong>Chức vụ</strong></div>
+                                <p>{{officer.type}}</p>
+                            </div>
+                            <div class="right">
+                                <div class="icon-left">
+                                    <fa-icon class="icon-left" icon="user-graduate"></fa-icon>
+                                </div>
+                                <div class="text"><strong>Học vị</strong></div>
+                                <p>{{officer.degree}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row-a">
+                        <div class="icon-left">
+                            <fa-icon class="icon-left" icon="university"></fa-icon>
+                        </div>
+                        <div class="text"><strong>Đơn vị</strong></div>
+                        <div *ngIf="officer.unit">
+                                <a [routerLink]="['../unit', officer.unit?.id, 'view' ]" >{{officer.unitName}}</a>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>

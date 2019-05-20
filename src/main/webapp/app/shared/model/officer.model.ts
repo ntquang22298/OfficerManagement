@@ -34,6 +34,7 @@ export interface IOfficer {
   researchAreas?: IResearchArea[];
   concernAreas?: IConcernArea[];
   unit?: IUnit;
+  unitName?: string;
   diaries?: IDiary[];
 }
 
@@ -50,6 +51,7 @@ export class Officer implements IOfficer {
     public researchAreas?: IResearchArea[],
     public concernAreas?: IConcernArea[],
     public unit?: IUnit,
+    public unitName?: string,
     public diaries?: IDiary[]
   ) {}
 }

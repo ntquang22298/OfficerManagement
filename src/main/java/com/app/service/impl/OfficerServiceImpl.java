@@ -7,9 +7,13 @@ import com.app.repository.OfficerRepository;
 import com.app.security.AuthoritiesConstants;
 import com.app.security.SecurityUtils;
 import com.app.service.OfficerService;
+import com.app.service.dto.OfficerDTO;
+import com.app.service.mapper.OfficerMapper;
 import com.app.web.rest.errors.BadRequestAlertException;
 import java.time.ZonedDateTime;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,10 +26,12 @@ public class OfficerServiceImpl implements OfficerService {
     private final Logger log = LoggerFactory.getLogger(OfficerServiceImpl.class);
     private final OfficerRepository officerRepository;
     private final DiaryRepository diaryRepository;
+    private final OfficerMapper officerMapper;
 
-    public OfficerServiceImpl(OfficerRepository officerRepository, DiaryRepository diaryRepository) {
+    public OfficerServiceImpl(OfficerRepository officerRepository, DiaryRepository diaryRepository, OfficerMapper officerMapper) {
         this.officerRepository = officerRepository;
         this.diaryRepository = diaryRepository;
+        this.officerMapper = officerMapper;
     }
 
     @Override
@@ -51,10 +57,25 @@ public class OfficerServiceImpl implements OfficerService {
     }
 
     @Override
-    public List<Officer> findAllByUnit(String key) {
-        
-        return officerRepository.findAllByUnit("%"+key+"%");
-        
+    public List<OfficerDTO> findAllByUnit(String key) {
+
+        return officerRepository.findAllByUnit("%" + key + "%").stream()
+                .map(officerMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+
+    }
+
+    @Override
+    public List<OfficerDTO> findAll() {
+        return officerRepository.findAllWithEagerRelationships().stream()
+                .map(officerMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public OfficerDTO findOne(Long id) {
+
+        return officerMapper.toDto(officerRepository.findOneWithEagerRelationships(id));
     }
 
 }

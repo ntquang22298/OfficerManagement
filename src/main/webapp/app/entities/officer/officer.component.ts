@@ -5,20 +5,24 @@ import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IOfficer } from 'app/shared/model/officer.model';
+import { IUnit } from 'app/shared/model/unit.model';
 import { AccountService } from 'app/core';
 import { OfficerService } from './officer.service';
-
+import { UnitService, unitPopupRoute } from '../unit';
 @Component({
   selector: 'jhi-officer',
   templateUrl: './officer.component.html'
 })
 export class OfficerComponent implements OnInit, OnDestroy {
   officers: IOfficer[];
+  units: IUnit[];
+  unit: IUnit;
   currentAccount: any;
   eventSubscriber: Subscription;
-  key: string;
+  results: any[];
   constructor(
     protected officerService: OfficerService,
+    protected unitService: UnitService,
     protected jhiAlertService: JhiAlertService,
     protected eventManager: JhiEventManager,
     protected accountService: AccountService
@@ -60,8 +64,11 @@ export class OfficerComponent implements OnInit, OnDestroy {
   }
 
   findByUnit() {
+    if (this.unit.name == null) {
+      this.loadAll();
+    }
     this.officerService
-      .findByUnit(this.key)
+      .findByUnit(this.unit.name)
       .pipe(
         filter((res: HttpResponse<IOfficer[]>) => res.ok),
         map((res: HttpResponse<IOfficer[]>) => res.body)
@@ -72,6 +79,33 @@ export class OfficerComponent implements OnInit, OnDestroy {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+  }
+
+  search(event) {
+    let query = event.query;
+    this.unitService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<IUnit[]>) => res.ok),
+        map((res: HttpResponse<IUnit[]>) => res.body)
+      )
+      .subscribe(
+        (res: IUnit[]) => {
+          this.units = res;
+          this.results = this.filterUnit(query, this.units);
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+  filterUnit(query, units: any[]): any[] {
+    let filtered: any[] = [];
+    for (let i = 0; i < units.length; i++) {
+      let unit = units[i];
+      if (unit.name.toLowerCase().includes(query.toLowerCase()) === true) {
+        filtered.push(unit);
+      }
+    }
+    return filtered;
   }
 
   protected onError(errorMessage: string) {

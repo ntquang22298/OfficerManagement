@@ -2,7 +2,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
-
+import { TableModule } from 'primeng/table';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { PaginatorModule } from 'primeng/paginator';
 import { OfficerManagementSharedModule } from 'app/shared';
 import {
   OfficerComponent,
@@ -17,7 +19,7 @@ import {
 const ENTITY_STATES = [...officerRoute, ...officerPopupRoute];
 
 @NgModule({
-  imports: [OfficerManagementSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [OfficerManagementSharedModule, RouterModule.forChild(ENTITY_STATES), TableModule, AutoCompleteModule, PaginatorModule],
   declarations: [
     OfficerComponent,
     OfficerDetailComponent,
