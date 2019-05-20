@@ -1,42 +1,85 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-
 /* ==========================================================================
 Navbar
 ========================================================================== */
 
-.navbar-version {
-  font-size: 0.65em;
-  color: $navbar-dark-color;
+.jh-navbar {
+  background-color: #253b80;
+  padding: 0.2em 1em;
 }
 
-.profile-image {
-  height: 1.75em;
-  width: 1.75em;
+.jh-navbar .profile-image {
+  margin: -10px 0px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 }
 
-.navbar {
-  padding: 0.2rem 1rem;
+.jh-navbar .dropdown-item.active,
+.jh-navbar .dropdown-item.active:focus,
+.jh-navbar .dropdown-item.active:hover {
+  background-color: #46a5e5;
+}
 
-  ul.navbar-nav {
-    .nav-item {
-      margin-left: 0.5em;
-    }
-  }
+.jh-navbar .dropdown-toggle::after {
+  margin-left: 0.15em;
+}
 
-  a.nav-link {
-    font-weight: 400;
+.jh-navbar ul.navbar-nav {
+  padding: 0.5em;
+}
+
+.jh-navbar .navbar-nav .nav-item {
+  margin-left: 1.5rem;
+}
+
+.jh-navbar a.nav-link {
+  font-weight: 400;
+}
+
+.jh-navbar .jh-navbar-toggler {
+  color: #ccc;
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+.jh-navbar .jh-navbar-toggler:hover {
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .jh-navbar-toggler {
+    display: none;
   }
+}
+
+@media screen and (max-width: 992px) {
+  .jh-logo-container {
+    width: 100%;
+  }
+}
+
+.navbar-title {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* ==========================================================================
 Logo styles
 ========================================================================== */
+.navbar-brand.logo {
+  padding: 0px;
+}
+
 .logo-img {
+  height: 100%;
+  background: url('../../../../../../images/UET.png') no-repeat center center;
+  background-size: contain;
+  width: 100%;
+}
+
+.logo .logo-img {
   height: 45px;
-  width: 45px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
-  background-size: contain;
+  width: 100px;
 }

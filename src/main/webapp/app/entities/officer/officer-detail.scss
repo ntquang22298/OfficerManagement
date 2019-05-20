@@ -1,0 +1,70 @@
+.form-info {
+  position: relative;
+  height: 470px;
+  width: 1024px;
+  border-bottom: 1px solid #bebebe;
+  border-right: 1px solid #bebebe;
+  box-shadow: 0 3px 4px rgba(135, 135, 135, 0.75);
+}
+.form-info .left-side,
+img {
+  float: left;
+  height: 470px;
+  width: 470px;
+}
+.form-info .right-side {
+  position: relative;
+  float: left;
+  height: 470px;
+  width: 470px;
+}
+
+.label {
+  width: 300px;
+  height: 60px;
+  margin-left: -38px;
+  text-align: center;
+  background: #0070ba;
+  box-shadow: 2px 2px 2px #717171;
+}
+h3 {
+  font-size: 20px;
+  padding-top: 20px;
+  color: white;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 500;
+}
+.right-side .detail {
+  width: 412px;
+  height: 326px;
+  padding-top: 30px;
+}
+.right-side .detail .row-a {
+  height: 74px;
+  width: 412px;
+  padding-top: 10px;
+  margin-left: 30px;
+  border-bottom: 1px solid #828282;
+}
+.icon-left {
+  width: 50px;
+  height: 37px;
+  float: left;
+  display: inline-block;
+}
+.icon-left fa-icon {
+  font-size: 35px;
+  color: #0070ba;
+}
+strong {
+  font-weight: 700;
+}
+.left {
+  width: 50%;
+  float: left;
+}
+.right {
+  width: 50%;
+  float: right;
+}

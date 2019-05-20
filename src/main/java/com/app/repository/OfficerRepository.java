@@ -25,7 +25,7 @@ public interface OfficerRepository extends JpaRepository<Officer, Long> {
     List<Officer> findAllWithEagerRelationships();
 
     @Query("select officer from Officer officer left join fetch officer.researchAreas left join fetch officer.concernAreas where officer.id =:id")
-    Optional<Officer> findOneWithEagerRelationships(@Param("id") Long id);
+    Officer findOneWithEagerRelationships(@Param("id") Long id);
         
     @Query(value = "Select o from Officer o inner join o.unit u where u.name like :key ")
     public List<Officer> findAllByUnit(@Param("key") String key);

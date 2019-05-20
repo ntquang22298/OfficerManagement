@@ -5,6 +5,7 @@ import com.app.domain.Officer;
 import com.app.repository.DiaryRepository;
 import com.app.repository.OfficerRepository;
 import com.app.service.OfficerService;
+import com.app.service.dto.OfficerDTO;
 import com.app.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -113,9 +114,9 @@ public class OfficerResource {
      * list of officers in body.
      */
     @GetMapping("/officers")
-    public List<Officer> getAllOfficers(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<OfficerDTO> getAllOfficers(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Officers");
-        return officerRepository.findAllWithEagerRelationships();
+        return officerService.findAll();
     }
 
     /**
@@ -126,10 +127,10 @@ public class OfficerResource {
      * body the officer, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/officers/{id}")
-    public ResponseEntity<Officer> getOfficer(@PathVariable Long id) {
+    public ResponseEntity<OfficerDTO> getOfficer(@PathVariable Long id) {
         log.debug("REST request to get Officer : {}", id);
-        Optional<Officer> officer = officerRepository.findOneWithEagerRelationships(id);
-        return ResponseUtil.wrapOrNotFound(officer);
+        OfficerDTO officer = officerService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(officer));
     }
 
     /**
@@ -144,13 +145,15 @@ public class OfficerResource {
         officerService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
     /**
      * {@code Get  /officers-by-unit/:key} : find officers by unit
+     *
      * @param key : unit's name or part of unit's name
      * @return list of officers in body.
      */
     @GetMapping("/officers-by-unit/{key}")
-    public List<Officer> findAllByUnit(@PathVariable(name = "key") String key) {
+    public List<OfficerDTO> findAllByUnit(@PathVariable(name = "key") String key) {
         log.debug("REST request to get all Officers by Unit");
         return officerService.findAllByUnit(key);
     }

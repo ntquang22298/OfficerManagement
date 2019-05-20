@@ -5,6 +5,7 @@ import { IOfficer } from 'app/shared/model/officer.model';
 
 @Component({
   selector: 'jhi-officer-detail',
+  styleUrls: ['officer-detail.scss'],
   templateUrl: './officer-detail.component.html'
 })
 export class OfficerDetailComponent implements OnInit {
