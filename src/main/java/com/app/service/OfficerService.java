@@ -1,6 +1,8 @@
 package com.app.service;
 
 import com.app.domain.Officer;
+import com.app.domain.enumeration.OfficerDegree;
+import com.app.domain.enumeration.OfficerType;
 import com.app.service.dto.OfficerDTO;
 import java.util.List;
 
@@ -14,7 +16,6 @@ public interface OfficerService {
      */
     Officer save(Officer officer);
 
-
     /**
      * Delete officer by id
      *
@@ -23,17 +24,30 @@ public interface OfficerService {
     void delete(Long id);
 
     /**
-     * Find officer by unit
-     *
+     * searching officer
      * @param key: unit's name or part of unit's name
-     * @return list officer in that unit
+     * @param degree: degree of officer
+     * @param type : type of officer    
+     * @return officer
      */
-    List<OfficerDTO> findAllByUnit(String key);
+    List<OfficerDTO> search(String key, OfficerDegree degree, OfficerType type);
+
     /**
-     * Find all officers 
+     * Find all officers
+     *
      * @return officer
      */
     List<OfficerDTO> findAll();
-    
+    /**
+     * find officer by id
+     * @param id
+     * @return officer
+     */
     OfficerDTO findOne(Long id);
+    /**
+     * search officer by name
+     * @param key: part of officer's name
+     * @return officer
+     */
+    List<OfficerDTO> findByName(String key);
 }

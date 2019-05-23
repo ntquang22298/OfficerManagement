@@ -20,6 +20,7 @@
         "password": "Mật khẩu",
         "sessions": "Phiên đăng nhập",
         "login": "Đăng nhập",
+        "anonymous": "Ẩn Danh",
         "logout": "Đăng xuất",
         "register": "Đăng ký"
       },

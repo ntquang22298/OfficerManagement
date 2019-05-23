@@ -1,0 +1,29 @@
+{
+  "officerManagementApp": {
+    "enum": {
+      "all": "Đơn vị",
+      "unit": {
+        "BOMON": "Bộ môn",
+        "PHONGTHINGHIEM": "Phòng thí nghiệm"
+      },
+      "officer": {
+        "degree": {
+          "TS": "Tiến sĩ",
+          "PGSTS": "Phó giáo sư",
+          "ThS": "Thạc sĩ",
+          "CN": "Cử nhân",
+          "GSTS": "Giáo sư"
+        },
+        "type": {
+          "HT": "Hiệu trưởng",
+          "PHT": "Phó hiệu trưởng",
+          "TK": "Trưởng khoa",
+          "PK": "Phó khoa",
+          "CNBM": "Chủ nhiệm bộ môn",
+          "PCNBM": "Phó chủ nhiệm bộ môn",
+          "GV": "Giảng viên"
+        }
+      }
+    }
+  }
+}

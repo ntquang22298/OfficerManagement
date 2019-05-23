@@ -126,13 +126,24 @@
                         </div>
                         <div class="text"><strong>Đơn vị</strong></div>
                         <div *ngIf="officer.unit">
-                                <a [routerLink]="['../unit', officer.unit?.id, 'view' ]" >{{officer.unitName}}</a>
-                            </div>
+                            <a [routerLink]="['/unit', officer.unit?.id, 'view' ]">{{officer.unitName}}</a>
+                        </div>
                     </div>
                 </div>
+
+
 
             </div>
         </div>
     </div>
 
+</div>
+<div>
+    <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" [routerLink]="['/officer', officer.id, 'edit']" class="btn btn-primary">
+        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+    </button>
 </div>

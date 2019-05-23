@@ -132,10 +132,5 @@
   "jestSonar": {
     "reportPath": "target/test-results/jest",
     "reportFile": "TESTS-results-sonar.xml"
-  },
-  "styles": [
-    "node_modules/primeicons/primeicons.css",
-    "node_modules/primeng/resources/themes/nova-light/theme.css",
-    "node_modules/primeng/resources/primeng.min.css"
-  ]
+  }
 }

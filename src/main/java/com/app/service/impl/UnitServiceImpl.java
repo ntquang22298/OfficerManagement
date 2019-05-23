@@ -2,6 +2,7 @@ package com.app.service.impl;
 
 import com.app.domain.Diary;
 import com.app.domain.Unit;
+import com.app.domain.enumeration.UnitType;
 import com.app.repository.DiaryRepository;
 import com.app.repository.UnitRepository;
 import com.app.security.AuthoritiesConstants;
@@ -9,6 +10,7 @@ import com.app.security.SecurityUtils;
 import com.app.service.UnitService;
 import com.app.web.rest.errors.BadRequestAlertException;
 import java.time.ZonedDateTime;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -48,6 +50,16 @@ public class UnitServiceImpl implements UnitService {
             return;
         }
         throw new BadRequestAlertException("Your account is not authorized to perform this action", null, null);
+    }
+
+    @Override
+    public List<Unit> findByType(UnitType type) {
+        return unitRepository.findByType(type);
+    }
+
+    @Override
+    public List<Unit> findByName(String key) {
+        return unitRepository.findByName(key);
     }
     
 }

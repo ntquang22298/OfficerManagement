@@ -3,15 +3,15 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
-
-import { IOfficer } from 'app/shared/model/officer.model';
-import { IUnit } from 'app/shared/model/unit.model';
+import { IOfficer, OfficerType, OfficerDegree } from 'app/shared/model/officer.model';
+import { IUnit, Unit } from 'app/shared/model/unit.model';
 import { AccountService } from 'app/core';
 import { OfficerService } from './officer.service';
-import { UnitService, unitPopupRoute } from '../unit';
+import { UnitService } from '../unit';
 @Component({
   selector: 'jhi-officer',
-  templateUrl: './officer.component.html'
+  templateUrl: './officer.component.html',
+  styleUrls: ['officer.component.scss']
 })
 export class OfficerComponent implements OnInit, OnDestroy {
   officers: IOfficer[];
@@ -20,13 +20,23 @@ export class OfficerComponent implements OnInit, OnDestroy {
   currentAccount: any;
   eventSubscriber: Subscription;
   results: any[];
+  officerTypes = Object.values(OfficerType);
+  officerDegrees = Object.values(OfficerDegree);
+  offcierType: OfficerType;
+  officerDegree: OfficerDegree;
+  officerSearch: IOfficer;
+  searchType: OfficerType;
+  searchDegree: OfficerDegree;
+  searchUnit: any;
   constructor(
     protected officerService: OfficerService,
     protected unitService: UnitService,
     protected jhiAlertService: JhiAlertService,
     protected eventManager: JhiEventManager,
     protected accountService: AccountService
-  ) {}
+  ) {
+    this.loadUnits();
+  }
 
   loadAll() {
     this.officerService
@@ -63,12 +73,15 @@ export class OfficerComponent implements OnInit, OnDestroy {
     this.eventSubscriber = this.eventManager.subscribe('officerListModification', response => this.loadAll());
   }
 
-  findByUnit() {
-    if (this.unit.name == null) {
-      this.loadAll();
+  searchOfficer() {
+    let unitName: string;
+    if (this.searchUnit == null) {
+      unitName = '0';
+    } else {
+      unitName = this.searchUnit;
     }
     this.officerService
-      .findByUnit(this.unit.name)
+      .search(unitName, this.searchDegree, this.searchType)
       .pipe(
         filter((res: HttpResponse<IOfficer[]>) => res.ok),
         map((res: HttpResponse<IOfficer[]>) => res.body)
@@ -81,8 +94,7 @@ export class OfficerComponent implements OnInit, OnDestroy {
       );
   }
 
-  search(event) {
-    let query = event.query;
+  loadUnits() {
     this.unitService
       .query()
       .pipe(
@@ -92,22 +104,50 @@ export class OfficerComponent implements OnInit, OnDestroy {
       .subscribe(
         (res: IUnit[]) => {
           this.units = res;
-          this.results = this.filterUnit(query, this.units);
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
-  filterUnit(query, units: any[]): any[] {
+  findByName() {
+    this.officerService
+      .findByName(this.officerSearch.fullName)
+      .pipe(
+        filter((res: HttpResponse<IOfficer[]>) => res.ok),
+        map((res: HttpResponse<IOfficer[]>) => res.body)
+      )
+      .subscribe(
+        (res: IOfficer[]) => {
+          this.officers = res;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+  search(event) {
+    let query = event.query;
+    this.officerService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<IOfficer[]>) => res.ok),
+        map((res: HttpResponse<IOfficer[]>) => res.body)
+      )
+      .subscribe(
+        (res: IOfficer[]) => {
+          this.officers = res;
+          this.results = this.filterOfficer(query, this.officers);
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+  filterOfficer(query, officers: any[]): any[] {
     let filtered: any[] = [];
-    for (let i = 0; i < units.length; i++) {
-      let unit = units[i];
-      if (unit.name.toLowerCase().includes(query.toLowerCase()) === true) {
-        filtered.push(unit);
+    for (let i = 0; i < officers.length; i++) {
+      let officer = officers[i];
+      if (officer.fullName.toLowerCase().includes(query.toLowerCase()) === true) {
+        filtered.push(officer);
       }
     }
     return filtered;
   }
-
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }

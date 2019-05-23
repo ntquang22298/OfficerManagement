@@ -2,6 +2,8 @@ package com.app.web.rest;
 
 import com.app.domain.Diary;
 import com.app.domain.Officer;
+import com.app.domain.enumeration.OfficerDegree;
+import com.app.domain.enumeration.OfficerType;
 import com.app.repository.DiaryRepository;
 import com.app.repository.OfficerRepository;
 import com.app.service.OfficerService;
@@ -147,14 +149,76 @@ public class OfficerResource {
     }
 
     /**
-     * {@code Get  /officers-by-unit/:key} : find officers by unit
+     * Search officer by unit/degree/type
      *
-     * @param key : unit's name or part of unit's name
-     * @return list of officers in body.
+     * @param key : unit's name
+     * @param degree: degree of officer
+     * @param type : type of officer
+     * @return officer list
      */
-    @GetMapping("/officers-by-unit/{key}")
-    public List<OfficerDTO> findAllByUnit(@PathVariable(name = "key") String key) {
+    @GetMapping("/officers-search/{key}/{degree}/{type}")
+    public List<OfficerDTO> search(@PathVariable(name = "key") String key,
+            @PathVariable(name = "degree") String degree, @PathVariable(name = "type") String type) {
+        OfficerDegree officerdegree = OfficerDegree.TS;
+        OfficerType officerType = OfficerType.GV;
+        if (key.equals("0")) {
+            key = null;
+        }
+        switch (degree) {
+            case "TS":
+                officerdegree = OfficerDegree.TS;
+                break;
+            case "CN":
+                officerdegree = OfficerDegree.CN;
+                break;
+            case "GSTS":
+                officerdegree = OfficerDegree.GSTS;
+                break;
+            case "PGSTS":
+                officerdegree = OfficerDegree.PGSTS;
+                break;
+            case "ThS":
+                officerdegree = OfficerDegree.ThS;
+                break;
+            default:
+                officerdegree = null;
+        }
+        switch (type) {
+            case "GV":
+                officerType = OfficerType.GV;
+                break;
+            case "CNBM":
+                officerType = OfficerType.CNBM;
+                break;
+            case "HT":
+                officerType = OfficerType.HT;
+                break;
+            case "PCNBM":
+                officerType = OfficerType.PCNBM;
+                break;
+            case "PHT":
+                officerType = OfficerType.PHT;
+                break;
+            case "PK":
+                officerType = OfficerType.PK;
+                break;
+            case "TK":
+                officerType = OfficerType.GV;
+                break;
+            default:
+                officerType = null;
+        }
         log.debug("REST request to get all Officers by Unit");
-        return officerService.findAllByUnit(key);
+        return officerService.search(key, officerdegree, officerType);
+    }
+    /**
+     * Search officers by name
+     * @param key: part of officer's name
+     * @return list of officers
+     */
+    @GetMapping("/officers-by-name/{key}")
+    public List<OfficerDTO> getAllOfficersByName(@PathVariable(name = "key") String key) {
+        log.debug("REST request to get all Officers by name");
+        return officerService.findByName(key);
     }
 }

@@ -25,7 +25,10 @@
       "researchAreas": "Research Areas",
       "concernAreas": "Concern Areas",
       "unit": "Unit",
-      "diaries": "Diaries"
+      "diaries": "Diaries",
+      "button": {
+        "search": "Tìm kiếm"
+      }
     }
   }
 }

@@ -33,7 +33,6 @@ public class OfficerDTO {
     private Set<ResearchArea> researchAreas = new HashSet<>();
     private Set<ConcernArea> concernAreas = new HashSet<>();
     private Unit unit;
-    private Set<Diary> diaries = new HashSet<>();
     private String unitName;
 
     public String getUnitName() {
@@ -131,13 +130,4 @@ public class OfficerDTO {
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
-
-    public Set<Diary> getDiaries() {
-        return diaries;
-    }
-
-    public void setDiaries(Set<Diary> diaries) {
-        this.diaries = diaries;
-    }
-
 }
