@@ -113,4 +113,9 @@ public class OfficerServiceImpl implements OfficerService {
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    @Override
+    public Officer findByUser(Long id) {
+        return officerRepository.findByUser(id);
+    }
+
 }

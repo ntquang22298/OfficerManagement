@@ -50,4 +50,10 @@ public interface OfficerService {
      * @return officer
      */
     List<OfficerDTO> findByName(String key);
+    /**
+     * Find officer by current user login
+     * @param id: id of current user
+     * @return officer
+     */
+    Officer findByUser(Long id);
 }

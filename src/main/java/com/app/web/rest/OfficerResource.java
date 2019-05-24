@@ -2,10 +2,13 @@ package com.app.web.rest;
 
 import com.app.domain.Diary;
 import com.app.domain.Officer;
+import com.app.domain.User;
 import com.app.domain.enumeration.OfficerDegree;
 import com.app.domain.enumeration.OfficerType;
 import com.app.repository.DiaryRepository;
 import com.app.repository.OfficerRepository;
+import com.app.repository.UserRepository;
+import com.app.security.SecurityUtils;
 import com.app.service.OfficerService;
 import com.app.service.dto.OfficerDTO;
 import com.app.web.rest.errors.BadRequestAlertException;
@@ -38,14 +41,14 @@ public class OfficerResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final OfficerRepository officerRepository;
     private final OfficerService officerService;
     private final DiaryRepository diaryRepository;
+    private final UserRepository userRepository;
 
-    public OfficerResource(OfficerRepository officerRepository, OfficerService officerService, DiaryRepository diaryRepository) {
-        this.officerRepository = officerRepository;
+    public OfficerResource(OfficerService officerService, DiaryRepository diaryRepository, UserRepository userRepository) {
         this.officerService = officerService;
         this.diaryRepository = diaryRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -211,8 +214,10 @@ public class OfficerResource {
         log.debug("REST request to get all Officers by Unit");
         return officerService.search(key, officerdegree, officerType);
     }
+
     /**
      * Search officers by name
+     *
      * @param key: part of officer's name
      * @return list of officers
      */
@@ -220,5 +225,13 @@ public class OfficerResource {
     public List<OfficerDTO> getAllOfficersByName(@PathVariable(name = "key") String key) {
         log.debug("REST request to get all Officers by name");
         return officerService.findByName(key);
+    }
+
+    @GetMapping("/officers-by-user")
+    public Officer getAllOfficersByName() throws Throwable {
+        log.debug("REST request to get all Officers by user");
+        String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new AccountResource.AccountResourceException("Current user login not found"));
+        User user = userRepository.findOneByLogin(userLogin).orElseThrow(()->new BadRequestAlertException("User not found", ENTITY_NAME, userLogin));
+        return officerService.findByUser(user.getId());
     }
 }

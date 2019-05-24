@@ -2,6 +2,8 @@
   "officerManagementApp": {
     "enum": {
       "all": "Đơn vị",
+      "allType": "Loại cán bộ",
+      "allDegree": "Học vị",
       "unit": {
         "BOMON": "Bộ môn",
         "PHONGTHINGHIEM": "Phòng thí nghiệm"

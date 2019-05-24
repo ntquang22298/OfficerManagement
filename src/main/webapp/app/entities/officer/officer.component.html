@@ -49,7 +49,6 @@
                     <th><span jhiTranslate="global.field.id">ID</span></th>
                     <th><span jhiTranslate="officerManagementApp.officer.code">Code</span></th>
                     <th><span jhiTranslate="officerManagementApp.officer.fullName">Full Name</span></th>
-                    <th><span jhiTranslate="officerManagementApp.officer.avatarUrl">Avatar Url</span></th>
                     <th><span jhiTranslate="officerManagementApp.officer.vNUEmail">V NU Email</span></th>
                     <th><span jhiTranslate="officerManagementApp.officer.degree">Degree</span></th>
                     <th><span jhiTranslate="officerManagementApp.officer.type">Type</span></th>
@@ -62,29 +61,28 @@
                     <td><a [routerLink]="['/officer', officer.id, 'view' ]">{{officer.id}}</a></td>
                     <td>{{officer.code}}</td>
                     <td>{{officer.fullName}}</td>
-                    <td>{{officer.avatarUrl}}</td>
                     <td>{{officer.vNUEmail}}</td>
-                    <td jhiTranslate="{{'officerManagementApp.OfficerDegree.' + officer.degree}}">{{officer.degree}}
+                    <td jhiTranslate="{{'officerManagementApp.enum.officer.degree.' + officer.degree}}">{{officer.degree}}
                     </td>
-                    <td jhiTranslate="{{'officerManagementApp.OfficerType.' + officer.type}}">{{officer.type}}</td>
+                    <td jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officer.type}}">{{officer.type}}</td>
                     <td>
                         <div *ngIf="officer.unit">
                             <a [routerLink]="['../unit', officer.unit?.id, 'view' ]">{{officer.unitName}}</a>
                         </div>
                     </td>
-                    <td class="text-right">
+                    <td >
                         <div class="btn-group">
                             <button type="submit" [routerLink]="['/officer', officer?.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
-                            <button type="submit" [routerLink]="['/officer', officer.id, 'edit']"
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" [routerLink]="['/officer', officer.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
-                            <button type="submit"
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                                 [routerLink]="['/', 'officer', { outlets: { popup: officer.id + '/delete'} }]"
                                 replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
                                 <fa-icon [icon]="'times'"></fa-icon>
