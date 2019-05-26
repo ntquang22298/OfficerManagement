@@ -2,11 +2,11 @@
   "officerManagementApp": {
     "OfficerDegree": {
       "null": "",
-      "TS": "TS",
-      "PGSTS": "PGSTS",
-      "ThS": "ThS",
-      "CN": "CN",
-      "GSTS": "GSTS"
+      "TS": "Doctor of Philosophy",
+      "PGSTS": "Associate Professor",
+      "ThS": "Master of Science",
+      "CN": "Bachelor of Science",
+      "GSTS": "Professor"
     }
   }
 }

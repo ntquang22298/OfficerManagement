@@ -15,15 +15,15 @@ import { ConcernAreaService } from 'app/entities/concern-area';
 import { IUnit } from 'app/shared/model/unit.model';
 import { UnitService } from 'app/entities/unit';
 import { AccountService, JhiLanguageHelper } from 'app/core';
-import { Account } from 'app/core/user/account.model';
 import { OfficerService } from 'app/entities/officer';
-
+import { ViewChild, ElementRef } from '@angular/core';
 @Component({
   selector: 'jhi-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  @ViewChild('alert') alert: ElementRef;
   error: string;
   success: string;
   languages: any[];
@@ -38,6 +38,7 @@ export class SettingsComponent implements OnInit {
     firstName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     email: [undefined, [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
+    VNUemail: [undefined, [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     activated: [false],
     authorities: [[]],
     langKey: ['en'],
@@ -51,8 +52,6 @@ export class SettingsComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
-    private languageService: JhiLanguageService,
-    private languageHelper: JhiLanguageHelper,
     protected jhiAlertService: JhiAlertService,
     protected officerService: OfficerService,
     protected userService: UserService,
@@ -63,6 +62,16 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loadAll();
+    this.unitService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IUnit[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUnit[]>) => response.body)
+      )
+      .subscribe((res: IUnit[]) => (this.units = res), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+  loadAll() {
     this.officerService
       .findByUser()
       .pipe(
@@ -76,30 +85,41 @@ export class SettingsComponent implements OnInit {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-    this.unitService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<IUnit[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IUnit[]>) => response.body)
-      )
-      .subscribe((res: IUnit[]) => (this.units = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
-
   save() {
     const settingsAccount = this.accountFromForm();
+    const officer = this.createFromForm();
     this.accountService.save(settingsAccount).subscribe(
       () => {
         this.error = null;
         this.success = 'OK';
-        this.updateForm();
       },
       () => {
         this.success = null;
         this.error = 'ERROR';
       }
     );
+    if (officer.id !== undefined) {
+      this.subscribeToSaveResponse(this.officerService.update(officer));
+    } else {
+      this.subscribeToSaveResponse(this.officerService.create(officer));
+    }
   }
-
+  private createFromForm(): IOfficer {
+    const entity = {
+      ...new Officer(),
+      id: this.officer.id,
+      code: this.officer.code,
+      fullName: this.settingsForm.get(['lastName']).value + ' ' + this.settingsForm.get('firstName').value,
+      avatarUrl: this.settingsForm.get(['imageUrl']).value,
+      vNUEmail: this.settingsForm.get(['VNUemail']).value,
+      degree: this.settingsForm.get(['degree']).value,
+      type: this.settingsForm.get(['type']).value,
+      user: this.officer.user,
+      unit: this.settingsForm.get(['unit']).value
+    };
+    return entity;
+  }
   private accountFromForm(): any {
     const account = {};
     return {
@@ -116,7 +136,7 @@ export class SettingsComponent implements OnInit {
   }
 
   updateForm(): void {
-    let account = this.officer.user;
+    const account = this.officer.user;
     this.settingsForm.patchValue({
       firstName: account.firstName,
       lastName: account.lastName,
@@ -128,10 +148,24 @@ export class SettingsComponent implements OnInit {
       imageUrl: this.officer.avatarUrl,
       unit: this.officer.unit,
       type: this.officer.type,
-      degree: this.officer.degree
+      degree: this.officer.degree,
+      VNUemail: this.officer.vNUEmail
     });
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IOfficer>>) {
+    result.subscribe((res: HttpResponse<IOfficer>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  }
+  protected onSaveSuccess() {
+    this.isSaving = false;
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
+  closeAlert() {
+    this.alert.nativeElement.classList.remove('show');
   }
 }

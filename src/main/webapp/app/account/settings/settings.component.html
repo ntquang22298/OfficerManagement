@@ -3,10 +3,7 @@
 
 </div> -->
 <div class="container-fluid">
-    <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
-        <strong>Settings saved!</strong>
-    </div>
-    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
     <div class="row">
 
         <div class="col-md-4 ">
@@ -87,66 +84,117 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label class="form-control-label" for="email"
-                                    jhiTranslate="global.form.email.label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="{{'global.form.email.placeholder' | translate}}"
-                                    formControlName="email">
-                                <div
-                                    *ngIf="settingsForm.get('email').invalid && (settingsForm.get('email').dirty || settingsForm.get('email').touched)">
-                                    <small class="form-text text-danger"
-                                        *ngIf="settingsForm.get('email').errors.required"
-                                        jhiTranslate="global.messages.validate.email.required">
-                                        Your email is required.
-                                    </small>
-                                    <small class="form-text text-danger" *ngIf="settingsForm.get('email').errors.email"
-                                        jhiTranslate="global.messages.validate.email.invalid">
-                                        Your email is invalid.
-                                    </small>
-                                    <small class="form-text text-danger"
-                                        *ngIf="settingsForm.get('email').errors.minlength"
-                                        jhiTranslate="global.messages.validate.email.minlength">
-                                        Your email is required to be at least 5 characters.
-                                    </small>
-                                    <small class="form-text text-danger"
-                                        *ngIf="settingsForm.get('email').errors.maxlength"
-                                        jhiTranslate="global.messages.validate.email.maxlength">
-                                        Your email cannot be longer than 100 characters.
-                                    </small>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="email"
+                                            jhiTranslate="global.form.email.label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="{{'global.form.email.placeholder' | translate}}"
+                                            formControlName="email">
+                                        <div
+                                            *ngIf="settingsForm.get('email').invalid && (settingsForm.get('email').dirty || settingsForm.get('email').touched)">
+                                            <small class="form-text text-danger"
+                                                *ngIf="settingsForm.get('email').errors.required"
+                                                jhiTranslate="global.messages.validate.email.required">
+                                                Your email is required.
+                                            </small>
+                                            <small class="form-text text-danger"
+                                                *ngIf="settingsForm.get('email').errors.email"
+                                                jhiTranslate="global.messages.validate.email.invalid">
+                                                Your email is invalid.
+                                            </small>
+                                            <small class="form-text text-danger"
+                                                *ngIf="settingsForm.get('email').errors.minlength"
+                                                jhiTranslate="global.messages.validate.email.minlength">
+                                                Your email is required to be at least 5 characters.
+                                            </small>
+                                            <small class="form-text text-danger"
+                                                *ngIf="settingsForm.get('email').errors.maxlength"
+                                                jhiTranslate="global.messages.validate.email.maxlength">
+                                                Your email cannot be longer than 100 characters.
+                                            </small>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="email"
+                                            jhiTranslate="officerManagementApp.officer.vNUEmail">VNU Email</label>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="{{'global.form.email.placeholder' | translate}}"
+                                                formControlName="VNUemail">
+                                            <div
+                                                *ngIf="settingsForm.get('email').invalid && (settingsForm.get('email').dirty || settingsForm.get('email').touched)">
+                                                <small class="form-text text-danger"
+                                                    *ngIf="settingsForm.get('email').errors.required"
+                                                    jhiTranslate="global.messages.validate.email.required">
+                                                    Your email is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                    *ngIf="settingsForm.get('email').errors.email"
+                                                    jhiTranslate="global.messages.validate.email.invalid">
+                                                    Your email is invalid.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                    *ngIf="settingsForm.get('email').errors.minlength"
+                                                    jhiTranslate="global.messages.validate.email.minlength">
+                                                    Your email is required to be at least 5 characters.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                    *ngIf="settingsForm.get('email').errors.maxlength"
+                                                    jhiTranslate="global.messages.validate.email.maxlength">
+                                                    Your email cannot be longer than 100 characters.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
+
                             <div class="row">
                                 <div class="form-group col">
                                     <label class="form-control-label" jhiTranslate="officerManagementApp.officer.degree"
                                         for="field_degree">Degree</label>
-                                    <select class="form-control" name="degree" formControlName="degree" id="field_degree">
-                                        <option value="TS">{{'officerManagementApp.OfficerDegree.TS' | translate}}</option>
-                                        <option value="PGSTS">{{'officerManagementApp.OfficerDegree.PGSTS' | translate}}</option>
-                                        <option value="ThS">{{'officerManagementApp.OfficerDegree.ThS' | translate}}</option>
-                                        <option value="CN">{{'officerManagementApp.OfficerDegree.CN' | translate}}</option>
-                                        <option value="GSTS">{{'officerManagementApp.OfficerDegree.GSTS' | translate}}</option>
+                                    <select class="form-control" name="degree" formControlName="degree"
+                                        id="field_degree">
+                                        <option value="TS">{{'officerManagementApp.OfficerDegree.TS' | translate}}
+                                        </option>
+                                        <option value="PGSTS">{{'officerManagementApp.OfficerDegree.PGSTS' | translate}}
+                                        </option>
+                                        <option value="ThS">{{'officerManagementApp.OfficerDegree.ThS' | translate}}
+                                        </option>
+                                        <option value="CN">{{'officerManagementApp.OfficerDegree.CN' | translate}}
+                                        </option>
+                                        <option value="GSTS">{{'officerManagementApp.OfficerDegree.GSTS' | translate}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group col">
                                     <label class="form-control-label" jhiTranslate="officerManagementApp.officer.type"
                                         for="field_type">Type</label>
                                     <select class="form-control" name="type" formControlName="type" id="field_type">
-                                        <option value="HT">{{'officerManagementApp.OfficerType.HT' | translate}}</option>
-                                        <option value="PHT">{{'officerManagementApp.OfficerType.PHT' | translate}}</option>
-                                        <option value="TK">{{'officerManagementApp.OfficerType.TK' | translate}}</option>
-                                        <option value="PK">{{'officerManagementApp.OfficerType.PK' | translate}}</option>
-                                        <option value="CNBM">{{'officerManagementApp.OfficerType.CNBM' | translate}}</option>
-                                        <option value="PCNBM">{{'officerManagementApp.OfficerType.PCNBM' | translate}}</option>
-                                        <option value="GV">{{'officerManagementApp.OfficerType.GV' | translate}}</option>
+                                        <option value="HT">{{'officerManagementApp.OfficerType.HT' | translate}}
+                                        </option>
+                                        <option value="PHT">{{'officerManagementApp.OfficerType.PHT' | translate}}
+                                        </option>
+                                        <option value="TK">{{'officerManagementApp.OfficerType.TK' | translate}}
+                                        </option>
+                                        <option value="PK">{{'officerManagementApp.OfficerType.PK' | translate}}
+                                        </option>
+                                        <option value="CNBM">{{'officerManagementApp.OfficerType.CNBM' | translate}}
+                                        </option>
+                                        <option value="PCNBM">{{'officerManagementApp.OfficerType.PCNBM' | translate}}
+                                        </option>
+                                        <option value="GV">{{'officerManagementApp.OfficerType.GV' | translate}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="officerManagementApp.officer.unit"
                                     for="field_unit">Unit</label>
-                                <select class="form-control" formControlName="unit" id="field_unit" name="unit" [(ngModel)]="officer.unit">
+                                <select class="form-control" formControlName="unit" id="field_unit" name="unit"
+                                    [(ngModel)]="officer.unit">
                                     <option [ngValue]="null"></option>
                                     <option [ngValue]="unitOption.id === officer.unit?.id ? officer.unit : unitOption"
                                         *ngFor="let unitOption of units; trackBy: trackUnitById">{{unitOption.id}}
