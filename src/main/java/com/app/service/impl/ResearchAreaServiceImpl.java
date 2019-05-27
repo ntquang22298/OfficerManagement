@@ -18,7 +18,6 @@ public class ResearchAreaServiceImpl implements ResearchAreaService {
         this.researchAreaRepository = researchAreaRepository;
     }
 
-    @Override
     public void delete(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

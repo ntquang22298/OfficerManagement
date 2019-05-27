@@ -19,6 +19,7 @@ import { OfficerService } from 'app/entities/officer';
 import { ViewChild, ElementRef } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { TreeNode } from 'primeng/api';
 @Component({
   selector: 'jhi-settings',
   templateUrl: './settings.component.html',
@@ -32,8 +33,10 @@ export class SettingsComponent implements OnInit {
   officer: IOfficer;
   isSaving: boolean;
   users: IUser[];
-  researchareas: IResearchArea[];
-  concernareas: IConcernArea[];
+  researchAreas: IResearchArea[];
+  concernAreas: IConcernArea[];
+  trees: TreeNode[] = [];
+  selectedFiles: TreeNode[] = [];
 
   units: IUnit[];
   settingsForm = this.fb.group({
@@ -68,6 +71,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.loadAll();
+
     this.unitService
       .query()
       .pipe(
@@ -77,24 +81,29 @@ export class SettingsComponent implements OnInit {
       .subscribe((res: IUnit[]) => (this.units = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
   loadAll() {
-    this.officerService
-      .findByUser()
+    this.loadReasearchArea();
+  }
+  loadReasearchArea() {
+    this.researchAreaService
+      .query()
       .pipe(
-        filter((res: HttpResponse<IOfficer>) => res.ok),
-        map((res: HttpResponse<IOfficer>) => res.body)
+        filter((res: HttpResponse<IResearchArea[]>) => res.ok),
+        map((res: HttpResponse<IResearchArea[]>) => res.body)
       )
       .subscribe(
-        (res: IOfficer) => {
-          this.officer = res;
-          this.updateForm();
+        (res: IResearchArea[]) => {
+          this.researchAreas = res;
+          this.createTree();
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
+  /**
+   * Save user information
+   */
   save() {
     if (this.downloadURL != null) {
       this.downloadURL.subscribe(res => {
-        console.log(res.toString());
         const settingsAccount = this.accountFromForm();
         const officer = this.createFromForm();
         officer.avatarUrl = res.toString();
@@ -128,6 +137,7 @@ export class SettingsComponent implements OnInit {
         }
       );
       if (officer.id !== undefined) {
+        console.log(officer);
         this.subscribeToSaveResponse(this.officerService.update(officer));
       } else {
         this.subscribeToSaveResponse(this.officerService.create(officer));
@@ -135,17 +145,19 @@ export class SettingsComponent implements OnInit {
     }
   }
   private createFromForm(): IOfficer {
+    this.selectesFilesToResearchAreas();
     const entity = {
       ...new Officer(),
       id: this.officer.id,
       code: this.officer.code,
-      fullName: this.settingsForm.get(['lastName']).value + ' ' + this.settingsForm.get('firstName').value,
+      fullName: this.settingsForm.get('firstName').value,
       avatarUrl: this.settingsForm.get(['imageUrl']).value,
       vNUEmail: this.settingsForm.get(['VNUemail']).value,
       degree: this.settingsForm.get(['degree']).value,
       type: this.settingsForm.get(['type']).value,
       user: this.officer.user,
-      unit: this.settingsForm.get(['unit']).value
+      unit: this.settingsForm.get(['unit']).value,
+      researchAreas: this.officer.researchAreas
     };
     return entity;
   }
@@ -163,11 +175,13 @@ export class SettingsComponent implements OnInit {
       imageUrl: this.settingsForm.get('imageUrl').value
     };
   }
-
+  /**
+   * update information form after load
+   */
   updateForm(): void {
     const account = this.officer.user;
     this.settingsForm.patchValue({
-      firstName: account.firstName,
+      firstName: this.officer.fullName,
       lastName: account.lastName,
       email: account.email,
       activated: account.activated,
@@ -181,6 +195,104 @@ export class SettingsComponent implements OnInit {
       VNUemail: this.officer.vNUEmail
     });
   }
+  /**
+   * create trê from research area
+   */
+  createTree() {
+    this.trees = [];
+    const trees: TreeNode[] = [];
+    this.researchAreas.forEach(r => {
+      const tree: TreeNode = {
+        label: r.name,
+        data: r.id,
+        children: [],
+        parent: r.parent ? r.parent : null,
+        expandedIcon: 'pi pi-folder-open',
+        collapsedIcon: 'pi pi-folder',
+        expanded: true
+      };
+      trees.push(tree);
+    });
+    trees.forEach(t => {
+      trees.forEach(e => {
+        if (e.parent != null && e.parent.id === t.data) {
+          t.children.push(e);
+        }
+      });
+    });
+    trees.forEach(t => {
+      if (t.parent === null) {
+        this.trees.push(t);
+      }
+    });
+    this.officerService
+      .findByUser()
+      .pipe(
+        filter((res: HttpResponse<IOfficer>) => res.ok),
+        map((res: HttpResponse<IOfficer>) => res.body)
+      )
+      .subscribe(
+        (res: IOfficer) => {
+          this.officer = res;
+          console.log(res);
+          res.researchAreas.forEach(element => {
+            trees.forEach(t => {
+              if (element.id === t.data) {
+                console.log(element.id);
+                this.selectedFiles.push(t);
+              }
+            });
+          });
+          this.updateForm();
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+  expandAll() {
+    this.trees.forEach(node => {
+      this.expandRecursive(node, true);
+    });
+  }
+
+  collapseAll() {
+    this.trees.forEach(node => {
+      this.expandRecursive(node, false);
+    });
+  }
+  selectesFilesToResearchAreas() {
+    this.officer.researchAreas = [];
+    this.selectedFiles.forEach(tree => {
+      if (tree.parent != null) {
+        this.researchAreas.forEach(element => {
+          if (element.id === tree.parent.data) {
+            const researchArea: IResearchArea = {
+              id: tree.data,
+              name: tree.label,
+              parent: element,
+              childs: null
+            };
+            this.officer.researchAreas.push(researchArea);
+          }
+        });
+      } else {
+        const researchArea: IResearchArea = {
+          id: tree.data,
+          name: tree.label,
+          parent: null,
+          childs: null
+        };
+        this.officer.researchAreas.push(researchArea);
+      }
+    });
+  }
+  private expandRecursive(node: TreeNode, isExpand: boolean) {
+    node.expanded = isExpand;
+    if (node.children) {
+      node.children.forEach(childNode => {
+        this.expandRecursive(childNode, isExpand);
+      });
+    }
+  }
 
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
@@ -190,6 +302,7 @@ export class SettingsComponent implements OnInit {
   }
   protected onSaveSuccess() {
     this.isSaving = false;
+    this.selectedFiles = [];
     this.loadAll();
   }
 
@@ -202,7 +315,7 @@ export class SettingsComponent implements OnInit {
 
   uploadFile(event) {
     const file = event.target.files[0];
-    const filePath = 'image/1';
+    const filePath = 'image/';
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 

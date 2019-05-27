@@ -51,6 +51,6 @@ public interface OfficerRepository extends JpaRepository<Officer, Long> {
     @Query(value = "Select o from Officer o  where o.fullName like :key ")
     public List<Officer> findAllByName(@Param("key") String key);
 
-    @Query("Select o from Officer o where o.user.id =:id ")
-    public Officer findByUser(@Param("id") Long id);
+    @Query("Select o from Officer o left join fetch o.researchAreas left join fetch o.concernAreas where o.user.login =:login ")
+    public Officer findByUser(@Param("login") String login);
 }

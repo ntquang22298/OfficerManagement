@@ -85,23 +85,19 @@
         <div class="row">
             <p-tree [value]="trees"   [filter]="true">
                 <ng-template let-tree pTemplate="default">
-                    <input [(ngModel)]="tree.label" type="text" style="width:100%">
+                    <input ng-class="{'border' : view?'0':'1'}"  [attr.disabled]="view ? '' : null" [(ngModel)]="tree.label" type="text" style="width:100%">
                     <span *ngIf="!view">
                         <button class="btn btn-success btn-sm" (click)="addNode(tree)" [hidden]="tree.data == null">
                             <fa-icon [icon]="'plus'"></fa-icon>
-                            <span jhiTranslate="button.add"></span>
                         </button>
                         <button class="btn btn-primary btn-sm" (click)="saveNode(tree)" [hidden]="!tree.parent">
-                            <fa-icon [icon]="'save'"></fa-icon>
-                            <span jhiTranslate="entity.action.save"></span>                            
+                            <fa-icon [icon]="'save'"></fa-icon>                       
                         </button>
                         <button (click)="deleteNode(tree)" [hidden]="tree.data == null || !tree.parent" class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                         <button class="btn btn-danger btn-sm" (click)="cancelNode(tree)" [hidden]="(!tree.data == '')" >
                             <fa-icon [icon]="'ban'"></fa-icon>
-                            <span jhiTranslate="entity.action.cancel"></span>
                         </button>
                     </span>
                 </ng-template>

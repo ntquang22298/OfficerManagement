@@ -163,9 +163,11 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
   }
   changeView() {
     this.view = true;
+    this.changeBorder();
   }
   changeEdit() {
     this.view = false;
+    this.changeBorder();
   }
   ngOnInit() {
     this.loadAll();
@@ -181,6 +183,10 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
 
   trackId(index: number, item: IResearchArea) {
     return item.id;
+  }
+  changeBorder() {
+    if (this.view == true) return '0';
+    else return '1';
   }
 
   registerChangeInResearchAreas() {

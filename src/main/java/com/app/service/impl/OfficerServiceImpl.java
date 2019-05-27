@@ -11,6 +11,7 @@ import com.app.security.SecurityUtils;
 import com.app.service.OfficerService;
 import com.app.service.dto.OfficerDTO;
 import com.app.service.mapper.OfficerMapper;
+import com.app.web.rest.AccountResource;
 import com.app.web.rest.errors.BadRequestAlertException;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
@@ -114,8 +115,9 @@ public class OfficerServiceImpl implements OfficerService {
     }
 
     @Override
-    public Officer findByUser(Long id) {
-        return officerRepository.findByUser(id);
+    public Officer findByUser() {
+        String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new AccountResource.AccountResourceException("Current user login not found"));
+        return officerRepository.findByUser(userLogin);
     }
 
 }

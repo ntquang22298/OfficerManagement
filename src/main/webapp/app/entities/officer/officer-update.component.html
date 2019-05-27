@@ -68,7 +68,7 @@
                         formControlName="researchAreas">
                         <option [ngValue]="getSelected(editForm.get('researchAreas').value, researchAreaOption)"
                             *ngFor="let researchAreaOption of researchareas; trackBy: trackResearchAreaById">
-                            {{researchAreaOption.id}}</option>
+                            {{researchAreaOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -78,7 +78,7 @@
                         formControlName="concernAreas">
                         <option [ngValue]="getSelected(editForm.get('concernAreas').value, concernAreaOption)"
                             *ngFor="let concernAreaOption of concernareas; trackBy: trackConcernAreaById">
-                            {{concernAreaOption.id}}</option>
+                            {{concernAreaOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

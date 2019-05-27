@@ -5,6 +5,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { OfficerManagementSharedModule } from 'app/shared';
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { TabViewModule } from 'primeng/tabview';
+import { TreeModule } from 'primeng/tree';
+import { CheckboxModule } from 'primeng/checkbox';
 import {
   PasswordStrengthBarComponent,
   RegisterComponent,
@@ -21,6 +23,7 @@ import {
     OfficerManagementSharedModule,
     RouterModule.forChild(accountState),
     TabViewModule,
+    TreeModule,
     AngularFireModule.initializeApp({
       apiKey: 'AIzaSyDGu5dDzNB1RbUS-lU6WvL51s8jc1BYjpc',
       authDomain: 'vuejs-firebase-425c6.firebaseapp.com',
@@ -31,7 +34,8 @@ import {
       appId: '1:1062324573032:web:74d74355b272f509'
     }),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    CheckboxModule
   ],
   declarations: [
     ActivateComponent,

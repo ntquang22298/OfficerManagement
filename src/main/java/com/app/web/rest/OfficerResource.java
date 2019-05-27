@@ -100,6 +100,8 @@ public class OfficerResource {
         if (result != null) {
             // create diary
             Diary diary = new Diary();
+            Officer current = officerService.findByUser();
+            diary.setOfficer(current);
             diary.setContent("Update officer");
             diary.setTime(ZonedDateTime.now());
             diaryRepository.save(diary);
@@ -230,8 +232,6 @@ public class OfficerResource {
     @GetMapping("/officers-by-user")
     public Officer getAllOfficersByName() throws Throwable {
         log.debug("REST request to get all Officers by user");
-        String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new AccountResource.AccountResourceException("Current user login not found"));
-        User user = userRepository.findOneByLogin(userLogin).orElseThrow(()->new BadRequestAlertException("User not found", ENTITY_NAME, userLogin));
-        return officerService.findByUser(user.getId());
+        return officerService.findByUser();
     }
 }

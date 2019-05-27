@@ -55,5 +55,5 @@ public interface OfficerService {
      * @param id: id of current user
      * @return officer
      */
-    Officer findByUser(Long id);
+    Officer findByUser();
 }

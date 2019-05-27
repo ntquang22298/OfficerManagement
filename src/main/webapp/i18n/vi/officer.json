@@ -2,29 +2,29 @@
   "officerManagementApp": {
     "officer": {
       "home": {
-        "title": "Officers",
-        "createLabel": "Thêm mới một Officer",
-        "createOrEditLabel": "Thêm mới hoặc cập nhật Officer"
+        "title": "Cán bộ",
+        "createLabel": "Thêm mới một Cán bộ",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Cán bộ"
       },
-      "created": "Một Officer mới được tạo với định danh {{ param }}",
-      "updated": "Một Officer cập nhật với định danh {{ param }}",
-      "deleted": "Một Officer đã xóa với định danh {{ param }}",
+      "created": "Một Cán bộ mới được tạo với định danh {{ param }}",
+      "updated": "Một Cán bộ cập nhật với định danh {{ param }}",
+      "deleted": "Một Cán bộ đã xóa với định danh {{ param }}",
       "delete": {
-        "question": "Bạn có chắc là muốn xóa Officer {{ id }}?"
+        "question": "Bạn có chắc là muốn xóa Cán bộ {{ id }}?"
       },
       "detail": {
-        "title": "Officer"
+        "title": "Cán bộ"
       },
-      "code": "Code",
-      "fullName": "Full Name",
+      "code": "Mã cán bộ",
+      "fullName": "Họ và tên",
       "avatarUrl": "Avatar Url",
-      "vNUEmail": "V NU Email",
-      "degree": "Degree",
-      "type": "Type",
-      "user": "User",
+      "vNUEmail": "VNU Email",
+      "degree": "Học vị",
+      "type": "Chức vụ",
+      "user": "Tài khoản",
       "researchAreas": "Research Areas",
       "concernAreas": "Concern Areas",
-      "unit": "Unit",
+      "unit": "Đơn vị",
       "diaries": "Diaries",
       "button": {
         "search": "Tìm kiếm"
