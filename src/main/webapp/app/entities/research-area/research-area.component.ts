@@ -22,6 +22,8 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
   isSaving: any;
   disable: boolean = true;
   trees: TreeNode[] = [];
+  cancel: boolean = false;
+  view: boolean = true;
   constructor(
     protected researchAreaService: ResearchAreaService,
     protected jhiAlertService: JhiAlertService,
@@ -52,7 +54,9 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
         label: r.name,
         data: r.id,
         children: [],
-        parent: r.parent ? r.parent : null
+        parent: r.parent ? r.parent : null,
+        expandedIcon: 'pi pi-folder-open',
+        collapsedIcon: 'pi pi-folder'
       };
       trees.push(tree);
     });
@@ -70,6 +74,8 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
     });
   }
   addNode(tree: TreeNode) {
+    this.cancel = true;
+    tree.expanded = true;
     let node: TreeNode = {
       label: null,
       data: null,
@@ -78,6 +84,11 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
     };
     tree.children.push(node);
   }
+  cancelNode(tree: TreeNode) {
+    this.cancel = false;
+    tree.parent.children.pop();
+  }
+
   saveNode(tree: TreeNode) {
     this.isSaving = true;
     this.disable = true;
@@ -97,8 +108,6 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
         .subscribe(
           (res: IResearchArea) => {
             researchArea.parent = res;
-            console.log(researchArea.parent);
-
             researchArea.id = tree.data != null ? tree.data : null;
             researchArea.name = tree.label;
             if (researchArea.id !== null) {
@@ -120,6 +129,19 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
       }
     }
   }
+  deleteNode(tree: TreeNode) {
+    if (tree.children != null) {
+      tree.children.forEach(c => {
+        this.deleteNode(c);
+      });
+    }
+    this.researchAreaService.delete(tree.data).subscribe(response => {
+      this.eventManager.broadcast({
+        name: 'researchAreaListModification',
+        content: 'Deleted an researchArea'
+      });
+    });
+  }
   expandAll() {
     this.trees.forEach(node => {
       this.expandRecursive(node, true);
@@ -139,7 +161,12 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
       });
     }
   }
-
+  changeView() {
+    this.view = true;
+  }
+  changeEdit() {
+    this.view = false;
+  }
   ngOnInit() {
     this.loadAll();
     this.isSaving = false;

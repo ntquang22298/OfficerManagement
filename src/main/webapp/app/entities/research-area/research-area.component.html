@@ -63,25 +63,50 @@
         </b>
     </h2>
     <jhi-alert></jhi-alert>
-
-    <div style="margin-top: 8px">
-        <button (click)="expandAll()">Expand all</button>
-        <button (click)="collapseAll()">Collapse all</button>
-    </div>
-    <p-tree [value]="trees" selectionMode="single" [(selection)]="selected" [filter]="true">
-        <ng-template let-tree pTemplate="default">
-            <input [(ngModel)]="tree.label" type="text" style="width:100%">
-            <span>
-                <button (click)="addNode(tree)">Them</button>
-                <button (click)="saveNode(tree)">Save</button>
-                <button type="submit"
-                    [routerLink]="['/', 'research-area', { outlets: { popup: tree.data + '/delete'} }]"
-                    replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
-                    <fa-icon [icon]="'times'"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+    <div class="container-fluid">
+        <div style="margin-top: 8px" class="row">
+            <div class="button">
+                <button class="btn btn-secondary btn-md" (click)="expandAll()">
+                    <span jhiTranslate="button.expandall"></span>
                 </button>
-            </span>
-        </ng-template>
-    </p-tree>
-    <div style="margin-top:8px">Selected Node: {{selected ? selected.label : 'none'}}</div>
+                <button class="btn btn-secondary btn-md" (click)="collapseAll()">
+                    <span jhiTranslate="button.collapseall"></span>
+                </button>
+                <button class="btn btn-success btn-md" (click)="changeView()">
+                    <fa-icon [icon]="'eye'"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                </button>
+                <button class="btn btn-primary btn-md" (click)="changeEdit()">
+                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <p-tree [value]="trees"   [filter]="true">
+                <ng-template let-tree pTemplate="default">
+                    <input [(ngModel)]="tree.label" type="text" style="width:100%">
+                    <span *ngIf="!view">
+                        <button class="btn btn-success btn-sm" (click)="addNode(tree)" [hidden]="tree.data == null">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span jhiTranslate="button.add"></span>
+                        </button>
+                        <button class="btn btn-primary btn-sm" (click)="saveNode(tree)" [hidden]="!tree.parent">
+                            <fa-icon [icon]="'save'"></fa-icon>
+                            <span jhiTranslate="entity.action.save"></span>                            
+                        </button>
+                        <button (click)="deleteNode(tree)" [hidden]="tree.data == null || !tree.parent" class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="cancelNode(tree)" [hidden]="(!tree.data == '')" >
+                            <fa-icon [icon]="'ban'"></fa-icon>
+                            <span jhiTranslate="entity.action.cancel"></span>
+                        </button>
+                    </span>
+                </ng-template>
+            </p-tree>
+        </div>
+
+    </div>
 </div>

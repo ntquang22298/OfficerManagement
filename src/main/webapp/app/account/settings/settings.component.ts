@@ -17,6 +17,8 @@ import { UnitService } from 'app/entities/unit';
 import { AccountService, JhiLanguageHelper } from 'app/core';
 import { OfficerService } from 'app/entities/officer';
 import { ViewChild, ElementRef } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'jhi-settings',
   templateUrl: './settings.component.html',
@@ -48,7 +50,9 @@ export class SettingsComponent implements OnInit {
     type: [],
     degree: []
   });
-
+  file: File = null;
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
@@ -58,7 +62,8 @@ export class SettingsComponent implements OnInit {
     protected researchAreaService: ResearchAreaService,
     protected concernAreaService: ConcernAreaService,
     protected unitService: UnitService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit() {
@@ -87,22 +92,46 @@ export class SettingsComponent implements OnInit {
       );
   }
   save() {
-    const settingsAccount = this.accountFromForm();
-    const officer = this.createFromForm();
-    this.accountService.save(settingsAccount).subscribe(
-      () => {
-        this.error = null;
-        this.success = 'OK';
-      },
-      () => {
-        this.success = null;
-        this.error = 'ERROR';
-      }
-    );
-    if (officer.id !== undefined) {
-      this.subscribeToSaveResponse(this.officerService.update(officer));
+    if (this.downloadURL != null) {
+      this.downloadURL.subscribe(res => {
+        console.log(res.toString());
+        const settingsAccount = this.accountFromForm();
+        const officer = this.createFromForm();
+        officer.avatarUrl = res.toString();
+        this.accountService.save(settingsAccount).subscribe(
+          () => {
+            this.error = null;
+            this.success = 'OK';
+          },
+          () => {
+            this.success = null;
+            this.error = 'ERROR';
+          }
+        );
+        if (officer.id !== undefined) {
+          this.subscribeToSaveResponse(this.officerService.update(officer));
+        } else {
+          this.subscribeToSaveResponse(this.officerService.create(officer));
+        }
+      });
     } else {
-      this.subscribeToSaveResponse(this.officerService.create(officer));
+      const settingsAccount = this.accountFromForm();
+      const officer = this.createFromForm();
+      this.accountService.save(settingsAccount).subscribe(
+        () => {
+          this.error = null;
+          this.success = 'OK';
+        },
+        () => {
+          this.success = null;
+          this.error = 'ERROR';
+        }
+      );
+      if (officer.id !== undefined) {
+        this.subscribeToSaveResponse(this.officerService.update(officer));
+      } else {
+        this.subscribeToSaveResponse(this.officerService.create(officer));
+      }
     }
   }
   private createFromForm(): IOfficer {
@@ -152,6 +181,7 @@ export class SettingsComponent implements OnInit {
       VNUemail: this.officer.vNUEmail
     });
   }
+
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
@@ -160,6 +190,7 @@ export class SettingsComponent implements OnInit {
   }
   protected onSaveSuccess() {
     this.isSaving = false;
+    this.loadAll();
   }
 
   protected onSaveError() {
@@ -167,5 +198,20 @@ export class SettingsComponent implements OnInit {
   }
   closeAlert() {
     this.alert.nativeElement.classList.remove('show');
+  }
+
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = 'image/1';
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task
+      .snapshotChanges()
+      .pipe(finalize(() => (this.downloadURL = fileRef.getDownloadURL())))
+      .subscribe();
   }
 }
