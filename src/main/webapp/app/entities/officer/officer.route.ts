@@ -33,7 +33,7 @@ export const officerRoute: Routes = [
     path: '',
     component: OfficerComponent,
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: [],
       pageTitle: 'officerManagementApp.officer.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const officerRoute: Routes = [
       officer: OfficerResolve
     },
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: [],
       pageTitle: 'officerManagementApp.officer.home.title'
     },
     canActivate: [UserRouteAccessService]

@@ -56,7 +56,8 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
         children: [],
         parent: r.parent ? r.parent : null,
         expandedIcon: 'pi pi-folder-open',
-        collapsedIcon: 'pi pi-folder'
+        collapsedIcon: 'pi pi-folder',
+        expanded: true
       };
       trees.push(tree);
     });
@@ -80,7 +81,10 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
       label: null,
       data: null,
       parent: tree,
-      children: []
+      children: [],
+      expandedIcon: 'pi pi-folder-open',
+      collapsedIcon: 'pi pi-folder',
+      expanded: true
     };
     tree.children.push(node);
   }
@@ -185,8 +189,9 @@ export class ResearchAreaComponent implements OnInit, OnDestroy {
     return item.id;
   }
   changeBorder() {
-    if (this.view == true) return '0';
-    else return '1';
+    if (this.view == true) {
+      return '0';
+    } else return '1';
   }
 
   registerChangeInResearchAreas() {

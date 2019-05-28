@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface ResearchAreaRepository extends JpaRepository<ResearchArea, Long> {
 
     @Query("Select r from ResearchArea r where r.parent.id =:id ")
-    public List<ResearchArea> findByUser(@Param("id") Long id);
+    public List<ResearchArea> getAllChilds(@Param("id") Long id);
 
 }

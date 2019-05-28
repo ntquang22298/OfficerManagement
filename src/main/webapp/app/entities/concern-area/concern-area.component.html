@@ -16,7 +16,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="officerManagementApp.concernArea.name">Name</span></th>
-            <th><span jhiTranslate="officerManagementApp.concernArea.parent">Parent</span></th>
+            <th><span jhiTranslate="officerManagementApp.concernArea.description">Description</span></th>
             <th></th>
             </tr>
             </thead>
@@ -24,11 +24,7 @@
             <tr *ngFor="let concernArea of concernAreas ;trackBy: trackId">
                 <td><a [routerLink]="['/concern-area', concernArea.id, 'view' ]">{{concernArea.id}}</a></td>
                 <td>{{concernArea.name}}</td>
-                <td>
-                    <div *ngIf="concernArea.parent">
-                        <a [routerLink]="['../concern-area', concernArea.parent?.id, 'view' ]" >{{concernArea.parent?.id}}</a>
-                    </div>
-                </td>
+                <td>{{concernArea.description}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

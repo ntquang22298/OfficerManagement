@@ -9,11 +9,9 @@
                 <dd>
                     <span>{{concernArea.name}}</span>
                 </dd>
-                <dt><span jhiTranslate="officerManagementApp.concernArea.parent">Parent</span></dt>
+                <dt><span jhiTranslate="officerManagementApp.concernArea.description">Description</span></dt>
                 <dd>
-                    <div *ngIf="concernArea.parent">
-                        <a [routerLink]="['/concern-area', concernArea.parent?.id, 'view']">{{concernArea.parent?.id}}</a>
-                    </div>
+                    <span>{{concernArea.description}}</span>
                 </dd>
             </dl>
 

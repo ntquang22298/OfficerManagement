@@ -13,12 +13,18 @@
                         <div class="avatar">
                             <img [src]='!this.downloadURL?officer.avatarUrl:this.downloadURL|async'>
                         </div>
-                        <input type="file" (change)="uploadFile($event)" />
-                        <div>{{ uploadPercent | async }}</div>
-                        <div>{{this.downloadURL}}</div>
-                        <button class="btn btn-primary btn-md" (click)="save()">
-                            Upload
-                        </button>
+                        <div class="input-group upload">
+                            <input class="col-md-6 input-upload" [(ngModel)]="inputUpload" type="file"
+                                (change)="uploadFile($event)" />
+                            <button class="btn btn-primary btn-md input-group-append" (click)="save()">
+                                Upload
+                            </button>
+                            <button [hidden]="!uploadPercent" class="btn btn-danger btn-md input-group-append"
+                                (click)="cancel()">
+                                Cancel
+                            </button>
+
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8 ">
@@ -206,8 +212,46 @@
                         </div>
 
                     </div>
+                    <div class="card">
+                        <div>
+                            <div class="card-icon">
+                                <fa-icon class="icon-left" icon="user"></fa-icon>
+                            </div>
+
+
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col areas">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">
+                                        <span class="badge badge-info">Chủ đề nghiên cứu</span>
+                                    </h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <ul *ngFor="let researchAreas of officer.researchAreas">
+                                        <li>
+                                            <h6>{{researchAreas.name}}</h6>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col areas">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">
+                                        <span class="badge badge-info">Chủ đề nghiên cứu</span>
+                                    </h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <ul *ngFor="let concernAreas of officer.concernAreas">
+                                        <li>
+                                            <h6>{{concernAreas.name}}</h6>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </p-tabPanel>
         <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
             <div>
@@ -236,7 +280,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p-tree [value]="trees" [filter]="true" selectionMode="checkbox" [(selection)]="selectedFiles" propagateSelectionUp="true">
+                        <p-tree [value]="trees" [filter]="true" selectionMode="checkbox" [(selection)]="selectedFiles"
+                            propagateSelectionUp="true">
                             <ng-template let-tree pTemplate="default">
                                 {{tree.label}}
                             </ng-template>

@@ -37,6 +37,7 @@ export class SettingsComponent implements OnInit {
   concernAreas: IConcernArea[];
   trees: TreeNode[] = [];
   selectedFiles: TreeNode[] = [];
+  inputUpload: any;
 
   units: IUnit[];
   settingsForm = this.fb.group({
@@ -157,7 +158,8 @@ export class SettingsComponent implements OnInit {
       type: this.settingsForm.get(['type']).value,
       user: this.officer.user,
       unit: this.settingsForm.get(['unit']).value,
-      researchAreas: this.officer.researchAreas
+      researchAreas: this.officer.researchAreas,
+      concernAreas: this.officer.concernAreas
     };
     return entity;
   }
@@ -293,7 +295,12 @@ export class SettingsComponent implements OnInit {
       });
     }
   }
-
+  cancel() {
+    this.uploadPercent = null;
+    this.downloadURL = null;
+    this.inputUpload.value = null;
+    this.loadAll();
+  }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
@@ -315,7 +322,7 @@ export class SettingsComponent implements OnInit {
 
   uploadFile(event) {
     const file = event.target.files[0];
-    const filePath = 'image/';
+    const filePath = 'image/' + new Date().getTime();
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 

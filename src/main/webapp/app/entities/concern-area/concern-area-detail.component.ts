@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { JhiDataUtils } from 'ng-jhipster';
 
 import { IConcernArea } from 'app/shared/model/concern-area.model';
 
@@ -10,7 +11,7 @@ import { IConcernArea } from 'app/shared/model/concern-area.model';
 export class ConcernAreaDetailComponent implements OnInit {
   concernArea: IConcernArea;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ concernArea }) => {
@@ -18,6 +19,13 @@ export class ConcernAreaDetailComponent implements OnInit {
     });
   }
 
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
   previousState() {
     window.history.back();
   }

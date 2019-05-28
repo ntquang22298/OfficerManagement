@@ -33,10 +33,10 @@ export const unitRoute: Routes = [
     path: '',
     component: UnitComponent,
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: [],
       pageTitle: 'officerManagementApp.unit.home.title'
-    },
-    canActivate: [UserRouteAccessService]
+    }
+    //canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/view',
@@ -45,10 +45,10 @@ export const unitRoute: Routes = [
       unit: UnitResolve
     },
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: [],
       pageTitle: 'officerManagementApp.unit.home.title'
-    },
-    canActivate: [UserRouteAccessService]
+    }
+    //canActivate: [UserRouteAccessService]
   },
   {
     path: 'new',
@@ -69,7 +69,7 @@ export const unitRoute: Routes = [
       unit: UnitResolve
     },
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'officerManagementApp.unit.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const unitPopupRoute: Routes = [
       unit: UnitResolve
     },
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: ['ROLE_USER'],
       pageTitle: 'officerManagementApp.unit.home.title'
     },
     canActivate: [UserRouteAccessService],

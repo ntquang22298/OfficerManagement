@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import * as XLSX from 'ts-xlsx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
@@ -16,6 +16,7 @@ import { UserMgmtDeleteDialogComponent } from './user-management-delete-dialog.c
 export class UserMgmtComponent implements OnInit, OnDestroy {
   currentAccount: any;
   users: User[];
+  newUsers: User[];
   error: any;
   success: any;
   routeData: any;
@@ -26,6 +27,9 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  arrayBuffer: any;
+  file: File;
+  isSaving: boolean;
 
   constructor(
     private userService: UserService,
@@ -137,5 +141,46 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
   private onError(error) {
     this.alertService.error(error.error, error.message, null);
+  }
+
+  incomingfile(event) {
+    this.file = event.target.files[0];
+  }
+  Upload() {
+    let fileReader = new FileReader();
+    fileReader.onload = e => {
+      this.arrayBuffer = fileReader.result;
+      var data = new Uint8Array(this.arrayBuffer);
+      var arr = new Array();
+      for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+      var bstr = arr.join('');
+      var workbook = XLSX.read(bstr, { type: 'binary' });
+      var first_sheet_name = workbook.SheetNames[0];
+      var worksheet = workbook.Sheets[first_sheet_name];
+      console.log(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
+      XLSX.utils.sheet_to_json(worksheet, { raw: true }).forEach(e => {
+        var objStr = JSON.stringify(e);
+        var obj = JSON.parse(objStr);
+        const user: User = {
+          login: obj['Tên đăng nhập'],
+          password: obj['Mật khẩu'],
+          firstName: obj['Họ và tên'],
+          email: obj['VNU email'],
+          authorities: ['ROLE_USER'],
+          activated: true
+        };
+        this.isSaving = true;
+        this.userService.create(user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+      });
+    };
+    fileReader.readAsArrayBuffer(this.file);
+  }
+  private onSaveSuccess(result) {
+    this.isSaving = false;
+    this.loadAll();
+  }
+
+  private onSaveError() {
+    this.isSaving = false;
   }
 }

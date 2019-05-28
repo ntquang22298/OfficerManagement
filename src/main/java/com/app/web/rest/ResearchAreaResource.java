@@ -123,11 +123,11 @@ public class ResearchAreaResource {
 
     /**
      *
-     * @return
+     * @return all childs of a researchArea entity
      */
     @GetMapping("/research-areas-childs/{id}")
     public List<ResearchArea> getAllChilds(@PathVariable(name = "id") Long id) {
         log.debug("REST request to get all childs of a researchArea entity");
-        return researchAreaRepository.findByUser(id);
+        return researchAreaRepository.getAllChilds(id);
     }
 }
