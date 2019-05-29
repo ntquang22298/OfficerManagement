@@ -205,7 +205,7 @@
                                             <option [ngValue]="null"></option>
                                             <option
                                                 [ngValue]="unitOption.id === officer.unit?.id ? officer.unit : unitOption"
-                                                *ngFor="let unitOption of units; trackBy: trackUnitById">
+                                                *ngFor="let unitOption of units">
                                                 {{unitOption.name}}
                                             </option>
                                         </select>
@@ -273,14 +273,6 @@
                             </button>
                             <button class="btn btn-secondary btn-md" (click)="collapseAll()">
                                 <span jhiTranslate="button.collapseall"></span>
-                            </button>
-                            <button class="btn btn-success btn-md" (click)="changeView()">
-                                <fa-icon [icon]="'eye'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-                            <button class="btn btn-primary btn-md" (click)="changeEdit()">
-                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
                         </div>
                     </div>

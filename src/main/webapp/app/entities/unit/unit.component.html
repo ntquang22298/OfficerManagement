@@ -13,7 +13,7 @@
     <br />
     <div class="row">
         <div class="col-md-9">
-            <select class="selection col-md-2" [(ngModel)]="search" (ngModelChange)="findByType($event)">
+            <select class="selection col-md-2" [(ngModel)]="search" (ngModelChange)="findByType()">
                 <option jhiTranslate="officerManagementApp.enum.all" [ngValue]="all">
                 </option>
                 <option jhiTranslate="{{'officerManagementApp.enum.unit.'+choice}}" *ngFor="let choice of choices"

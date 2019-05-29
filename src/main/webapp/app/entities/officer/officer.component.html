@@ -13,18 +13,18 @@
     <br />
     <div class="row">
         <div class="col-md-9">
-            <select class="selection" [(ngModel)]="searchType" (ngModelChange)="searchOfficer($event)">
-                <option jhiTranslate="officerManagementApp.enum.allType" [ngValue]="allType"></option>
+            <select class="selection" [(ngModel)]="searchType" (ngModelChange)="searchOfficer()">
+                <option jhiTranslate="officerManagementApp.enum.allType" ></option>
                 <option jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officerType}}"
                     *ngFor="let officerType of officerTypes" [ngValue]="officerType">{{officerType}}</option>
             </select>
-            <select class="selection" [(ngModel)]="searchDegree" (ngModelChange)="searchOfficer($event)">
-                <option jhiTranslate="officerManagementApp.enum.allDegree" [ngValue]="allDegree"></option>
+            <select class="selection" [(ngModel)]="searchDegree" (ngModelChange)="searchOfficer()">
+                <option jhiTranslate="officerManagementApp.enum.allDegree" ></option>
                 <option jhiTranslate="{{'officerManagementApp.enum.officer.degree.'+ officerDegree}}"
                     *ngFor="let officerDegree of officerDegrees" [ngValue]="officerDegree">{{officerDegree}}</option>
             </select>
-            <select class="selection" [(ngModel)]="searchUnit" (ngModelChange)="searchOfficer($event)">
-                <option jhiTranslate="officerManagementApp.enum.all" [ngValue]="allUnit"></option>
+            <select class="selection" [(ngModel)]="searchUnit" (ngModelChange)="searchOfficer()">
+                <option jhiTranslate="officerManagementApp.enum.all" ></option>
                 <option *ngFor="let unit of units" [ngValue]="unit.name">{{unit.name}}</option>
             </select>
         </div>
