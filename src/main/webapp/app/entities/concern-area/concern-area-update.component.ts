@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IConcernArea, ConcernArea } from 'app/shared/model/concern-area.model';
 import { ConcernAreaService } from './concern-area.service';
 import { IOfficer } from 'app/shared/model/officer.model';
@@ -18,17 +18,16 @@ export class ConcernAreaUpdateComponent implements OnInit {
   concernArea: IConcernArea;
   isSaving: boolean;
 
-  concernareas: IConcernArea[];
-
   officers: IOfficer[];
 
   editForm = this.fb.group({
     id: [],
     name: [],
-    parent: []
+    description: []
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
     protected concernAreaService: ConcernAreaService,
     protected officerService: OfficerService,
@@ -42,13 +41,6 @@ export class ConcernAreaUpdateComponent implements OnInit {
       this.updateForm(concernArea);
       this.concernArea = concernArea;
     });
-    this.concernAreaService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<IConcernArea[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IConcernArea[]>) => response.body)
-      )
-      .subscribe((res: IConcernArea[]) => (this.concernareas = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.officerService
       .query()
       .pipe(
@@ -62,8 +54,40 @@ export class ConcernAreaUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: concernArea.id,
       name: concernArea.name,
-      parent: concernArea.parent
+      description: concernArea.description
     });
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field: string, isImage) {
+    return new Promise((resolve, reject) => {
+      if (event && event.target && event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
+        if (isImage && !/^image\//.test(file.type)) {
+          reject(`File was expected to be an image but was found to be ${file.type}`);
+        } else {
+          const filedContentType: string = field + 'ContentType';
+          this.dataUtils.toBase64(file, base64Data => {
+            this.editForm.patchValue({
+              [field]: base64Data,
+              [filedContentType]: file.type
+            });
+          });
+        }
+      } else {
+        reject(`Base64 data was not set as file could not be extracted from passed parameter: ${event}`);
+      }
+    }).then(
+      () => console.log('blob added'), // sucess
+      this.onError
+    );
   }
 
   previousState() {
@@ -85,7 +109,7 @@ export class ConcernAreaUpdateComponent implements OnInit {
       ...new ConcernArea(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
-      parent: this.editForm.get(['parent']).value
+      description: this.editForm.get(['description']).value
     };
     return entity;
   }
@@ -104,10 +128,6 @@ export class ConcernAreaUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  trackConcernAreaById(index: number, item: IConcernArea) {
-    return item.id;
   }
 
   trackOfficerById(index: number, item: IOfficer) {

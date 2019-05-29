@@ -2,9 +2,15 @@ package com.app.web.rest;
 
 import com.app.domain.Diary;
 import com.app.domain.Officer;
+import com.app.domain.User;
+import com.app.domain.enumeration.OfficerDegree;
+import com.app.domain.enumeration.OfficerType;
 import com.app.repository.DiaryRepository;
 import com.app.repository.OfficerRepository;
+import com.app.repository.UserRepository;
+import com.app.security.SecurityUtils;
 import com.app.service.OfficerService;
+import com.app.service.dto.OfficerDTO;
 import com.app.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -35,14 +41,14 @@ public class OfficerResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final OfficerRepository officerRepository;
     private final OfficerService officerService;
     private final DiaryRepository diaryRepository;
+    private final UserRepository userRepository;
 
-    public OfficerResource(OfficerRepository officerRepository, OfficerService officerService, DiaryRepository diaryRepository) {
-        this.officerRepository = officerRepository;
+    public OfficerResource(OfficerService officerService, DiaryRepository diaryRepository, UserRepository userRepository) {
         this.officerService = officerService;
         this.diaryRepository = diaryRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -94,6 +100,8 @@ public class OfficerResource {
         if (result != null) {
             // create diary
             Diary diary = new Diary();
+            Officer current = officerService.findByUser();
+            diary.setOfficer(current);
             diary.setContent("Update officer");
             diary.setTime(ZonedDateTime.now());
             diaryRepository.save(diary);
@@ -113,9 +121,9 @@ public class OfficerResource {
      * list of officers in body.
      */
     @GetMapping("/officers")
-    public List<Officer> getAllOfficers(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<OfficerDTO> getAllOfficers(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Officers");
-        return officerRepository.findAllWithEagerRelationships();
+        return officerService.findAll();
     }
 
     /**
@@ -126,10 +134,10 @@ public class OfficerResource {
      * body the officer, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/officers/{id}")
-    public ResponseEntity<Officer> getOfficer(@PathVariable Long id) {
+    public ResponseEntity<OfficerDTO> getOfficer(@PathVariable Long id) {
         log.debug("REST request to get Officer : {}", id);
-        Optional<Officer> officer = officerRepository.findOneWithEagerRelationships(id);
-        return ResponseUtil.wrapOrNotFound(officer);
+        OfficerDTO officer = officerService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(officer));
     }
 
     /**
@@ -144,14 +152,86 @@ public class OfficerResource {
         officerService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
     /**
-     * {@code Get  /officers-by-unit/:key} : find officers by unit
-     * @param key : unit's name or part of unit's name
-     * @return list of officers in body.
+     * Search officer by unit/degree/type
+     *
+     * @param key : unit's name
+     * @param degree: degree of officer
+     * @param type : type of officer
+     * @return officer list
      */
-    @GetMapping("/officers-by-unit/{key}")
-    public List<Officer> findAllByUnit(@PathVariable(name = "key") String key) {
+    @GetMapping("/officers-search/{key}/{degree}/{type}")
+    public List<OfficerDTO> search(@PathVariable(name = "key") String key,
+            @PathVariable(name = "degree") String degree, @PathVariable(name = "type") String type) {
+        OfficerDegree officerdegree = OfficerDegree.TS;
+        OfficerType officerType = OfficerType.GV;
+        if (key.equals("0")) {
+            key = null;
+        }
+        switch (degree) {
+            case "TS":
+                officerdegree = OfficerDegree.TS;
+                break;
+            case "CN":
+                officerdegree = OfficerDegree.CN;
+                break;
+            case "GSTS":
+                officerdegree = OfficerDegree.GSTS;
+                break;
+            case "PGSTS":
+                officerdegree = OfficerDegree.PGSTS;
+                break;
+            case "ThS":
+                officerdegree = OfficerDegree.ThS;
+                break;
+            default:
+                officerdegree = null;
+        }
+        switch (type) {
+            case "GV":
+                officerType = OfficerType.GV;
+                break;
+            case "CNBM":
+                officerType = OfficerType.CNBM;
+                break;
+            case "HT":
+                officerType = OfficerType.HT;
+                break;
+            case "PCNBM":
+                officerType = OfficerType.PCNBM;
+                break;
+            case "PHT":
+                officerType = OfficerType.PHT;
+                break;
+            case "PK":
+                officerType = OfficerType.PK;
+                break;
+            case "TK":
+                officerType = OfficerType.GV;
+                break;
+            default:
+                officerType = null;
+        }
         log.debug("REST request to get all Officers by Unit");
-        return officerService.findAllByUnit(key);
+        return officerService.search(key, officerdegree, officerType);
+    }
+
+    /**
+     * Search officers by name
+     *
+     * @param key: part of officer's name
+     * @return list of officers
+     */
+    @GetMapping("/officers-by-name/{key}")
+    public List<OfficerDTO> getAllOfficersByName(@PathVariable(name = "key") String key) {
+        log.debug("REST request to get all Officers by name");
+        return officerService.findByName(key);
+    }
+
+    @GetMapping("/officers-by-user")
+    public Officer getAllOfficersByName() throws Throwable {
+        log.debug("REST request to get all Officers by user");
+        return officerService.findByUser();
     }
 }

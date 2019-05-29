@@ -2,13 +2,13 @@
   "officerManagementApp": {
     "OfficerType": {
       "null": "",
-      "HT": "HT",
-      "PHT": "PHT",
-      "TK": "TK",
-      "PK": "PK",
-      "CNBM": "CNBM",
-      "PCNBM": "PCNBM",
-      "GV": "GV"
+      "HT": "Rector",
+      "PHT": "Vice Rector",
+      "TK": "Dean",
+      "PK": "Associate Dean",
+      "CNBM": "Head Head of Department",
+      "PCNBM": "Deputy Head of Department",
+      "GV": "Lecture"
     }
   }
 }

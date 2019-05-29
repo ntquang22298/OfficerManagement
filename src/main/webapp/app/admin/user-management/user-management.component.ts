@@ -1,13 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import * as XLSX from 'ts-xlsx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { AccountService, UserService, User } from 'app/core';
 import { UserMgmtDeleteDialogComponent } from './user-management-delete-dialog.component';
+import { Register } from 'app/account';
+import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'jhi-user-mgmt',
@@ -16,6 +19,7 @@ import { UserMgmtDeleteDialogComponent } from './user-management-delete-dialog.c
 export class UserMgmtComponent implements OnInit, OnDestroy {
   currentAccount: any;
   users: User[];
+  newUsers: User[];
   error: any;
   success: any;
   routeData: any;
@@ -26,6 +30,11 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  arrayBuffer: any;
+  file: File;
+  isSaving: boolean;
+  errorEmailExists: string;
+  errorUserExists: string;
 
   constructor(
     private userService: UserService,
@@ -34,6 +43,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     private parseLinks: JhiParseLinks,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private registerService: Register,
     private eventManager: JhiEventManager,
     private modalService: NgbModal
   ) {
@@ -137,5 +147,52 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
   private onError(error) {
     this.alertService.error(error.error, error.message, null);
+  }
+
+  incomingfile(event) {
+    this.file = event.target.files[0];
+  }
+  Upload() {
+    let fileReader = new FileReader();
+    fileReader.onload = e => {
+      this.arrayBuffer = fileReader.result;
+      var data = new Uint8Array(this.arrayBuffer);
+      var arr = new Array();
+      for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+      var bstr = arr.join('');
+      var workbook = XLSX.read(bstr, { type: 'binary' });
+      var first_sheet_name = workbook.SheetNames[0];
+      var worksheet = workbook.Sheets[first_sheet_name];
+      console.log(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
+      XLSX.utils.sheet_to_json(worksheet, { raw: true }).forEach(e => {
+        var objStr = JSON.stringify(e);
+        var obj = JSON.parse(objStr);
+        const user: User = {
+          login: obj['Tên đăng nhập'],
+          password: obj['Mật khẩu'],
+          firstName: obj['Họ và tên'],
+          email: obj['VNU email']
+        };
+        this.isSaving = true;
+        this.registerService.save(user).subscribe(
+          () => {
+            this.success = true;
+            this.loadAll();
+          },
+          response => this.processError(response)
+        );
+      });
+    };
+    fileReader.readAsArrayBuffer(this.file);
+  }
+  private processError(response: HttpErrorResponse) {
+    this.success = null;
+    if (response.status === 400 && response.error.type === LOGIN_ALREADY_USED_TYPE) {
+      this.errorUserExists = 'ERROR';
+    } else if (response.status === 400 && response.error.type === EMAIL_ALREADY_USED_TYPE) {
+      this.errorEmailExists = 'ERROR';
+    } else {
+      this.error = 'ERROR';
+    }
   }
 }

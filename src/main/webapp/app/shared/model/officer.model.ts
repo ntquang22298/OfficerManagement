@@ -4,7 +4,7 @@ import { IConcernArea } from 'app/shared/model/concern-area.model';
 import { IUnit } from 'app/shared/model/unit.model';
 import { IDiary } from 'app/shared/model/diary.model';
 
-export const enum OfficerDegree {
+export enum OfficerDegree {
   TS = 'TS',
   PGSTS = 'PGSTS',
   ThS = 'ThS',
@@ -12,7 +12,7 @@ export const enum OfficerDegree {
   GSTS = 'GSTS'
 }
 
-export const enum OfficerType {
+export enum OfficerType {
   HT = 'HT',
   PHT = 'PHT',
   TK = 'TK',
@@ -34,6 +34,7 @@ export interface IOfficer {
   researchAreas?: IResearchArea[];
   concernAreas?: IConcernArea[];
   unit?: IUnit;
+  unitName?: string;
   diaries?: IDiary[];
 }
 
@@ -50,6 +51,7 @@ export class Officer implements IOfficer {
     public researchAreas?: IResearchArea[],
     public concernAreas?: IConcernArea[],
     public unit?: IUnit,
+    public unitName?: string,
     public diaries?: IDiary[]
   ) {}
 }

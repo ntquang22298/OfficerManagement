@@ -1,25 +1,7 @@
 {
-    "name": "ConcernArea",
-    "fields": [
-        {
-            "fieldName": "name",
-            "fieldType": "String"
-        }
-    ],
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "concernArea",
-            "otherEntityRelationshipName": "parent",
-            "relationshipName": "childs"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "concernArea",
-            "otherEntityRelationshipName": "childs",
-            "relationshipName": "parent",
-            "otherEntityField": "id"
-        },
         {
             "relationshipType": "many-to-many",
             "otherEntityName": "officer",
@@ -29,13 +11,23 @@
             "ownerSide": false
         }
     ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
     "changelogDate": "20190507090300",
-    "entityTableName": "concern_area",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "concern_area",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

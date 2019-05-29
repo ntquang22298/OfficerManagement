@@ -4,7 +4,7 @@
     "form": {
       "firstname": "Tên",
       "firstname.placeholder": "Nhập tên của bạn",
-      "lastname": "Họ",
+      "lastname": "Họ và tên",
       "lastname.placeholder": "Nhập họ của bạn",
       "language": "Ngôn ngữ",
       "button": "Lưu"

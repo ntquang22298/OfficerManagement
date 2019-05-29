@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IUnit } from 'app/shared/model/unit.model';
+import { IUnit, UnitType } from 'app/shared/model/unit.model';
 
 type EntityResponseType = HttpResponse<IUnit>;
 type EntityArrayResponseType = HttpResponse<IUnit[]>;
@@ -12,6 +12,8 @@ type EntityArrayResponseType = HttpResponse<IUnit[]>;
 @Injectable({ providedIn: 'root' })
 export class UnitService {
   public resourceUrl = SERVER_API_URL + 'api/units';
+  public findByTypeUrl = SERVER_API_URL + 'api/units-by-type';
+  public findByNameUrl = SERVER_API_URL + 'api/units-by-name';
 
   constructor(protected http: HttpClient) {}
 
@@ -34,5 +36,12 @@ export class UnitService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findByType(type: UnitType) {
+    return this.http.get<IUnit[]>(`${this.findByTypeUrl}/${type}`, { observe: 'response' });
+  }
+  findByName(key: String) {
+    return this.http.get<IUnit[]>(`${this.findByNameUrl}/${key}`, { observe: 'response' });
   }
 }

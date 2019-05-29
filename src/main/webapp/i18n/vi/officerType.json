@@ -2,13 +2,13 @@
   "officerManagementApp": {
     "OfficerType": {
       "null": "",
-      "HT": "HT",
-      "PHT": "PHT",
-      "TK": "TK",
-      "PK": "PK",
-      "CNBM": "CNBM",
-      "PCNBM": "PCNBM",
-      "GV": "GV"
+      "HT": "Hiệu trưởng",
+      "PHT": "Phó hiệu trưởng",
+      "TK": "Trưởng khoa",
+      "PK": "Phó khoa",
+      "CNBM": "Chủ nhiệm bộ môn",
+      "PCNBM": "Phó chủ nhiệm bộ môn",
+      "GV": "Giảng viên"
     }
   }
 }

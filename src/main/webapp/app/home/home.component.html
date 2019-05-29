@@ -3,22 +3,27 @@
         <span class="hipster img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-        <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
+        <h1 class="display-6" jhiTranslate="home.title">Welcome to OfficerManagement System!</h1>
         <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
 
         <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
+            <div class="alert alert-primary" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
-                    [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}". </span>
+                    [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}".
+                </span>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">
                 <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-                <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
+                <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign
+                    in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default
+                    accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
+                    password="user").</span>
             </div>
             <div class="alert alert-warning" *ngSwitchCase="false">
                 <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+                <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a
+                    new account</a>
             </div>
         </div>
 
@@ -27,15 +32,87 @@
         </p>
 
         <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener" jhiTranslate="home.link.homepage">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener" jhiTranslate="home.link.stackoverflow">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener" jhiTranslate="home.link.bugtracker">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener" jhiTranslate="home.link.chat">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener" jhiTranslate="home.link.follow">follow @java_hipster on Twitter</a></li>
+            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener"
+                    jhiTranslate="home.link.homepage">JHipster homepage</a></li>
+            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener"
+                    jhiTranslate="home.link.stackoverflow">JHipster on Stack Overflow</a></li>
+            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank"
+                    rel="noopener" jhiTranslate="home.link.bugtracker">JHipster bug tracker</a></li>
+            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener"
+                    jhiTranslate="home.link.chat">JHipster public chat room</a></li>
+            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener"
+                    jhiTranslate="home.link.follow">follow @java_hipster on Twitter</a></li>
         </ul>
 
         <p>
-            <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener" jhiTranslate="home.github">GitHub</a>!
+            <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a
+                href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener"
+                jhiTranslate="home.github">GitHub</a>!
         </p>
     </div>
+</div>
+<!-- <div [ngSwitch]="isAuthenticated()">
+    <div *ngSwitchCase="true">
+        <div class="banner">
+
+        </div>
+        <div class="body">
+                <p-dataView #dv [value]="officers" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand"
+                [sortField]="sortField" [sortOrder]="sortOrder">
+                <p-header>
+                    <div class="ui-helper-clearfix">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-4">
+                                <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                            </div>
+                            <div class="ui-g-6 ui-md-4 filter-container">
+                                <div style="position:relative">
+                                    <input type="search" pInputText placeholder="Search by brand" (keyup)="dv.filter($event.target.value)">
+                                </div>
+                            </div>
+                            <div class="ui-g-6 ui-md-4" style="text-align:right">
+                                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                            </div>
+                        </div>
+                    </div>
+                </p-header>
+                <ng-template let-officer pTemplate="listItem">
+                    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                        <div class="ui-g-12 ui-md-3" style="text-align:center">
+                            <img src="../../../../../images/images.jpg">
+                        </div>
+                        <div class="ui-g-12 ui-md-8 officer-details">
+                            <div class="ui-g">
+                                <div class="ui-g-2 ui-sm-6">Vin: </div>
+                                <div class="ui-g-10 ui-sm-6"><b>{{officer.id}}</b></div>
+            
+                                <div class="ui-g-2 ui-sm-6">Year: </div>
+                                <div class="ui-g-10 ui-sm-6"><b>{{officer.fullName}}</b></div>
+            
+                                <div class="ui-g-2 ui-sm-6">Brand: </div>
+                                <div class="ui-g-10 ui-sm-6"><b>{{officer.unitName}}</b></div>
+            
+                                <div class="ui-g-2 ui-sm-6">Color: </div>
+                                <div class="ui-g-10 ui-sm-6"><b>{{officer.code}}</b></div>
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-1 search-icon">
+                            <button pButton type="button" icon="pi pi-search" (click)="selectofficer($event, officer)"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template let-officer pTemplate="gridItem">
+                    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+                        <p-panel [header]="officer.vin" [style]="{'text-align':'center'}">
+                            <img src="../../../../../images/images.jpg" width="60">
+                            <div class="officer-detail">{{officer.code}} - {{officer.fullName}}</div>
+                            <hr class="ui-widget-content" style="border-top:0">
+                            <button pButton type="button" icon="pi pi-search" (click)="selectofficer($event, officer)" style="margin-top:0"></button>
+                        </p-panel>
+                    </div>
+                </ng-template>
+            </p-dataView>
+        </div>
+    </div> -->
+
 </div>

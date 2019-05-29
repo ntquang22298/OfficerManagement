@@ -23,6 +23,14 @@ import { RouterModule } from '@angular/router';
       {
         path: 'diary',
         loadChildren: './diary/diary.module#OfficerManagementDiaryModule'
+      },
+      {
+        path: 'concern-area',
+        loadChildren: './concern-area/concern-area.module#OfficerManagementConcernAreaModule'
+      },
+      {
+        path: 'concern-area',
+        loadChildren: './concern-area/concern-area.module#OfficerManagementConcernAreaModule'
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

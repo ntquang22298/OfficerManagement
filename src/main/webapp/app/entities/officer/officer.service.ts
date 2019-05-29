@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IOfficer } from 'app/shared/model/officer.model';
+import { IOfficer, OfficerDegree, OfficerType } from 'app/shared/model/officer.model';
 
 type EntityResponseType = HttpResponse<IOfficer>;
 type EntityArrayResponseType = HttpResponse<IOfficer[]>;
@@ -12,7 +12,9 @@ type EntityArrayResponseType = HttpResponse<IOfficer[]>;
 @Injectable({ providedIn: 'root' })
 export class OfficerService {
   public resourceUrl = SERVER_API_URL + 'api/officers';
-  public findByUnitUrl = SERVER_API_URL + 'api/officers-by-unit';
+  public searchUrl = SERVER_API_URL + 'api/officers-search';
+  public findByNameUrl = SERVER_API_URL + 'api/officers-by-name';
+  public findByUserUrl = SERVER_API_URL + 'api/officers-by-user';
   constructor(protected http: HttpClient) {}
 
   create(officer: IOfficer): Observable<EntityResponseType> {
@@ -35,7 +37,13 @@ export class OfficerService {
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
-  findByUnit(key: string): Observable<EntityArrayResponseType> {
-    return this.http.get<IOfficer[]>(`${this.findByUnitUrl}/${key}`, { observe: 'response' });
+  search(key: string, degree: OfficerDegree, type: OfficerType): Observable<EntityArrayResponseType> {
+    return this.http.get<IOfficer[]>(`${this.searchUrl}/${key}/${degree}/${type}`, { observe: 'response' });
+  }
+  findByName(key: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IOfficer[]>(`${this.findByNameUrl}/${key}`, { observe: 'response' });
+  }
+  findByUser(): Observable<EntityResponseType> {
+    return this.http.get<IOfficer>(`${this.findByUserUrl}`, { observe: 'response' });
   }
 }

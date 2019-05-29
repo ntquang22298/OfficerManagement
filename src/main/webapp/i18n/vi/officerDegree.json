@@ -2,11 +2,11 @@
   "officerManagementApp": {
     "OfficerDegree": {
       "null": "",
-      "TS": "TS",
-      "PGSTS": "PGSTS",
-      "ThS": "ThS",
-      "CN": "CN",
-      "GSTS": "GSTS"
+      "TS": "Tiến sĩ",
+      "PGSTS": "Phó giáo sư",
+      "ThS": "Thạc sĩ",
+      "CN": "Cử nhân",
+      "GSTS": "Giáo sư"
     }
   }
 }

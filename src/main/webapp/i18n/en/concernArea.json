@@ -16,8 +16,7 @@
         "title": "Concern Area"
       },
       "name": "Name",
-      "childs": "Childs",
-      "parent": "Parent",
+      "description": "Description",
       "officers": "Officers"
     }
   }
