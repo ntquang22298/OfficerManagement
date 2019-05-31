@@ -25,9 +25,10 @@ public interface OfficerService {
 
     /**
      * searching officer
+     *
      * @param key: unit's name or part of unit's name
      * @param degree: degree of officer
-     * @param type : type of officer    
+     * @param type : type of officer
      * @return officer
      */
     List<OfficerDTO> search(String key, OfficerDegree degree, OfficerType type);
@@ -38,22 +39,31 @@ public interface OfficerService {
      * @return officer
      */
     List<OfficerDTO> findAll();
+
     /**
      * find officer by id
+     *
      * @param id
      * @return officer
      */
     OfficerDTO findOne(Long id);
+
     /**
      * search officer by name
+     *
      * @param key: part of officer's name
      * @return officer
      */
     List<OfficerDTO> findByName(String key);
+
     /**
      * Find officer by current user login
+     *
      * @param id: id of current user
      * @return officer
      */
     Officer findByUser();
+
+    List<OfficerDTO> findByResearchArea(Long id);
+
 }

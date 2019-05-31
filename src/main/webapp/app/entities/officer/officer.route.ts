@@ -57,7 +57,7 @@ export const officerRoute: Routes = [
       officer: OfficerResolve
     },
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: ['ROLE_USER', 'ROLE_ADMIN'],
       pageTitle: 'officerManagementApp.officer.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const officerRoute: Routes = [
       officer: OfficerResolve
     },
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: ['ROLE_USER', 'ROLE_ADMIN'],
       pageTitle: 'officerManagementApp.officer.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const officerPopupRoute: Routes = [
       officer: OfficerResolve
     },
     data: {
-      authorities: ['ROLE_USER', 'ROLE_ANONYMOUS'],
+      authorities: ['ROLE_USER', 'ROLE_ADMIN'],
       pageTitle: 'officerManagementApp.officer.home.title'
     },
     canActivate: [UserRouteAccessService],

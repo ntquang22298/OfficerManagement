@@ -234,4 +234,10 @@ public class OfficerResource {
         log.debug("REST request to get all Officers by user");
         return officerService.findByUser();
     }
+    
+        @GetMapping("/officers-by-research/{id}")
+    public List<OfficerDTO> getAllOfficersByResearchArea(@PathVariable(name = "id") Long id) {
+        log.debug("REST request to get all Officers by research");
+        return officerService.findByResearchArea(id);
+    }
 }

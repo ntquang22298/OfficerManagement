@@ -46,12 +46,13 @@ public class ConcernAreaResource {
         this.officerService = officerService;
     }
 
-    
     /**
      * {@code POST  /concern-areas} : Create a new concernArea.
      *
      * @param concernArea the concernArea to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new concernArea, or with status {@code 400 (Bad Request)} if the concernArea has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and
+     * with body the new concernArea, or with status {@code 400 (Bad Request)}
+     * if the concernArea has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/concern-areas")
@@ -62,17 +63,19 @@ public class ConcernAreaResource {
         }
         ConcernArea result = concernAreaService.save(concernArea);
         return ResponseEntity.created(new URI("/api/concern-areas/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /concern-areas} : Updates an existing concernArea.
      *
      * @param concernArea the concernArea to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated concernArea,
-     * or with status {@code 400 (Bad Request)} if the concernArea is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the concernArea couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with
+     * body the updated concernArea, or with status {@code 400 (Bad Request)} if
+     * the concernArea is not valid, or with status
+     * {@code 500 (Internal Server Error)} if the concernArea couldn't be
+     * updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/concern-areas")
@@ -83,27 +86,28 @@ public class ConcernAreaResource {
         }
         ConcernArea result = concernAreaRepository.save(concernArea);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, concernArea.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, concernArea.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code GET  /concern-areas} : get all the concernAreas.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of concernAreas in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the
+     * list of concernAreas in body.
      */
     @GetMapping("/concern-areas")
     public List<ConcernArea> getAllConcernAreas() {
         log.debug("REST request to get all ConcernAreas");
-        Officer officer = officerService.findByUser();
-        return concernAreaRepository.findAllByUser(officer.getId());
+        return concernAreaRepository.findAll();
     }
 
     /**
      * {@code GET  /concern-areas/:id} : get the "id" concernArea.
      *
      * @param id the id of the concernArea to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the concernArea, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with
+     * body the concernArea, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/concern-areas/{id}")
     public ResponseEntity<ConcernArea> getConcernArea(@PathVariable Long id) {
@@ -123,5 +127,12 @@ public class ConcernAreaResource {
         log.debug("REST request to delete ConcernArea : {}", id);
         concernAreaRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/concern-areas-officer")
+    public List<ConcernArea> getAllConcernAreasByOfficer() {
+        log.debug("REST request to get all ConcernAreas by officer");
+        Officer officer = officerService.findByUser();
+        return concernAreaRepository.findAllByUser(officer.getId());
     }
 }

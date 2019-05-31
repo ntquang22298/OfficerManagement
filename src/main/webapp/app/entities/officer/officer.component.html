@@ -44,6 +44,7 @@
 
 
         </div>
+        <br/>
         <div class="table-responsive" *ngIf="officers">
             <p-table class="table table-striped table-responsive" [value]=officers [paginator]="true" [rows]="10">
                 <ng-template pTemplate="header">
@@ -112,7 +113,8 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <p-tree [value]="trees" [filter]="true" selectionMode="single"
-                                                [(selection)]="selectedFiles" propagateSelectionUp="true">
+                                                [(selection)]="selectedFiles" propagateSelectionUp="true"
+                                                (onNodeSelect)="findByResearch($event)">
                                                 <ng-template let-tree pTemplate="default">
                                                     {{tree.label}}
                                                 </ng-template>
@@ -128,9 +130,10 @@
                         </p-scrollPanel>
                     </p-tabPanel>
                     <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
-                            <p-listbox (click)="filterByUnit()" [options]="units" [(ngModel)]="selectedUnit" optionLabel="name" filter="filter"> </p-listbox>
-                            <p>Selected Unit: {{selectedUnit ? selectedUnit.name : 'none'}}</p>
-                        </p-tabPanel>
+                        <p-listbox (click)="filterByUnit()" [options]="units" [(ngModel)]="selectedUnit"
+                            optionLabel="name" filter="filter"> </p-listbox>
+                        <p>Selected Unit: {{selectedUnit ? selectedUnit.name : 'none'}}</p>
+                    </p-tabPanel>
                 </p-tabView>
             </div>
             <div class="col">

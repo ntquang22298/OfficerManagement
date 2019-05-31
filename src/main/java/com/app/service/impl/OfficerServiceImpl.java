@@ -120,4 +120,11 @@ public class OfficerServiceImpl implements OfficerService {
         return officerRepository.findByUser(userLogin);
     }
 
+    @Override
+    public List<OfficerDTO> findByResearchArea(Long id) {
+                        return officerRepository.findAllByResearchArea(id).stream()
+                .map(officerMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+    }
+
 }

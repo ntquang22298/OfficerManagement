@@ -12,8 +12,10 @@ type EntityArrayResponseType = HttpResponse<IConcernArea[]>;
 @Injectable({ providedIn: 'root' })
 export class ConcernAreaService {
   public resourceUrl = SERVER_API_URL + 'api/concern-areas';
+  public findAllByUserUrl = SERVER_API_URL + 'api/concern-areas-officer';
 
-  constructor(protected http: HttpClient) {}
+
+  constructor(protected http: HttpClient) { }
 
   create(concernArea: IConcernArea): Observable<EntityResponseType> {
     return this.http.post<IConcernArea>(this.resourceUrl, concernArea, { observe: 'response' });
@@ -34,5 +36,10 @@ export class ConcernAreaService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findAllByUser(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IConcernArea[]>(this.findAllByUserUrl, { params: options, observe: 'response' });
   }
 }

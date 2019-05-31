@@ -27,7 +27,7 @@ export class ConcernAreaComponent implements OnInit, OnDestroy {
 
   loadAll() {
     this.concernAreaService
-      .query()
+      .findAllByUser()
       .pipe(
         filter((res: HttpResponse<IConcernArea[]>) => res.ok),
         map((res: HttpResponse<IConcernArea[]>) => res.body)
@@ -69,6 +69,6 @@ export class ConcernAreaComponent implements OnInit, OnDestroy {
   }
 
   protected onError(errorMessage: string) {
-    this.jhiAlertService.error(errorMessage, null, null);
+    this.jhiAlertService.error("Officer not found", null, null);
   }
 }

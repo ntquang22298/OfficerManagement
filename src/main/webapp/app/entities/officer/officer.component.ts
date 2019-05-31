@@ -37,6 +37,7 @@ export class OfficerComponent implements OnInit, OnDestroy {
   trees: TreeNode[] = [];
   researchAreas: IResearchArea[];
   selectedUnit: IUnit;
+  selectedNode:TreeNode;
 
   constructor(
     protected officerService: OfficerService,
@@ -240,5 +241,19 @@ export class OfficerComponent implements OnInit, OnDestroy {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+  }
+  findByResearch(event){
+    this.officerService
+    .findByResearch(event.node.data)
+    .pipe(
+      filter((res: HttpResponse<IOfficer[]>) => res.ok),
+      map((res: HttpResponse<IOfficer[]>) => res.body)
+    )
+    .subscribe(
+      (res: IOfficer[]) => {
+        this.officers = res;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 }
