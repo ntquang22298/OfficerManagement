@@ -14,6 +14,21 @@
       "follow": "Theo dõi @java_hipster trên Twitter"
     },
     "like": "Nếu bạn thích JHipster, đừng quên cho chúng tôi thêm một ngôi sao trên",
-    "github": "GitHub"
+    "github": "GitHub",
+
+    "footer": {
+      "uet": "Đại học Công Nghệ",
+      "detail": "Thông tin chi tiết",
+      "officer": "Danh sách giảng viên",
+      "concernarea": "Lĩnh vực quan tâm",
+      "researcharea": "Chủ đề nghiên cứu",
+      "usefullink": "Liên kết hữu ích",
+      "contact": "Thông tin liên hệ",
+      "tag": "© 2019 Đại học Công Nghệ",
+      "location": "Địa chỉ: E3-144 Xuân Thủy",
+      "phonenumber": "Điện thoại: 024.37547.461",
+      "liam": "Email: uet@vnu.edu.vn",
+      "knil": "Website chính thức của Đại học Công Nghệ"
+    }
   }
 }
