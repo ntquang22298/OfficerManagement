@@ -1,0 +1,36 @@
+.table {
+  text-align: center;
+  padding-top: 30px;
+}
+th,
+td {
+  vertical-align: middle;
+}
+.selection {
+  width: 200px;
+  height: 41px;
+  background-color: #0070ba;
+  color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(147, 147, 147, 0.75);
+  vertical-align: middle;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+::ng-deep.ui-autocomplete .ui-autocomplete-input {
+  width: 265px;
+  height: 41px;
+  border: 1px solid #828080;
+  font-size: 12px;
+  padding-left: 42px;
+}
+.searchbtn {
+  width: 84px;
+  height: 41px;
+  background: #0871b9;
+  font-size: 12px;
+  border: none;
+  margin-left: -3px;
+  color: white;
+}

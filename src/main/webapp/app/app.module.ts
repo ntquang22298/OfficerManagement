@@ -17,6 +17,7 @@ import { OfficerManagementAppRoutingModule } from './app-routing.module';
 import { OfficerManagementHomeModule } from './home/home.module';
 import { OfficerManagementAccountModule } from './account/account.module';
 import { OfficerManagementEntityModule } from './entities/entity.module';
+
 import { AccordionModule } from 'primeng/accordion';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here

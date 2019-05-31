@@ -1,0 +1,76 @@
+.avatar {
+  margin: -50px auto 0;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  width: 200px;
+  height: 200px;
+}
+img {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.card {
+  border: 0;
+  margin-bottom: 30px;
+  margin-top: 60px;
+  border-radius: 6px;
+  color: #333;
+  background: #ebecf1;
+  width: 100%;
+  padding-bottom: 20px;
+}
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: #0070ba;
+  padding: 16px;
+  margin-top: -20px;
+  margin-left: 5px;
+  margin-right: 15px;
+  float: left;
+}
+.icon-left {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 33px;
+  color: #ffffff;
+  font-size: 30px;
+}
+::ng-deep .ui-tree {
+  width: 1680px;
+  height: 100%;
+  border: none !important;
+}
+
+::ng-deep .ui-tree .ui-tree-filter-container {
+  width: 351px;
+  margin-left: 20px;
+}
+.button {
+  margin-left: 40px;
+}
+.btn-md {
+  width: 110px;
+}
+.btn-sm {
+  width: 80px;
+}
+::ng-deep .ui-tree .ui-treenode-children {
+  padding-left: 50px;
+}
+::ng-deep .ui-tree .ui-treenode-icon {
+  font-size: 30px !important;
+  color: #eecc66 !important;
+}
+.upload {
+  margin-top: 20px;
+}
+.areas {
+  margin-left: 100px;
+  margin-top: -50px;
+}

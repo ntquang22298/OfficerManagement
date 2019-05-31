@@ -5,6 +5,7 @@ import { JhiLanguageHelper } from 'app/core';
 import { TableModule } from 'primeng/table';
 import { OfficerManagementSharedModule } from 'app/shared';
 import { PaginatorModule } from 'primeng/paginator';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import {
   UnitComponent,
   UnitDetailComponent,
@@ -18,7 +19,7 @@ import {
 const ENTITY_STATES = [...unitRoute, ...unitPopupRoute];
 
 @NgModule({
-  imports: [OfficerManagementSharedModule, RouterModule.forChild(ENTITY_STATES), TableModule, PaginatorModule],
+  imports: [OfficerManagementSharedModule, RouterModule.forChild(ENTITY_STATES), TableModule, PaginatorModule, AutoCompleteModule],
   declarations: [UnitComponent, UnitDetailComponent, UnitUpdateComponent, UnitDeleteDialogComponent, UnitDeletePopupComponent],
   entryComponents: [UnitComponent, UnitUpdateComponent, UnitDeleteDialogComponent, UnitDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],

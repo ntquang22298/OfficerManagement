@@ -1,7 +1,11 @@
 package com.app.web.rest;
 
 import com.app.domain.ConcernArea;
+import com.app.domain.Officer;
 import com.app.repository.ConcernAreaRepository;
+import com.app.repository.OfficerRepository;
+import com.app.service.ConcernAreaService;
+import com.app.service.OfficerService;
 import com.app.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -33,11 +37,16 @@ public class ConcernAreaResource {
     private String applicationName;
 
     private final ConcernAreaRepository concernAreaRepository;
+    private final ConcernAreaService concernAreaService;
+    private final OfficerService officerService;
 
-    public ConcernAreaResource(ConcernAreaRepository concernAreaRepository) {
+    public ConcernAreaResource(ConcernAreaRepository concernAreaRepository, ConcernAreaService concernAreaService, OfficerService officerService) {
         this.concernAreaRepository = concernAreaRepository;
+        this.concernAreaService = concernAreaService;
+        this.officerService = officerService;
     }
 
+    
     /**
      * {@code POST  /concern-areas} : Create a new concernArea.
      *
@@ -51,7 +60,7 @@ public class ConcernAreaResource {
         if (concernArea.getId() != null) {
             throw new BadRequestAlertException("A new concernArea cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ConcernArea result = concernAreaRepository.save(concernArea);
+        ConcernArea result = concernAreaService.save(concernArea);
         return ResponseEntity.created(new URI("/api/concern-areas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -86,7 +95,8 @@ public class ConcernAreaResource {
     @GetMapping("/concern-areas")
     public List<ConcernArea> getAllConcernAreas() {
         log.debug("REST request to get all ConcernAreas");
-        return concernAreaRepository.findAll();
+        Officer officer = officerService.findByUser();
+        return concernAreaRepository.findAllByUser(officer.getId());
     }
 
     /**

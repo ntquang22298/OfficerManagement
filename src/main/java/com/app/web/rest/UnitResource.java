@@ -2,6 +2,7 @@ package com.app.web.rest;
 
 import com.app.domain.Diary;
 import com.app.domain.Unit;
+import com.app.domain.enumeration.UnitType;
 import com.app.repository.DiaryRepository;
 import com.app.repository.UnitRepository;
 import com.app.service.UnitService;
@@ -142,5 +143,23 @@ public class UnitResource {
         log.debug("REST request to delete Unit : {}", id);
         unitService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/units-by-type/{type}")
+    public List<Unit> getAllUnitsByType(@PathVariable String type) {
+        log.debug("REST request to get all Units by type");
+        UnitType unitType = UnitType.BOMON;
+        if (type.equals("BOMON")) {
+            unitType = UnitType.BOMON;
+        } else if (type.equals("PHONGTHINGHIEM")) {
+            unitType = UnitType.PHONGTHINGHIEM;
+        }
+        return unitService.findByType(unitType);
+    }
+
+    @GetMapping("/units-by-name/{key}")
+    public List<Unit> getAllUnits(@PathVariable String key) {
+        log.debug("REST request to get all Units by name");
+        return unitService.findByName(key);
     }
 }

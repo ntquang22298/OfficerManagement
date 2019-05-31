@@ -11,9 +11,31 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br />
+    <div class="row">
+        <div class="col-md-9">
+            <select class="selection col-md-2" [(ngModel)]="search" (ngModelChange)="findByType()">
+                <option jhiTranslate="officerManagementApp.enum.all" [ngValue]="all">
+                </option>
+                <option jhiTranslate="{{'officerManagementApp.enum.unit.'+choice}}" *ngFor="let choice of choices"
+                    [ngValue]="choice">{{choice}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <p-autoComplete [(ngModel)]="unitsearch" [suggestions]="results" (completeMethod)="searchUnit($event)"
+                    field="name"></p-autoComplete>
+                <button class="searchbtn" (click)="findByName()">
+                    <span class="d-none d-md-inline"
+                        jhiTranslate="officerManagementApp.officer.button.search">Search</span>
+                </button>
+            </div>
+        </div>
 
-    <div *ngIf="units">
-        <p-table class="table table-striped" [value]="units" [paginator]="true" [rows]="10" >
+    </div>
+
+    <div class="table" *ngIf="units">
+        <p-table class="table table-striped" [value]="units" [paginator]="true" [rows]="10">
             <ng-template pTemplate="header">
                 <tr>
                     <th><span jhiTranslate="global.field.id">ID</span></th>
@@ -32,7 +54,7 @@
                     <td>{{unit.address}}</td>
                     <td>{{unit.phone}}</td>
                     <td>{{unit.website}}</td>
-                    <td jhiTranslate="{{'officerManagementApp.UnitType.' + unit.type}}">{{unit.type}}</td>
+                    <td jhiTranslate="{{'officerManagementApp.enum.unit.'+unit.type}}">{{unit.type}}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit" [routerLink]="['/unit', unit.id, 'view' ]"
@@ -57,6 +79,6 @@
             </ng-template>
         </p-table>
     </div>
-    
+
 
 </div>

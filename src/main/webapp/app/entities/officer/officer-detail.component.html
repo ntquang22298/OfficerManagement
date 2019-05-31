@@ -1,137 +1,124 @@
-<!-- <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="officer">
-            <h2><span>Officer</span> {{officer.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span>Code</span></dt>
-                <dd>
-                    <span>{{officer.code}}</span>
-                </dd>
-                <dt><span>Full Name</span></dt>
-                <dd>
-                    <span
-                    >{{officer.fullName}}</span>
-                </dd>
-                <dt><span>Avatar Url</span></dt>
-                <dd>
-                    <span>{{officer.avatarUrl}}</span>
-                </dd>
-                <dt><span>V NU Email</span></dt>
-                <dd>
-                    <span>{{officer.vNUEmail}}</span>
-                </dd>
-                <dt><span>Degree</span></dt>
-                <dd>
-                    <span>{{officer.degree}}</span>
-                </dd>
-                <dt><span>Type</span></dt>
-                <dd>
-                    <span>{{officer.type}}</span>
-                </dd>
-                <dt><span>User</span></dt>
-                <dd>
-                    {{officer.user?.id}}
-                </dd>
-                <dt><span>Research Areas</span></dt>
-                <dd>
-                    <span *ngFor="let researchAreas of officer.researchAreas; let last = last">
-                        <a
-                            [routerLink]="['/research-area', researchAreas?.id, 'view' ]">{{researchAreas.id}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span>Concern Areas</span></dt>
-                <dd>
-                    <span *ngFor="let concernAreas of officer.concernAreas; let last = last">
-                        <a
-                            [routerLink]="['/concern-area', concernAreas?.id, 'view' ]">{{concernAreas.id}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span>Unit</span></dt>
-                <dd>
-                    <div *ngIf="officer.unit">
-                        <a [routerLink]="['/unit', officer.unit?.id, 'view']">{{officer.unit?.id}}</a>
-                    </div>
-                </dd>
-            </dl>
 
-            <button type="submit" (click)="previousState()" class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
-            </button>
-
-            <button type="button" [routerLink]="['/officer', officer.id, 'edit']" class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
-            </button>
-        </div>
-    </div>
-</div> -->
 <div *ngIf="officer">
-    <div class="row justify-content-center">
+    <div>
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-info">
-            <div class="left-side">
-                <div class="personal-img"><img src="../../../../../../images/images.jpg"></div>
+        <div>
+                <button type="submit" (click)="previousState()" class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                </button>
+            
+                <button type="button" [routerLink]="['/officer', officer.id, 'edit']" class="btn btn-primary">
+                    <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                </button>
             </div>
-            <div class="right-side">
-                <div class="label">
-                    <h3>
-                        Thông tin cán bộ
-                    </h3>
+        <div class="row  justify-content-center">
+            <div class="form-info">
+                <div class="left-side">
+                    <div *ngIf="officer.avatarUrl" class="personal-img"><img [src]="officer.avatarUrl"></div>
+                    <div *ngIf="!officer.avatarUrl"><img src="../../../../../../images/placeholder.png"/></div>
                 </div>
-                <div class="detail">
-                    <div class="info">
-                        <div class="row-a">
-                            <div class="icon-left">
-                                <fa-icon class="icon-left" icon="id-badge"></fa-icon>
-                            </div>
-                            <div class="text"><strong>Mã cán bộ</strong></div>
-                            <p> {{officer.id}}</p>
-                        </div>
-                        <div class="row-a">
-                            <div class="icon-left">
-                                <fa-icon class="icon-left" icon="user"></fa-icon>
-                            </div>
-                            <div class="text"><strong>Họ và tên</strong></div>
-                            <p> {{officer.fullName}}</p>
-                        </div>
-                        <div class="row-a">
-                            <div class="icon-left">
-                                <fa-icon class="icon-left" icon="envelope"></fa-icon>
-                            </div>
-                            <div class="text"><strong>VNU Email</strong></div>
-                            <p> {{officer.vNUEmail}}</p>
-                        </div>
-                        <div class="row-a">
-                            <div class="left">
-                                <div class="icon-left">
-                                    <fa-icon class="icon-left" icon="briefcase"></fa-icon>
-                                </div>
-                                <div class="text"><strong>Chức vụ</strong></div>
-                                <p>{{officer.type}}</p>
-                            </div>
-                            <div class="right">
-                                <div class="icon-left">
-                                    <fa-icon class="icon-left" icon="user-graduate"></fa-icon>
-                                </div>
-                                <div class="text"><strong>Học vị</strong></div>
-                                <p>{{officer.degree}}</p>
-                            </div>
-                        </div>
-
+                <div class="right-side">
+                    <div class="label">
+                        <h3>
+                            Thông tin cán bộ
+                        </h3>
                     </div>
-                    <div class="row-a">
-                        <div class="icon-left">
-                            <fa-icon class="icon-left" icon="university"></fa-icon>
-                        </div>
-                        <div class="text"><strong>Đơn vị</strong></div>
-                        <div *ngIf="officer.unit">
-                                <a [routerLink]="['../unit', officer.unit?.id, 'view' ]" >{{officer.unitName}}</a>
+                    <div class="detail">
+                        <div class="info">
+                            <div class="row-a">
+                                <div class="icon-left">
+                                    <fa-icon class="icon-left" icon="id-badge"></fa-icon>
+                                </div>
+                                <div class="text"><strong>Mã cán bộ</strong></div>
+                                <p> {{officer.id}}</p>
                             </div>
+                            <div class="row-a">
+                                <div class="icon-left">
+                                    <fa-icon class="icon-left" icon="user"></fa-icon>
+                                </div>
+                                <div class="text"><strong>Họ và tên</strong></div>
+                                <p> {{officer.fullName}}</p>
+                            </div>
+                            <div class="row-a">
+                                <div class="icon-left">
+                                    <fa-icon class="icon-left" icon="envelope"></fa-icon>
+                                </div>
+                                <div class="text"><strong>VNU Email</strong></div>
+                                <p> {{officer.vNUEmail}}</p>
+                            </div>
+                            <div class="row-a">
+                                <div class="left">
+                                    <div class="icon-left">
+                                        <fa-icon class="icon-left" icon="briefcase"></fa-icon>
+                                    </div>
+                                    <div class="text"><strong>Chức vụ</strong></div>
+                                    <p>{{officer.type}}</p>
+                                </div>
+                                <div class="right">
+                                    <div class="icon-left">
+                                        <fa-icon class="icon-left" icon="user-graduate"></fa-icon>
+                                    </div>
+                                    <div class="text"><strong>Học vị</strong></div>
+                                    <p>{{officer.degree}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row-a">
+                            <div class="icon-left">
+                                <fa-icon class="icon-left" icon="university"></fa-icon>
+                            </div>
+                            <div class="text"><strong>Đơn vị</strong></div>
+                            <div *ngIf="officer.unit">
+                                <a [routerLink]="['/unit', officer.unit?.id, 'view' ]">{{officer.unitName}}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
+        </div>
+        <div class="row  justify-content-center div2">
+            <ul class="timeline col-md-8">
+                <li>
+                    <div class="timeline-badge success">
+                            <fa-icon class="icon-left" icon="book"></fa-icon>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">
+                                <span class="badge badge-success">Lĩnh vực quan tâm</span>
+                            </h4>
+                        </div>
+                        <div class="timeline-body">
+                            <ul *ngFor="let researchAreas of officer.researchAreas">
+                                <li>
+                                   <h5>{{researchAreas.name}}</h5> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <div class="timeline-badge info">
+                            <fa-icon class="icon-left" icon="pencil-alt"></fa-icon>
+                        
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">
+                                <span class="badge badge-info">Chủ đề nghiên cứu</span>
+                            </h4>
+                        </div>
+                        <div class="timeline-body">
+                            <ul *ngFor="let concernAreas of officer.concernAreas">
+                                <li>
+                                    <h5>{{concernAreas.name}}</h5>   
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 

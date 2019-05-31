@@ -2,7 +2,6 @@ package com.app.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -30,13 +29,9 @@ public class ConcernArea implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "parent")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<ConcernArea> childs = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnoreProperties("childs")
-    private ConcernArea parent;
+    @Lob
+    @Column(name = "description")
+    private String description;
 
     @ManyToMany(mappedBy = "concernAreas")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -65,42 +60,17 @@ public class ConcernArea implements Serializable {
         this.name = name;
     }
 
-    public Set<ConcernArea> getChilds() {
-        return childs;
+    public String getDescription() {
+        return description;
     }
 
-    public ConcernArea childs(Set<ConcernArea> concernAreas) {
-        this.childs = concernAreas;
+    public ConcernArea description(String description) {
+        this.description = description;
         return this;
     }
 
-    public ConcernArea addChilds(ConcernArea concernArea) {
-        this.childs.add(concernArea);
-        concernArea.setParent(this);
-        return this;
-    }
-
-    public ConcernArea removeChilds(ConcernArea concernArea) {
-        this.childs.remove(concernArea);
-        concernArea.setParent(null);
-        return this;
-    }
-
-    public void setChilds(Set<ConcernArea> concernAreas) {
-        this.childs = concernAreas;
-    }
-
-    public ConcernArea getParent() {
-        return parent;
-    }
-
-    public ConcernArea parent(ConcernArea concernArea) {
-        this.parent = concernArea;
-        return this;
-    }
-
-    public void setParent(ConcernArea concernArea) {
-        this.parent = concernArea;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Officer> getOfficers() {
@@ -150,6 +120,7 @@ public class ConcernArea implements Serializable {
         return "ConcernArea{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

@@ -6,6 +6,11 @@ import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PaginatorModule } from 'primeng/paginator';
 import { OfficerManagementSharedModule } from 'app/shared';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { TreeModule } from 'primeng/tree';
+import { TabViewModule } from 'primeng/tabview';
+import { ListboxModule } from 'primeng/listbox';
+
 import {
   OfficerComponent,
   OfficerDetailComponent,
@@ -19,12 +24,23 @@ import {
 const ENTITY_STATES = [...officerRoute, ...officerPopupRoute];
 
 @NgModule({
-  imports: [OfficerManagementSharedModule, RouterModule.forChild(ENTITY_STATES), TableModule, AutoCompleteModule, PaginatorModule],
+  imports: [
+    OfficerManagementSharedModule,
+    RouterModule.forChild(ENTITY_STATES),
+    TableModule,
+    AutoCompleteModule,
+    PaginatorModule,
+    ScrollPanelModule,
+    TreeModule,
+    TabViewModule,
+    ListboxModule
+  ],
   declarations: [
     OfficerComponent,
     OfficerDetailComponent,
     OfficerUpdateComponent,
     OfficerDeleteDialogComponent,
+
     OfficerDeletePopupComponent
   ],
   entryComponents: [OfficerComponent, OfficerUpdateComponent, OfficerDeleteDialogComponent, OfficerDeletePopupComponent],

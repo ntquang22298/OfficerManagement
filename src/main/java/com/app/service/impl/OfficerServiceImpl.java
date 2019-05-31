@@ -2,6 +2,8 @@ package com.app.service.impl;
 
 import com.app.domain.Diary;
 import com.app.domain.Officer;
+import com.app.domain.enumeration.OfficerDegree;
+import com.app.domain.enumeration.OfficerType;
 import com.app.repository.DiaryRepository;
 import com.app.repository.OfficerRepository;
 import com.app.security.AuthoritiesConstants;
@@ -9,6 +11,7 @@ import com.app.security.SecurityUtils;
 import com.app.service.OfficerService;
 import com.app.service.dto.OfficerDTO;
 import com.app.service.mapper.OfficerMapper;
+import com.app.web.rest.AccountResource;
 import com.app.web.rest.errors.BadRequestAlertException;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
@@ -57,9 +60,35 @@ public class OfficerServiceImpl implements OfficerService {
     }
 
     @Override
-    public List<OfficerDTO> findAllByUnit(String key) {
-
-        return officerRepository.findAllByUnit("%" + key + "%").stream()
+    public List<OfficerDTO> search(String key, OfficerDegree degree, OfficerType type) {
+        if (degree == null && type == null && key != null) {
+            return officerRepository.findAllByUnit(key).stream()
+                    .map(officerMapper::toDto)
+                    .collect(Collectors.toCollection(LinkedList::new));
+        } else if (degree == null && type != null && key != null) {
+            return officerRepository.findAllByUnitAndType(key, type).stream()
+                    .map(officerMapper::toDto)
+                    .collect(Collectors.toCollection(LinkedList::new));
+        } else if (degree != null && type == null && key != null) {
+            return officerRepository.findAllByUnitAndDegree(key, degree).stream()
+                    .map(officerMapper::toDto)
+                    .collect(Collectors.toCollection(LinkedList::new));
+        } else if (degree != null && type != null && key == null) {
+            return officerRepository.findAllByDegreeAndType(degree, type).stream()
+                    .map(officerMapper::toDto)
+                    .collect(Collectors.toCollection(LinkedList::new));
+        } else if (degree != null && type == null && key == null) {
+            return officerRepository.findAllByDegree(degree).stream()
+                    .map(officerMapper::toDto)
+                    .collect(Collectors.toCollection(LinkedList::new));
+        } else if (degree == null && type != null && key == null) {
+            return officerRepository.findAllByType(type).stream()
+                    .map(officerMapper::toDto)
+                    .collect(Collectors.toCollection(LinkedList::new));
+        } else if (degree == null && type == null && key == null) {
+            return this.findAll();
+        }
+        return officerRepository.search(key, degree, type).stream()
                 .map(officerMapper::toDto)
                 .collect(Collectors.toCollection(LinkedList::new));
 
@@ -76,6 +105,19 @@ public class OfficerServiceImpl implements OfficerService {
     public OfficerDTO findOne(Long id) {
 
         return officerMapper.toDto(officerRepository.findOneWithEagerRelationships(id));
+    }
+
+    @Override
+    public List<OfficerDTO> findByName(String key) {
+                return officerRepository.findAllByName(key).stream()
+                .map(officerMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public Officer findByUser() {
+        String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new AccountResource.AccountResourceException("Current user login not found"));
+        return officerRepository.findByUser(userLogin);
     }
 
 }

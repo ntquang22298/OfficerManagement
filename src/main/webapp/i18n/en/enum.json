@@ -1,0 +1,31 @@
+{
+  "officerManagementApp": {
+    "enum": {
+      "all": "Unit",
+      "allType": "Type",
+      "allDegree": "Degree",
+      "unit": {
+        "BOMON": "Department",
+        "PHONGTHINGHIEM": "Lab"
+      },
+      "officer": {
+        "degree": {
+          "TS": "Doctor of Philosophy",
+          "PGSTS": "Asscociate Professor",
+          "ThS": "Master of Science",
+          "CN": "Bachelor of Science",
+          "GSTS": "Professor"
+        },
+        "type": {
+          "HT": "Rector",
+          "PHT": "Vice Rector",
+          "TK": "Dean",
+          "PK": "Associate Dean",
+          "CNBM": "Head Head of Department",
+          "PCNBM": "Deputy Head of Department",
+          "GV": "Lecturers"
+        }
+      }
+    }
+  }
+}

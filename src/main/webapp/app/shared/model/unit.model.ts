@@ -1,6 +1,6 @@
 import { IOfficer } from 'app/shared/model/officer.model';
 
-export const enum UnitType {
+export enum UnitType {
   BOMON = 'BOMON',
   PHONGTHINGHIEM = 'PHONGTHINGHIEM'
 }

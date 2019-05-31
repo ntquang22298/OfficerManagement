@@ -115,6 +115,7 @@ export class OfficerUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const officer = this.createFromForm();
+    console.log(this.officer.researchAreas);
     if (officer.id !== undefined) {
       this.subscribeToSaveResponse(this.officerService.update(officer));
     } else {

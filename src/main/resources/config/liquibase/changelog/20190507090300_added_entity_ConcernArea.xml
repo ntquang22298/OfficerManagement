@@ -26,7 +26,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="parent_id" type="bigint">
+            <column name="description" type="clob">
                 <constraints nullable="true" />
             </column>
 
@@ -51,6 +51,7 @@
                   context="dev">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="description" type="string"/>
         </loadData>
     </changeSet>
 

@@ -33,7 +33,7 @@ export const researchAreaRoute: Routes = [
     path: '',
     component: ResearchAreaComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'officerManagementApp.researchArea.home.title'
     },
     canActivate: [UserRouteAccessService]
