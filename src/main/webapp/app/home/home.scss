@@ -6,7 +6,7 @@ Main page styles
   display: inline-block;
   width: 347px;
   height: 497px;
-  background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
+  background: url('../../../../../images/gear7-01.png') no-repeat center top;
   background-size: contain;
 }
 
@@ -17,7 +17,7 @@ Main page styles
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   .hipster {
-    background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
+    background: url('../../../../../images/gear7-01.png') no-repeat center top;
     background-size: contain;
   }
 }
@@ -27,41 +27,44 @@ Main page styles
   margin-left: 26px;
   width: 230px;
 }
-.gv-item{
+.gv-item {
   color: #000;
   padding-bottom: 18px;
   position: relative;
   text-align: left;
 }
-img{
-  max-width: 100%;
+img {
+  width: 236px;
   height: 315px;
   vertical-align: middle;
   border-radius: 6px;
-  box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+  box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
-.gv-name{
+.gv-name {
   margin-top: 16px;
-  margin-bottom: 1px;
+  margin-bottom: 20px;
   color: #1c9ad6;
   font-weight: bold;
   text-transform: capitalize;
+  min-height: 10px;
 }
-.gv-unit{
+.gv-unit {
   font-weight: bold;
   min-height: 30px;
+  color: #17dcf3;
 }
-p{
-  font-family: "Roboto",Tahoma,sans-serif;
+p {
+  font-family: 'Roboto', Tahoma, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.25;
 }
-.gv-viewmore{
+.gv-viewmore {
   margin-top: 30px;
   text-align: right;
+  color: #1c9ad6;
 }
-.gv-desc{
+.gv-desc {
   font-size: 13px;
   color: #000;
   min-height: 32px;
@@ -71,7 +74,7 @@ p{
   height: 5px;
   left: 0;
   width: 56px;
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   bottom: 0;
@@ -81,12 +84,12 @@ p{
   height: 3px;
   left: 65px;
   right: 0;
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   bottom: 0;
 }
-.gv-list{
+.gv-list {
   list-style: none;
   text-align: center;
   padding: 0;
@@ -108,10 +111,11 @@ p{
   border: none;
   margin-left: -3px;
   color: white;
+  float: left;
 }
 
 .selection {
-  width: 200px;
+  width: 180px;
   height: 41px;
   background-color: #0070ba;
   color: #ffffff;
@@ -121,26 +125,36 @@ p{
   line-height: 40px;
   font-weight: bold;
 }
-.search{
+.search {
   padding-bottom: 50px;
-  padding-left: 60px;
-  
 }
 ::ng-deep.ui-autocomplete .ui-autocomplete-input {
   width: 265px;
   height: 41px;
-  border: 1px solid #828080;
   font-size: 12px;
   padding-left: 42px;
 }
-.banner-img{
-  width: 100%;
-  height: 600px;
-
+.banner-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  height: 520px;
 }
-.banner{
-  margin-top:-30px;
+.banner {
+  margin-top: -30px;
+  margin-bottom: 50px;
+}
+
+h3 {
+  color: #ffffff;
 }
 ::ng-deep .ui-widget-content{
   border: 0 !important;
+}
+.icon{
+width: 500px;
+height: 500px;
+box-shadow:none
+
 }

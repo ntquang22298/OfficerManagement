@@ -8,7 +8,8 @@ import { UnitService } from './unit.service';
 
 @Component({
   selector: 'jhi-unit-update',
-  templateUrl: './unit-update.component.html'
+  templateUrl: './unit-update.component.html',
+  styleUrls : ['unit-update.scss']
 })
 export class UnitUpdateComponent implements OnInit {
   unit: IUnit;

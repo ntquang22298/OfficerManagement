@@ -1,105 +1,155 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-officer-heading" jhiTranslate="officerManagementApp.officer.home.createOrEditLabel">Create or
-                edit a Officer</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!officer.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.code"
-                        for="field_code">Code</label>
-                    <input type="text" class="form-control" name="code" id="field_code" formControlName="code" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.fullName"
-                        for="field_fullName">Full Name</label>
-                    <input type="text" class="form-control" name="fullName" id="field_fullName"
-                        formControlName="fullName" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.vNUEmail"
-                        for="field_vNUEmail">V NU Email</label>
-                    <input type="text" class="form-control" name="vNUEmail" id="field_vNUEmail"
-                        formControlName="vNUEmail" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.degree"
-                        for="field_degree">Degree</label>
-                    <select class="form-control" name="degree" formControlName="degree" id="field_degree">
-                        <option value="TS">{{'officerManagementApp.OfficerDegree.TS' | translate}}</option>
-                        <option value="PGSTS">{{'officerManagementApp.OfficerDegree.PGSTS' | translate}}</option>
-                        <option value="ThS">{{'officerManagementApp.OfficerDegree.ThS' | translate}}</option>
-                        <option value="CN">{{'officerManagementApp.OfficerDegree.CN' | translate}}</option>
-                        <option value="GSTS">{{'officerManagementApp.OfficerDegree.GSTS' | translate}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.type"
-                        for="field_type">Type</label>
-                    <select class="form-control" name="type" formControlName="type" id="field_type">
-                        <option value="HT">{{'officerManagementApp.OfficerType.HT' | translate}}</option>
-                        <option value="PHT">{{'officerManagementApp.OfficerType.PHT' | translate}}</option>
-                        <option value="TK">{{'officerManagementApp.OfficerType.TK' | translate}}</option>
-                        <option value="PK">{{'officerManagementApp.OfficerType.PK' | translate}}</option>
-                        <option value="CNBM">{{'officerManagementApp.OfficerType.CNBM' | translate}}</option>
-                        <option value="PCNBM">{{'officerManagementApp.OfficerType.PCNBM' | translate}}</option>
-                        <option value="GV">{{'officerManagementApp.OfficerType.GV' | translate}}</option>
-                    </select>
-                </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.user"
-                        for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" formControlName="user">
-                        <option [ngValue]="null"></option>
-                        <option
-                            [ngValue]="userOption.id === editForm.get('user').value?.id ? editForm.get('user').value : userOption"
-                            *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group" [hidden]="true">
-                    <label jhiTranslate="officerManagementApp.officer.researchAreas" for="field_researchAreas">Research
-                        Areas</label>
-                    <select class="form-control" id="field_researchAreas" multiple name="researchAreas"
-                        formControlName="researchAreas">
-                        <option [ngValue]="getSelected(editForm.get('researchAreas').value, researchAreaOption)"
-                            *ngFor="let researchAreaOption of researchareas; trackBy: trackResearchAreaById">
-                            {{researchAreaOption.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group" [hidden]="true">
-                    <label jhiTranslate="officerManagementApp.officer.concernAreas" for="field_concernAreas">Concern
-                        Areas</label>
-                    <select class="form-control" id="field_concernAreas" multiple name="concernAreas"
-                        formControlName="concernAreas">
-                        <option [ngValue]="getSelected(editForm.get('concernAreas').value, concernAreaOption)"
-                            *ngFor="let concernAreaOption of concernareas; trackBy: trackConcernAreaById">
-                            {{concernAreaOption.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.unit"
-                        for="field_unit">Unit</label>
-                    <select class="form-control" formControlName="unit" id="field_unit" name="unit" [(ngModel)]="officer.unit">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="unitOption.id === officer.unit?.id ? officer.unit : unitOption"
-                            *ngFor="let unitOption of units; trackBy: trackUnitById">{{unitOption.id}}</option>
-                    </select>
-                </div>
-            </div>
+        <div class="card">
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
-                    class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
+                <div class="card-icon">
+                    <fa-icon class="icon-left" icon="user"></fa-icon>
+                </div>
+                <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                    <h2 id="jhi-officer-heading" jhiTranslate="officerManagementApp.officer.home.createOrEditLabel">
+                        Create or
+                        edit a Officer</h2>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="form-group" [hidden]="!officer.id">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.code"
+                                        for="field_code">Code</label>
+                                    <input type="text" class="form-control" name="code" id="field_code"
+                                        formControlName="code" />
+                                </div>
+                            </div>
+                            <div class="col">
+
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                        jhiTranslate="officerManagementApp.officer.fullName" for="field_fullName">Full
+                                        Name</label>
+                                    <input type="text" class="form-control" name="fullName" id="field_fullName"
+                                        formControlName="fullName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.degree"
+                                        for="field_degree">Degree</label>
+                                    <select class="form-control" name="degree" formControlName="degree"
+                                        id="field_degree">
+                                        <option value="TS">{{'officerManagementApp.OfficerDegree.TS' | translate}}
+                                        </option>
+                                        <option value="PGSTS">{{'officerManagementApp.OfficerDegree.PGSTS' | translate}}
+                                        </option>
+                                        <option value="ThS">{{'officerManagementApp.OfficerDegree.ThS' | translate}}
+                                        </option>
+                                        <option value="CN">{{'officerManagementApp.OfficerDegree.CN' | translate}}
+                                        </option>
+                                        <option value="GSTS">{{'officerManagementApp.OfficerDegree.GSTS' | translate}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.type"
+                                        for="field_type">Type</label>
+                                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                                        <option value="HT">{{'officerManagementApp.OfficerType.HT' | translate}}
+                                        </option>
+                                        <option value="PHT">{{'officerManagementApp.OfficerType.PHT' | translate}}
+                                        </option>
+                                        <option value="TK">{{'officerManagementApp.OfficerType.TK' | translate}}
+                                        </option>
+                                        <option value="PK">{{'officerManagementApp.OfficerType.PK' | translate}}
+                                        </option>
+                                        <option value="CNBM">{{'officerManagementApp.OfficerType.CNBM' | translate}}
+                                        </option>
+                                        <option value="PCNBM">{{'officerManagementApp.OfficerType.PCNBM' | translate}}
+                                        </option>
+                                        <option value="GV">{{'officerManagementApp.OfficerType.GV' | translate}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="officerManagementApp.officer.vNUEmail"
+                                for="field_vNUEmail">V NU Email</label>
+                            <input type="text" class="form-control" name="vNUEmail" id="field_vNUEmail"
+                                formControlName="vNUEmail" />
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.user"
+                                        for="field_user">User</label>
+                                    <select class="form-control" id="field_user" name="user" formControlName="user">
+                                        <option [ngValue]="null"></option>
+                                        <option
+                                            [ngValue]="userOption.id === editForm.get('user').value?.id ? editForm.get('user').value : userOption"
+                                            *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="officerManagementApp.officer.unit"
+                                        for="field_unit">Unit</label>
+                                    <select class="form-control" formControlName="unit" id="field_unit" name="unit"
+                                        [(ngModel)]="officer.unit">
+                                        <option [ngValue]="null"></option>
+                                        <option
+                                            [ngValue]="unitOption.id === officer.unit?.id ? officer.unit : unitOption"
+                                            *ngFor="let unitOption of units; trackBy: trackUnitById">{{unitOption.id}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" [hidden]="true">
+                        <label jhiTranslate="officerManagementApp.officer.researchAreas"
+                            for="field_researchAreas">Research
+                            Areas</label>
+                        <select class="form-control" id="field_researchAreas" multiple name="researchAreas"
+                            formControlName="researchAreas">
+                            <option [ngValue]="getSelected(editForm.get('researchAreas').value, researchAreaOption)"
+                                *ngFor="let researchAreaOption of researchareas; trackBy: trackResearchAreaById">
+                                {{researchAreaOption.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group" [hidden]="true">
+                        <label jhiTranslate="officerManagementApp.officer.concernAreas" for="field_concernAreas">Concern
+                            Areas</label>
+                        <select class="form-control" id="field_concernAreas" multiple name="concernAreas"
+                            formControlName="concernAreas">
+                            <option [ngValue]="getSelected(editForm.get('concernAreas').value, concernAreaOption)"
+                                *ngFor="let concernAreaOption of concernareas; trackBy: trackConcernAreaById">
+                                {{concernAreaOption.name}}</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
+                                jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                            class="btn btn-primary">
+                            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>

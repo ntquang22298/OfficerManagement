@@ -85,8 +85,12 @@
         <div class="row">
             <p-tree [value]="trees"   [filter]="true">
                 <ng-template let-tree pTemplate="default">
-                    <input ng-class="{'border' : view?'0':'1'}"  [attr.disabled]="view ? '' : null" [(ngModel)]="tree.label" type="text" style="width:100%">
+                    <div *ngIf="view">
+                        {{tree.label}}
+                    </div>
                     <span *ngIf="!view">
+                    <input   [attr.disabled]="view ? '' : null" [(ngModel)]="tree.label" type="text" style="width:100%">
+
                         <button class="btn btn-success btn-sm" (click)="addNode(tree)" [hidden]="tree.data == null">
                             <fa-icon [icon]="'plus'"></fa-icon>
                         </button>

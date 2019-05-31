@@ -6,7 +6,8 @@ import { JhiLanguageHelper, User, UserService } from 'app/core';
 
 @Component({
   selector: 'jhi-user-mgmt-update',
-  templateUrl: './user-management-update.component.html'
+  templateUrl: './user-management-update.component.html',
+  styleUrls:['user-management.scss']
 })
 export class UserMgmtUpdateComponent implements OnInit {
   user: User;
@@ -18,7 +19,7 @@ export class UserMgmtUpdateComponent implements OnInit {
     id: [null],
     login: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[_.@A-Za-z0-9-]*')]],
     firstName: ['', [Validators.maxLength(50)]],
-    lastName: ['', [Validators.maxLength(50)]],
+    lastName: [''],
     email: ['', [Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     activated: [true],
     langKey: [],

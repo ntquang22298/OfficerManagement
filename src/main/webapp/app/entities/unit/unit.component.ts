@@ -23,7 +23,7 @@ export class UnitComponent implements OnInit, OnDestroy {
   all: UnitType;
   results: any[];
   unitsearch: any;
-
+  i:any
   constructor(
     protected unitService: UnitService,
     protected jhiAlertService: JhiAlertService,

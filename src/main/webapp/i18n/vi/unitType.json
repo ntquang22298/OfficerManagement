@@ -2,8 +2,8 @@
   "officerManagementApp": {
     "UnitType": {
       "null": "",
-      "BOMON": "BOMON",
-      "PHONGTHINGHIEM": "PHONGTHINGHIEM"
+      "BOMON": "Bộ môn",
+      "PHONGTHINGHIEM": "Phòng thí nghiệm"
     }
   }
 }

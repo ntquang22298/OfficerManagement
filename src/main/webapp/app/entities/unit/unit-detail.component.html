@@ -1,43 +1,94 @@
 <div class="row justify-content-center">
+    <jhi-alert-error></jhi-alert-error>
+
     <div class="col-8">
-        <div *ngIf="unit">
-            <h2><span jhiTranslate="officerManagementApp.unit.detail.title">Unit</span> {{unit.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="officerManagementApp.unit.name">Name</span></dt>
-                <dd>
-                    <span>{{unit.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="officerManagementApp.unit.address">Address</span></dt>
-                <dd>
-                    <span>{{unit.address}}</span>
-                </dd>
-                <dt><span jhiTranslate="officerManagementApp.unit.phone">Phone</span></dt>
-                <dd>
-                    <span>{{unit.phone}}</span>
-                </dd>
-                <dt><span jhiTranslate="officerManagementApp.unit.website">Website</span></dt>
-                <dd>
-                    <span>{{unit.website}}</span>
-                </dd>
-                <dt><span jhiTranslate="officerManagementApp.unit.type">Type</span></dt>
-                <dd>
-                    <span jhiTranslate="{{'officerManagementApp.UnitType.' + unit.type}}">{{unit.type}}</span>
-                </dd>
-            </dl>
+        <div class="card">
+            <div>
+                <div class="card-icon">
+                    <fa-icon class="icon-top" icon="university"></fa-icon>
+                </div>
+                <div class="right-side">
+                    <div class="label">
+                        <h3>
+                            Thông tin cán bộ
+                        </h3>
+                    </div>
+                    <div class="detail">
+                        <div class="info">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <div class="icon-left">
+                                            <fa-icon class="icon-left" icon="id-card"></fa-icon>
+                                        </div>
+                                        <div class="text"><strong>Unit id</strong></div>
+                                        <p> {{unit.id}}</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <div class="icon-left">
+                                            <fa-icon class="icon-left" icon="signature"></fa-icon>
+                                        </div>
+                                        <div class="text"><strong>Unit name</strong></div>
+                                        <p> {{unit.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
 
-            <button type="button"
-                    [routerLink]="['/unit', unit.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="icon-left">
+                                        <fa-icon class="icon-left" icon="map-marker"></fa-icon>
+                                    </div>
+                                    <div class="text"><strong>Address</strong></div>
+                                    <p> {{unit.address}}</p>
+                                </div>
+                                <div class="col">
+                                    <div class="left">
+                                        <div class="icon-left">
+                                            <fa-icon class="icon-left" icon="phone"></fa-icon>
+                                        </div>
+                                        <div class="text"><strong>Phone</strong></div>
+                                        <p>{{unit.phone}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="icon-left">
+                                        <fa-icon class="icon-left" icon="globe"></fa-icon>
+                                    </div>
+                                    <div class="text"><strong>Website</strong></div>
+                                    <p>{{unit.website}}</p>
+                                </div>
+                                <div class="col">
+                                    <div class="icon-left">
+                                        <fa-icon class="icon-left" icon="briefcase"></fa-icon>
+                                    </div>
+                                    <div class="text"><strong>Type</strong></div>
+                                    <p jhiTranslate="{{'officerManagementApp.enum.unit.'+unit.type}}" >{{unit.type}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button">
+                            <button type="submit" (click)="previousState()" class="btn btn-info">
+                                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">
+                                    Back</span>
+                            </button>
+
+                            <button type="button" [routerLink]="['/unit', unit.id, 'edit']" class="btn btn-primary">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">
+                                    Edit</span>
+                            </button>
+                        </div>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
