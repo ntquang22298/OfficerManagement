@@ -28,6 +28,11 @@
       "phonenumber": "Phone number: 024.37547.461",
       "liam": "Email: uet@vnu.edu.vn",
       "knil": "Website of University of Engineering and Technology"
+    },
+    "banner": {
+      "operator": "VNU Operator",
+      "amphitheater": "G2 Amphitheater",
+      "lecture": "UET lectures"
     }
   }
 }

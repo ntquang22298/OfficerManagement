@@ -7,11 +7,11 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Thực thể",
-        "unit": "Unit",
-        "officer": "Officer",
-        "researchArea": "Research Area",
-        "concernArea": "Concern Area",
-        "diary": "Diary",
+        "unit": "Đơn vị",
+        "officer": "Thông tin giảng viên",
+        "researchArea": "Chủ đề nghiên cứu",
+        "concernArea": "Lĩnh vực quan tâm",
+        "diary": "Nhật Ký",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -122,8 +122,16 @@
       "pattern": "Trường này phải theo định dạng {{ pattern }}.",
       "number": "Trường này phải là một số.",
       "datetimelocal": "Trường này phải là định dạng thời gian."
+    },
+    "navbar": {
+      "unit": "Cơ quan",
+      "officer": "Danh sách giảng viên",
+      "researcharea": "Chủ đề nghiên cứu",
+      "concernarea": "Lĩnh vực quan tâm",
+      "diary": "Nhật ký"
     }
   },
+
   "error": {
     "internalServerError": "Lỗi máy chủ nội bộ",
     "server.not.reachable": "Không tìm thấy máy chủ",

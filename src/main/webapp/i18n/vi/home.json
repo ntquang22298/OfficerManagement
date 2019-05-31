@@ -29,6 +29,11 @@
       "phonenumber": "Điện thoại: 024.37547.461",
       "liam": "Email: uet@vnu.edu.vn",
       "knil": "Website chính thức của Đại học Công Nghệ"
+    },
+    "banner": {
+      "operator": "Tòa nhà điều hành VNU",
+      "amphitheater": "Giảng đường",
+      "lecture": "Giảng viên UET"
     }
   }
 }
