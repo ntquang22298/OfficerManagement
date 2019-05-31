@@ -6,12 +6,6 @@
   border-right: 1px solid #bebebe;
   box-shadow: 0 3px 4px rgba(135, 135, 135, 0.75);
 }
-.form-info .left-side,
-img {
-  float: left;
-  height: 470px;
-  width: 470px;
-}
 .form-info .right-side {
   position: relative;
   float: left;
@@ -268,4 +262,15 @@ strong {
 }
 .badge .badge-info {
   background-color: #00bcd4;
+}
+.carousel-inner{
+  background: black
+}
+.profile-img{
+  float: left;
+  height: 470px;
+  width: 470px;
+}
+.carousel-caption{
+  margin-top:-100px
 }

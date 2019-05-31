@@ -14,7 +14,6 @@ export class ConcernAreaService {
   public resourceUrl = SERVER_API_URL + 'api/concern-areas';
   public findAllByUserUrl = SERVER_API_URL + 'api/concern-areas-officer';
 
-
   constructor(protected http: HttpClient) { }
 
   create(concernArea: IConcernArea): Observable<EntityResponseType> {

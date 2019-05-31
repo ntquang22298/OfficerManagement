@@ -1,21 +1,22 @@
-
 <div *ngIf="officer">
     <div>
         <jhi-alert-error></jhi-alert-error>
         <div>
-                <button type="submit" (click)="previousState()" class="btn btn-info">
-                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
-                </button>
-            
-                <button type="button" [routerLink]="['/officer', officer.id, 'edit']" class="btn btn-primary">
-                    <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
-                </button>
-            </div>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button" [routerLink]="['/officer', officer.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
         <div class="row  justify-content-center">
             <div class="form-info">
                 <div class="left-side">
-                    <div *ngIf="officer.avatarUrl" class="personal-img"><img [src]="officer.avatarUrl"></div>
-                    <div *ngIf="!officer.avatarUrl"><img src="../../../../../../images/placeholder.png"/></div>
+                    <div *ngIf="officer.avatarUrl" class="personal-img"><img class="profile-img"
+                            [src]="officer.avatarUrl"></div>
+                    <div *ngIf="!officer.avatarUrl"><img class="profile-img" s
+                            src="../../../../../../images/placeholder.png" /></div>
                 </div>
                 <div class="right-side">
                     <div class="label">
@@ -81,7 +82,7 @@
             <ul class="timeline col-md-8">
                 <li>
                     <div class="timeline-badge success">
-                            <fa-icon class="icon-left" icon="book"></fa-icon>
+                        <fa-icon class="icon-left" icon="book"></fa-icon>
                     </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
@@ -92,7 +93,7 @@
                         <div class="timeline-body">
                             <ul *ngFor="let researchAreas of officer.researchAreas">
                                 <li>
-                                   <h5>{{researchAreas.name}}</h5> 
+                                    <h5>{{researchAreas.name}}</h5>
                                 </li>
                             </ul>
                         </div>
@@ -100,8 +101,8 @@
                 </li>
                 <li class="timeline-inverted">
                     <div class="timeline-badge info">
-                            <fa-icon class="icon-left" icon="pencil-alt"></fa-icon>
-                        
+                        <fa-icon class="icon-left" icon="pencil-alt"></fa-icon>
+
                     </div>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
@@ -112,7 +113,7 @@
                         <div class="timeline-body">
                             <ul *ngFor="let concernAreas of officer.concernAreas">
                                 <li>
-                                    <h5>{{concernAreas.name}}</h5>   
+                                    <h5><a (click)="getConcernArea(concernAreas.id)">{{concernAreas.name}}</a></h5>
                                 </li>
                             </ul>
                         </div>
@@ -121,5 +122,6 @@
             </ul>
         </div>
     </div>
+
 
 </div>
