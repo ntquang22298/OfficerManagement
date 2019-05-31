@@ -34,3 +34,59 @@ td {
   margin-left: -3px;
   color: white;
 }
+::ng-deep .ui-tree {
+  width: 680px;
+  border: none !important;
+}
+.custombar1 .ui-scrollpanel-wrapper {
+  border-right: 9px solid #f4f4f4;
+}
+
+.custombar1 .ui-scrollpanel-bar {
+  background-color: #1976d2;
+  opacity: 1;
+  transition: background-color 0.3s;
+}
+
+.custombar1 .ui-scrollpanel-bar:hover {
+  background-color: #135ba1;
+}
+::ng-deep .ui-tree .ui-treenode-children {
+  padding-left: 50px;
+}
+::ng-deep .ui-tree .ui-treenode-icon {
+  font-size: 30px !important;
+  color: #eecc66 !important;
+}
+::ng-deep .ui-tree {
+  width: 400px !important;
+  height: 100%;
+  border: none !important;
+}
+::ng-deep .ui-tabview-panels {
+  border: none !important;
+  padding: 0 !important;
+}
+::ng-deep .ui-table .ui-table-thead > tr > th {
+  color: white !important;
+  background-color: #00bcd4 !important;
+}
+::ng-deep .ui-listbox {
+  border: none !important;
+  width: 400px;
+}
+::ng-deep .ui-listbox .ui-listbox-list-wrapper,
+.ui-listbox-list,
+.ui-listbox-item {
+  width: 400px !important;
+}
+::ng-deep .ui-listbox .ui-listbox-header {
+  width: 400px !important;
+}
+p-table {
+  padding-top: 0px !important;
+}
+.text-right {
+  float: right;
+  padding-right: 10px;
+}

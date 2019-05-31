@@ -1,97 +1,180 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="officerManagementApp.officer.home.title">Officers</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-officer"
-            [routerLink]="['/officer/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span jhiTranslate="officerManagementApp.officer.home.createLabel">
-                Create new Officer
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <br />
-    <div class="row">
-        <div class="col-md-9">
-            <select class="selection" [(ngModel)]="searchType" (ngModelChange)="searchOfficer()">
-                <option jhiTranslate="officerManagementApp.enum.allType" ></option>
-                <option jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officerType}}"
-                    *ngFor="let officerType of officerTypes" [ngValue]="officerType">{{officerType}}</option>
-            </select>
-            <select class="selection" [(ngModel)]="searchDegree" (ngModelChange)="searchOfficer()">
-                <option jhiTranslate="officerManagementApp.enum.allDegree" ></option>
-                <option jhiTranslate="{{'officerManagementApp.enum.officer.degree.'+ officerDegree}}"
-                    *ngFor="let officerDegree of officerDegrees" [ngValue]="officerDegree">{{officerDegree}}</option>
-            </select>
-            <select class="selection" [(ngModel)]="searchUnit" (ngModelChange)="searchOfficer()">
-                <option jhiTranslate="officerManagementApp.enum.all" ></option>
-                <option *ngFor="let unit of units" [ngValue]="unit.name">{{unit.name}}</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <p-autoComplete  [(ngModel)]="officerSearch" [suggestions]="results"
-                    (completeMethod)="search($event)" field="fullName"></p-autoComplete>
-                <button class="searchbtn" (click)="findByName()">
-                    <span class="d-none d-md-inline"
-                        jhiTranslate="officerManagementApp.officer.button.search">Search</span>
-                </button>
+<div [ngSwitch]="isAdmin()">
+    <div *ngSwitchCase="true">
+        <h2 id="page-heading">
+            <span jhiTranslate="officerManagementApp.officer.home.title">Officers</span>
+            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-officer"
+                [routerLink]="['/officer/new']">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span jhiTranslate="officerManagementApp.officer.home.createLabel">
+                    Create new Officer
+                </span>
+            </button>
+        </h2>
+        <jhi-alert></jhi-alert>
+        <br />
+        <div class="row">
+            <div class="col-md-9">
+                <select class="selection" [(ngModel)]="searchType" (ngModelChange)="searchOfficer()">
+                    <option jhiTranslate="officerManagementApp.enum.allType" [ngValue]="allType"></option>
+                    <option jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officerType}}"
+                        *ngFor="let officerType of officerTypes" [ngValue]="officerType">{{officerType}}</option>
+                </select>
+                <select class="selection" [(ngModel)]="searchDegree" (ngModelChange)="searchOfficer()">
+                    <option jhiTranslate="officerManagementApp.enum.allDegree" [ngValue]="allDegree"></option>
+                    <option jhiTranslate="{{'officerManagementApp.enum.officer.degree.'+ officerDegree}}"
+                        *ngFor="let officerDegree of officerDegrees" [ngValue]="officerDegree">{{officerDegree}}
+                    </option>
+                </select>
+                <select class="selection" [(ngModel)]="searchUnit" (ngModelChange)="searchOfficer()">
+                    <option jhiTranslate="officerManagementApp.enum.all" [ngValue]="all"></option>
+                    <option *ngFor="let unit of units" [ngValue]="unit.name">{{unit.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <p-autoComplete [(ngModel)]="officerSearch" [suggestions]="results"
+                        (completeMethod)="search($event)" field="fullName"></p-autoComplete>
+                    <button class="searchbtn" (click)="findByName()">
+                        <span class="d-none d-md-inline"
+                            jhiTranslate="officerManagementApp.officer.button.search">Search</span>
+                    </button>
+                </div>
+
             </div>
 
+
         </div>
+        <div class="table-responsive" *ngIf="officers">
+            <p-table class="table table-striped table-responsive" [value]=officers [paginator]="true" [rows]="10">
+                <ng-template pTemplate="header">
+                    <tr class="header">
+                        <th><span jhiTranslate="global.field.id">ID</span></th>
+                        <th><span jhiTranslate="officerManagementApp.officer.code">Code</span></th>
+                        <th><span jhiTranslate="officerManagementApp.officer.fullName">Full Name</span></th>
+                        <th><span jhiTranslate="officerManagementApp.officer.vNUEmail">V NU Email</span></th>
+                        <th><span jhiTranslate="officerManagementApp.officer.degree">Degree</span></th>
+                        <th><span jhiTranslate="officerManagementApp.officer.type">Type</span></th>
+                        <th><span jhiTranslate="officerManagementApp.officer.unit">Unit</span></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-officer>
+                    <tr>
+                        <td><a [routerLink]="['/officer', officer.id, 'view' ]">{{officer.id}}</a></td>
+                        <td>{{officer.code}}</td>
+                        <td>{{officer.fullName}}</td>
+                        <td>{{officer.vNUEmail}}</td>
+                        <td jhiTranslate="{{'officerManagementApp.enum.officer.degree.' + officer.degree}}">
+                            {{officer.degree}}
+                        </td>
+                        <td jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officer.type}}">{{officer.type}}
+                        </td>
+                        <td>
+                            <div *ngIf="officer.unit">
+                                <a [routerLink]="['../unit', officer.unit?.id, 'view' ]">{{officer.unitName}}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="submit" [routerLink]="['/officer', officer?.id, 'view' ]"
+                                    class="btn btn-info btn-sm">
+                                    <fa-icon [icon]="'eye'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                </button>
+                                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                    [routerLink]="['/officer', officer.id, 'edit']" class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                                    [routerLink]="['/', 'officer', { outlets: { popup: officer.id + '/delete'} }]"
+                                    replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div *ngSwitchCase="false">
+        <div class="row">
+
+            <div class="col">
+                <p-tabView>
+                    <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
+
+                        <p-scrollPanel styleClass="custombar1" [style]="{width: '100%', height: '600px'}">
+                            <div>
+                                <div>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <p-tree [value]="trees" [filter]="true" selectionMode="single"
+                                                [(selection)]="selectedFiles" propagateSelectionUp="true">
+                                                <ng-template let-tree pTemplate="default">
+                                                    {{tree.label}}
+                                                </ng-template>
+                                            </p-tree>
+                                            <div>Selected Nodes: <span *ngFor="let file of selectedFiles">{{file.label}}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </p-scrollPanel>
+                    </p-tabPanel>
+                    <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
+                            <p-listbox (click)="filterByUnit()" [options]="units" [(ngModel)]="selectedUnit" optionLabel="name" filter="filter"> </p-listbox>
+                            <p>Selected Unit: {{selectedUnit ? selectedUnit.name : 'none'}}</p>
+                        </p-tabPanel>
+                </p-tabView>
+            </div>
+            <div class="col">
+                <p-tabView>
+                    <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
+                        <p-scrollPanel styleClass="custombar1" [style]="{width: '100%', height: '600px'}">
+                            <div class="table-responsive" *ngIf="officers">
+                                <p-table class="table table-striped table-responsive" [value]=officers>
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th><span jhiTranslate="officerManagementApp.officer.fullName">Full
+                                                    Name</span>
+                                            </th>
+                                            <th><span jhiTranslate="officerManagementApp.officer.degree">Degree</span>
+                                            </th>
+                                            <th><span jhiTranslate="officerManagementApp.officer.unit">Unit</span></th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-officer>
+                                        <tr>
 
 
+                                            <td>{{officer.fullName}}</td>
+
+                                            <td
+                                                jhiTranslate="{{'officerManagementApp.enum.officer.degree.' + officer.degree}}">
+                                                {{officer.degree}}
+                                            </td>
+
+                                            <td>
+                                                <div *ngIf="officer.unit">
+                                                    <a
+                                                        [routerLink]="['../unit', officer.unit?.id, 'view' ]">{{officer.unitName}}</a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <a class="text-right" (click)="loadAll()"><i>All</i></a>
+                            </div>
+                        </p-scrollPanel>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
     </div>
-    <div class="table-responsive" *ngIf="officers">
-        <p-table class="table table-striped table-responsive" [value]=officers [paginator]="true" [rows]="10">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th><span jhiTranslate="global.field.id">ID</span></th>
-                    <th><span jhiTranslate="officerManagementApp.officer.code">Code</span></th>
-                    <th><span jhiTranslate="officerManagementApp.officer.fullName">Full Name</span></th>
-                    <th><span jhiTranslate="officerManagementApp.officer.vNUEmail">V NU Email</span></th>
-                    <th><span jhiTranslate="officerManagementApp.officer.degree">Degree</span></th>
-                    <th><span jhiTranslate="officerManagementApp.officer.type">Type</span></th>
-                    <th><span jhiTranslate="officerManagementApp.officer.unit">Unit</span></th>
-                    <th></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-officer>
-                <tr>
-                    <td><a [routerLink]="['/officer', officer.id, 'view' ]">{{officer.id}}</a></td>
-                    <td>{{officer.code}}</td>
-                    <td>{{officer.fullName}}</td>
-                    <td>{{officer.vNUEmail}}</td>
-                    <td jhiTranslate="{{'officerManagementApp.enum.officer.degree.' + officer.degree}}">{{officer.degree}}
-                    </td>
-                    <td jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officer.type}}">{{officer.type}}</td>
-                    <td>
-                        <div *ngIf="officer.unit">
-                            <a [routerLink]="['../unit', officer.unit?.id, 'view' ]">{{officer.unitName}}</a>
-                        </div>
-                    </td>
-                    <td >
-                        <div class="btn-group">
-                            <button type="submit" [routerLink]="['/officer', officer?.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                                <fa-icon [icon]="'eye'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" [routerLink]="['/officer', officer.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
-                                [routerLink]="['/', 'officer', { outlets: { popup: officer.id + '/delete'} }]"
-                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</div>

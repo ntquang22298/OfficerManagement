@@ -4,10 +4,13 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IOfficer, OfficerType, OfficerDegree } from 'app/shared/model/officer.model';
-import { IUnit, Unit } from 'app/shared/model/unit.model';
+import { IUnit, Unit, UnitType } from 'app/shared/model/unit.model';
 import { AccountService } from 'app/core';
 import { OfficerService } from './officer.service';
 import { UnitService } from '../unit';
+import { TreeNode } from 'primeng/api';
+import { ResearchAreaService } from '../research-area';
+import { IResearchArea } from 'app/shared/model/research-area.model';
 @Component({
   selector: 'jhi-officer',
   templateUrl: './officer.component.html',
@@ -28,12 +31,20 @@ export class OfficerComponent implements OnInit, OnDestroy {
   searchType: OfficerType;
   searchDegree: OfficerDegree;
   searchUnit: any;
+  allType: OfficerType;
+  allDegree: OfficerDegree;
+  all: UnitType;
+  trees: TreeNode[] = [];
+  researchAreas: IResearchArea[];
+  selectedUnit: IUnit;
+
   constructor(
     protected officerService: OfficerService,
     protected unitService: UnitService,
     protected jhiAlertService: JhiAlertService,
     protected eventManager: JhiEventManager,
-    protected accountService: AccountService
+    protected accountService: AccountService,
+    protected researchAreaService: ResearchAreaService
   ) {
     this.loadUnits();
   }
@@ -48,6 +59,19 @@ export class OfficerComponent implements OnInit, OnDestroy {
       .subscribe(
         (res: IOfficer[]) => {
           this.officers = res;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+    this.researchAreaService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<IResearchArea[]>) => res.ok),
+        map((res: HttpResponse<IResearchArea[]>) => res.body)
+      )
+      .subscribe(
+        (res: IResearchArea[]) => {
+          this.researchAreas = res;
+          this.createTree();
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
@@ -148,7 +172,73 @@ export class OfficerComponent implements OnInit, OnDestroy {
     }
     return filtered;
   }
+  isAdmin() {
+    return this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER']);
+  }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+  createTree() {
+    this.trees = [];
+    const trees: TreeNode[] = [];
+    this.researchAreas.forEach(r => {
+      const tree: TreeNode = {
+        label: r.name,
+        data: r.id,
+        children: [],
+        parent: r.parent ? r.parent : null,
+        expandedIcon: 'pi pi-folder-open',
+        collapsedIcon: 'pi pi-folder',
+        expanded: true
+      };
+      trees.push(tree);
+    });
+    this.researchAreas.forEach(r => {
+      trees.forEach(t => {
+        trees.forEach(e => {
+          if (r.id == t.data && r.parent != null && r.parent.id == e.data) {
+            e.children.push(t);
+          }
+        });
+      });
+    });
+    trees.forEach(t => {
+      if (t.parent === null) {
+        this.trees.push(t);
+      }
+    });
+  }
+  expandAll() {
+    this.trees.forEach(node => {
+      this.expandRecursive(node, true);
+    });
+  }
+
+  collapseAll() {
+    this.trees.forEach(node => {
+      this.expandRecursive(node, false);
+    });
+  }
+  private expandRecursive(node: TreeNode, isExpand: boolean) {
+    node.expanded = isExpand;
+    if (node.children) {
+      node.children.forEach(childNode => {
+        this.expandRecursive(childNode, isExpand);
+      });
+    }
+  }
+  filterByUnit() {
+    this.officerService
+      .search(this.selectedUnit.name, null, null)
+      .pipe(
+        filter((res: HttpResponse<IOfficer[]>) => res.ok),
+        map((res: HttpResponse<IOfficer[]>) => res.body)
+      )
+      .subscribe(
+        (res: IOfficer[]) => {
+          this.officers = res;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
   }
 }
