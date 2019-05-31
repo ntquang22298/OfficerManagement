@@ -33,32 +33,32 @@
     </div>
     <div *ngSwitchCase="false">
         <div [ngSwitch]="isAuthenticated()">
-    <div class="banner" *ngSwitchCase="false">
-        <ngb-carousel [showNavigationArrows]="false">
-            <ng-template ngbSlide>
-                <img class="banner-img" src="../../../../../images/f07635fc24d8e33b3bddac1b15e6ea51-700.jpg">
-                <div class="carousel-caption">
-                    <h3>No keyboard...</h3>
-                    <p>This carousel uses customized default values.</p>
-                </div>
-            </ng-template>
-            <ng-template ngbSlide>
-                <img class="banner-img" src="../../../../../images/Digital-Technology-Background.jpg">
-                <div class="carousel-caption">
-                    <h3>10 seconds between slides...</h3>
-                    <p>This carousel uses customized default values.</p>
-                </div>
-            </ng-template>
-            <ng-template ngbSlide>
-                <img class="banner-img" src="../../../../../images/96112.jpg">
-                <div class="carousel-caption">
-                    <h3>No mouse events...</h3>
-                    <p>This carousel doesn't pause or resume on mouse events</p>
-                </div>
-            </ng-template>
-        </ngb-carousel>
-    </div>
-</div>
+            <div class="banner" *ngSwitchCase="false">
+                <ngb-carousel [showNavigationArrows]="false">
+                    <ng-template ngbSlide>
+                        <img class="banner-img" src="../../../../../images/f07635fc24d8e33b3bddac1b15e6ea51-700.jpg">
+                        <div class="carousel-caption">
+                            <h3>No keyboard...</h3>
+                            <p>This carousel uses customized default values.</p>
+                        </div>
+                    </ng-template>
+                    <ng-template ngbSlide>
+                        <img class="banner-img" src="../../../../../images/Digital-Technology-Background.jpg">
+                        <div class="carousel-caption">
+                            <h3>10 seconds between slides...</h3>
+                            <p>This carousel uses customized default values.</p>
+                        </div>
+                    </ng-template>
+                    <ng-template ngbSlide>
+                        <img class="banner-img" src="../../../../../images/96112.jpg">
+                        <div class="carousel-caption">
+                            <h3>No mouse events...</h3>
+                            <p>This carousel doesn't pause or resume on mouse events</p>
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+            </div>
+        </div>
         <div class="body" class="wrapper">
             <div class="row search">
                 <div class="row">
@@ -71,110 +71,33 @@
                 </div>
 
             </div>
-            <ul class="gv-list">
-                <li>
-                    <div class="gv-item-wr">
-                        <div class="gv-item">
-                            <img src="../../../../../images/images.jpg">
-                            <div class="caption">
-                                <p class="gv-name">
-                                    <a> Le Dinh Thanh</a>
-                                </p>
-                                <p class="gv-unit">Khoa cong nghe thong tin</p>
-                                <div class="gv-desc">
-                                    <i>Hoc ham: Tien si</i>
-                                    <br>
-                                    <i>Chuc vu: Giang vien</i>
+            <p-scrollPanel styleClass="custombar1" [style]="{width: '1060px', height: '1060px'}">
+                <ul class="gv-list" *ngFor="let officer of officers">
+                    <li>
+                        <div class="gv-item-wr">
+                            <div class="gv-item">
+                                <img src="../../../../../images/images.jpg">
+                                <div class="caption">
+                                    <p class="gv-name">
+                                        <a> Le Dinh Thanh</a>
+                                    </p>
+                                    <p class="gv-unit">Khoa cong nghe thong tin</p>
+                                    <div class="gv-desc">
+                                        <i>Hoc ham: Tien si</i>
+                                        <br>
+                                        <i>Chuc vu: Giang vien</i>
+                                    </div>
+                                </div>
+
+                                <div class="gv-viewmore">
+                                    <a>Chi tiet</a>
                                 </div>
                             </div>
-
-                            <div class="gv-viewmore">
-                                <a>Chi tiet</a>
-                            </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="gv-item-wr">
-                        <div class="gv-item">
-                            <img src="../../../../../images/images.jpg">
-                            <div class="caption">
-                                <p class="gv-name">Le Dinh Thanh</p>
-                                <p class="gv-unit">Khoa cong nghe thong tin</p>
-                                <div class="gv-desc">
-                                    <i>Hoc ham: Tien si</i>
-                                    <br>
-                                    <i>Chuc vu: Giang vien</i>
-                                </div>
-                            </div>
+                    </li>
+                </ul>
+            </p-scrollPanel>
 
-                            <div class="gv-viewmore">
-                                <a>Chi tiet</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="gv-item-wr">
-                        <div class="gv-item">
-                            <img src="../../../../../images/images.jpg">
-                            <div class="caption">
-                                <p class="gv-name">Le Dinh Thanh</p>
-                                <p class="gv-unit">Khoa cong nghe thong tin</p>
-                                <div class="gv-desc">
-                                    <i>Hoc ham: Tien si</i>
-                                    <br>
-                                    <i>Chuc vu: Giang vien</i>
-                                </div>
-                            </div>
-
-                            <div class="gv-viewmore">
-                                <a>Chi tiet</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="gv-item-wr">
-                        <div class="gv-item">
-                            <img src="../../../../../images/images.jpg">
-                            <div class="caption">
-                                <p class="gv-name">Le Dinh Thanh</p>
-                                <p class="gv-unit">Khoa cong nghe thong tin</p>
-                                <div class="gv-desc">
-                                    <i>Hoc ham: Tien si</i>
-                                    <br>
-                                    <i>Chuc vu: Giang vien</i>
-                                </div>
-                            </div>
-
-                            <div class="gv-viewmore">
-                                <a>Chi tiet</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="gv-item-wr">
-                        <div class="gv-item">
-                            <img src="../../../../../images/images.jpg">
-                            <div class="caption">
-                                <p class="gv-name">Le Dinh Thanh</p>
-                                <p class="gv-unit">Khoa cong nghe thong tin</p>
-                                <div class="gv-desc">
-                                    <i>Hoc ham: Tien si</i>
-                                    <br>
-                                    <i>Chuc vu: Giang vien</i>
-                                </div>
-                            </div>
-
-                            <div class="gv-viewmore">
-                                <a>Chi tiet</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
 

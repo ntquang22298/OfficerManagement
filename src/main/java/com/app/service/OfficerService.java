@@ -5,6 +5,8 @@ import com.app.domain.enumeration.OfficerDegree;
 import com.app.domain.enumeration.OfficerType;
 import com.app.service.dto.OfficerDTO;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface OfficerService {
 
@@ -65,5 +67,5 @@ public interface OfficerService {
     Officer findByUser();
 
     List<OfficerDTO> findByResearchArea(Long id);
-
+    
 }

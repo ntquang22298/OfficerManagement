@@ -141,3 +141,6 @@ p{
 .banner{
   margin-top:-30px;
 }
+::ng-deep .ui-widget-content{
+  border: 0 !important;
+}
