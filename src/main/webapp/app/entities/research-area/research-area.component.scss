@@ -26,3 +26,8 @@
   font-size: 30px !important;
   color: #eecc66 !important;
 }
+::ng-deep .ui-tree {
+  width: 1680px;
+  height: 100%;
+  border: none !important;
+}
