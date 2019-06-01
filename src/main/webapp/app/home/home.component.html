@@ -1,9 +1,9 @@
 <div [ngSwitch]="isAuthenticated()">
     <div class="row" *ngSwitchCase="true">
-        <div class="col-md-5">
-            <img class="icon" src="../../../../../images/gear7-01.png">
+        <div class="col-md-3">
+            <span class="hipster img-fluid rounded"></span>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-9">
             <h1 class="display-6" jhiTranslate="home.title">Welcome to OfficerManagement System!</h1>
             <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
 
@@ -33,97 +33,145 @@
     </div>
     <div *ngSwitchCase="false">
         <div [ngSwitch]="isAuthenticated()">
-            <div class="banner" *ngSwitchCase="false">
-                <ngb-carousel [showNavigationArrows]="false">
-                    <ng-template ngbSlide>
-                        <img class="banner-img"
-                            src="https://firebasestorage.googleapis.com/v0/b/vuejs-firebase-425c6.appspot.com/o/vnu.png?alt=media&token=5415751c-2ff5-45a3-9593-e16eb75d6179">
-                        <div class="carousel-caption">
-                            <h3 jhiTranslate="home.banner.operator">VNU Operator</h3>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbSlide>
-                        <img class="banner-img"
-                            src="https://firebasestorage.googleapis.com/v0/b/vuejs-firebase-425c6.appspot.com/o/G2.png?alt=media&token=47d1bc1e-b2dc-4ed9-a877-5e9f4d921c47">
-                        <div class="carousel-caption">
-                            <h3 jhiTranslate="home.banner.amphitheater">Amphitheater</h3>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbSlide>
-                        <img class="banner-img"
-                            src="https://firebasestorage.googleapis.com/v0/b/vuejs-firebase-425c6.appspot.com/o/E3.png?alt=media&token=f811fa55-7bed-4b87-8dc5-e66de5747a56">
-                        <div class="carousel-caption">
-                            <h3 jhiTranslate="home.banner.lecture">UET lecturers</h3>
-                        </div>
-                    </ng-template>
-                </ngb-carousel>
-            </div>
-        </div>
-        <div class="body" class="wrapper">
-            <div class="row search">
-                <div class="col-md-7">
-                    <select class="selection" [(ngModel)]="searchType" (ngModelChange)="searchOfficer()">
-                        <option jhiTranslate="officerManagementApp.enum.allType" [ngValue]="allType"></option>
-                        <option jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officerType}}"
-                            *ngFor="let officerType of officerTypes" [ngValue]="officerType">{{officerType}}
-                        </option>
-                    </select>
-                    <select class="selection" [(ngModel)]="searchDegree" (ngModelChange)="searchOfficer()">
-                        <option jhiTranslate="officerManagementApp.enum.allDegree" [ngValue]="allDegree"></option>
-                        <option jhiTranslate="{{'officerManagementApp.enum.officer.degree.'+ officerDegree}}"
-                            *ngFor="let officerDegree of officerDegrees" [ngValue]="officerDegree">{{officerDegree}}
-                        </option>
-                    </select>
-                    <select class="selection" [(ngModel)]="searchUnit" (ngModelChange)="searchOfficer()">
-                        <option jhiTranslate="officerManagementApp.enum.all" [ngValue]="all"></option>
-                        <option *ngFor="let unit of units" [ngValue]="unit.name">{{unit.name}}</option>
-                    </select>
+    <div class="banner" *ngSwitchCase="false">
+        <ngb-carousel [showNavigationArrows]="false">
+            <ng-template ngbSlide>
+                <img class="banner-img" src="https://firebasestorage.googleapis.com/v0/b/vuejs-firebase-425c6.appspot.com/o/vnu.png?alt=media&token=5415751c-2ff5-45a3-9593-e16eb75d6179">
+                <div class="carousel-caption">
+                    <h3 jhiTranslate="home.banner.operator">VNU Operator</h3>                
                 </div>
-                <div class="col-md-5">
+            </ng-template>
+            <ng-template ngbSlide>
+                <img class="banner-img" src="https://firebasestorage.googleapis.com/v0/b/vuejs-firebase-425c6.appspot.com/o/G2.png?alt=media&token=47d1bc1e-b2dc-4ed9-a877-5e9f4d921c47">
+                <div class="carousel-caption">
+                    <h3 jhiTranslate="home.banner.amphitheater">Amphitheater</h3>                   
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <img class="banner-img" src="https://firebasestorage.googleapis.com/v0/b/vuejs-firebase-425c6.appspot.com/o/E3.png?alt=media&token=f811fa55-7bed-4b87-8dc5-e66de5747a56">
+                <div class="carousel-caption">
+                    <h3 jhiTranslate="home.banner.lecture">UET lecturers</h3>                    
+                </div>
+            </ng-template>S
+        </ngb-carousel>
+    </div>
+</div>
+        <div class="body" class="wrapper">
+            <div class="row-search">
+                <div class="row">
                     <p-autoComplete [(ngModel)]="officerSearch" [suggestions]="results"
                         (completeMethod)="search($event)" field="fullName"></p-autoComplete>
                     <button class="searchbtn" (click)="findByName()">
-                        <span class="d-none d-md-inline selection"
+                        <span class="d-none d-md-inline"
                             jhiTranslate="officerManagementApp.officer.button.search">Search</span>
                     </button>
                 </div>
 
             </div>
-            <p-scrollPanel styleClass="custombar1" [style]="{width: '1060px', height: '1060px'}">
-                <ul class="gv-list" *ngFor="let officer of officers">
-                    <li>
-                        <div class="gv-item-wr">
-                            <div class="gv-item">
-                                <div *ngIf="officer.avatarUrl">
-                                    <img [src]='officer.avatarUrl'>
-                                </div>
-                                <div *ngIf="!officer.avatarUrl">
-                                    <img
-                                        src="https://firebasestorage.googleapis.com/v0/b/vuejs-firebase-425c6.appspot.com/o/image%2Fplaceholder.png?alt=media&token=b799bfb5-1b5a-48b3-b237-acbf99de499c" />
-                                </div>
-                                <div class="caption">
-                                    <p class="gv-name">
-                                        <a (click)="getOfficer(officer.id)"> {{officer.fullName}}</a>
-                                    </p>
-                                    <p class="gv-unit">{{officer.unitName}}</p>
-                                    <div class="gv-desc">
-                                        <i
-                                            jhiTranslate="{{'officerManagementApp.enum.officer.degree.' + officer.degree}}">{{officer.degree}}</i>
-                                        <br>
-                                        <i
-                                            jhiTranslate="{{'officerManagementApp.enum.officer.type.'+ officer.type}}">{{officer.type}}</i>
-                                    </div>
-                                </div>
-
-                                <div class="gv-viewmore">
-                                    <a jhiTranslate="home.detail" (click)="getOfficer(officer.id)">Chi tiet</a>
+            <ul class="gv-list">
+                <li>
+                    <div class="gv-item-wr">
+                        <div class="gv-item">
+                            <img src="../../../../../images/images.jpg">
+                            <div class="caption">
+                                <p class="gv-name">
+                                    <a> Le Dinh Thanh</a>
+                                </p>
+                                <p class="gv-unit">Khoa cong nghe thong tin</p>
+                                <div class="gv-desc">
+                                    <i>Hoc ham: Tien si</i>
+                                    <br>
+                                    <i>Chuc vu: Giang vien</i>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </p-scrollPanel>
 
+                            <div class="gv-viewmore">
+                                <a>Chi tiet</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gv-item-wr">
+                        <div class="gv-item">
+                            <img src="../../../../../images/images.jpg">
+                            <div class="caption">
+                                <p class="gv-name">Le Dinh Thanh</p>
+                                <p class="gv-unit">Khoa cong nghe thong tin</p>
+                                <div class="gv-desc">
+                                    <i>Hoc ham: Tien si</i>
+                                    <br>
+                                    <i>Chuc vu: Giang vien</i>
+                                </div>
+                            </div>
+
+                            <div class="gv-viewmore">
+                                <a>Chi tiet</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gv-item-wr">
+                        <div class="gv-item">
+                            <img src="../../../../../images/images.jpg">
+                            <div class="caption">
+                                <p class="gv-name">Le Dinh Thanh</p>
+                                <p class="gv-unit">Khoa cong nghe thong tin</p>
+                                <div class="gv-desc">
+                                    <i>Hoc ham: Tien si</i>
+                                    <br>
+                                    <i>Chuc vu: Giang vien</i>
+                                </div>
+                            </div>
+
+                            <div class="gv-viewmore">
+                                <a>Chi tiet</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gv-item-wr">
+                        <div class="gv-item">
+                            <img src="../../../../../images/images.jpg">
+                            <div class="caption">
+                                <p class="gv-name">Le Dinh Thanh</p>
+                                <p class="gv-unit">Khoa cong nghe thong tin</p>
+                                <div class="gv-desc">
+                                    <i>Hoc ham: Tien si</i>
+                                    <br>
+                                    <i>Chuc vu: Giang vien</i>
+                                </div>
+                            </div>
+
+                            <div class="gv-viewmore">
+                                <a>Chi tiet</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gv-item-wr">
+                        <div class="gv-item">
+                            <img src="../../../../../images/images.jpg">
+                            <div class="caption">
+                                <p class="gv-name">Le Dinh Thanh</p>
+                                <p class="gv-unit">Khoa cong nghe thong tin</p>
+                                <div class="gv-desc">
+                                    <i>Hoc ham: Tien si</i>
+                                    <br>
+                                    <i>Chuc vu: Giang vien</i>
+                                </div>
+                            </div>
+
+                            <div class="gv-viewmore">
+                                <a>Chi tiet</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 
