@@ -6,9 +6,9 @@
       "home": "Trang chủ",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Thực thể",
+        "main": "Chức năng",
         "unit": "Đơn vị",
-        "officer": "Thông tin giảng viên",
+        "officer": "Giảng viên",
         "researchArea": "Lĩnh vực quan tâm",
         "concernArea": "Chủ đề nghiên cứu",
         "diary": "Nhật Ký",

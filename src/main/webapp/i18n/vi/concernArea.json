@@ -2,22 +2,22 @@
   "officerManagementApp": {
     "concernArea": {
       "home": {
-        "title": "Concern Areas",
-        "createLabel": "Thêm mới một Concern Area",
-        "createOrEditLabel": "Thêm mới hoặc cập nhật Concern Area"
+        "title": "Chủ đề nghiên cứu",
+        "createLabel": "Thêm mới chủ đề nghiên cứu",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật chủ đề nghiên cứu"
       },
-      "created": "Một Concern Area mới được tạo với định danh {{ param }}",
-      "updated": "Một Concern Area cập nhật với định danh {{ param }}",
-      "deleted": "Một Concern Area đã xóa với định danh {{ param }}",
+      "created": "Một chủ đề nghiên cứu mới được tạo với định danh {{ param }}",
+      "updated": "Một chủ đề nghiên cứu cập nhật với định danh {{ param }}",
+      "deleted": "Một chủ đề nghiên cứu đã xóa với định danh {{ param }}",
       "delete": {
-        "question": "Bạn có chắc là muốn xóa Concern Area {{ id }}?"
+        "question": "Bạn có chắc là muốn xóa chủ đề nghiên cứu {{ id }}?"
       },
       "detail": {
-        "title": "Concern Area"
+        "title": "chủ đề nghiên cứu"
       },
-      "name": "Name",
-      "description": "Description",
-      "officers": "Officers"
+      "name": "Tên",
+      "description": "Mô tả",
+      "officers": "Giảng viên"
     }
   }
 }
