@@ -9,10 +9,12 @@ import { IConcernArea, ConcernArea } from 'app/shared/model/concern-area.model';
 import { ConcernAreaService } from './concern-area.service';
 import { IOfficer } from 'app/shared/model/officer.model';
 import { OfficerService } from 'app/entities/officer';
+import { updateExpression } from '@babel/types';
 
 @Component({
   selector: 'jhi-concern-area-update',
-  templateUrl: './concern-area-update.component.html'
+  templateUrl: './concern-area-update.component.html',
+  styleUrls:['concern-area-update.scss']
 })
 export class ConcernAreaUpdateComponent implements OnInit {
   concernArea: IConcernArea;
