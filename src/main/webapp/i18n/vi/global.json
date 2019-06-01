@@ -9,8 +9,8 @@
         "main": "Thực thể",
         "unit": "Đơn vị",
         "officer": "Thông tin giảng viên",
-        "researchArea": "Chủ đề nghiên cứu",
-        "concernArea": "Lĩnh vực quan tâm",
+        "researchArea": "Lĩnh vực quan tâm",
+        "concernArea": "Chủ đề nghiên cứu",
         "diary": "Nhật Ký",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },

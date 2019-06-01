@@ -20,8 +20,8 @@
       "uet": "Đại học Công Nghệ",
       "detail": "Thông tin chi tiết",
       "officer": "Danh sách giảng viên",
-      "concernarea": "Lĩnh vực quan tâm",
-      "researcharea": "Chủ đề nghiên cứu",
+      "concernarea": "Chủ đề nghiên cứu",
+      "researcharea": "Lĩnh vực quan tâm",
       "usefullink": "Liên kết hữu ích",
       "contact": "Thông tin liên hệ",
       "tag": "© 2019 Đại học Công Nghệ",
@@ -32,7 +32,7 @@
     },
     "banner": {
       "operator": "Tòa nhà điều hành VNU",
-      "amphitheater": "Giảng đường",
+      "amphitheater": "Giảng đường G2",
       "lecture": "Giảng viên UET"
     }
   }
