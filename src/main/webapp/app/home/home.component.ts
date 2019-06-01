@@ -88,6 +88,9 @@ export class HomeComponent implements OnInit {
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
+  /**
+   * find officer by name
+   */
   findByName() {
     this.officerService
       .findByName(this.officerSearch.fullName)

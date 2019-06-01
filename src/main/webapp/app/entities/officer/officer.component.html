@@ -44,7 +44,7 @@
 
 
         </div>
-        <br/>
+        <br />
         <div class="table-responsive" *ngIf="officers">
             <p-table class="table table-striped table-responsive" [value]=officers [paginator]="true" [rows]="10">
                 <ng-template pTemplate="header">
@@ -105,7 +105,7 @@
 
             <div class="col">
                 <p-tabView>
-                    <p-tabPanel  header="Lĩnh vực" leftIcon="pi pi-briefcase">
+                    <p-tabPanel header="Lĩnh vực" leftIcon="pi pi-briefcase">
 
                         <p-scrollPanel styleClass="custombar1" [style]="{width: '100%', height: '600px'}">
                             <div>
@@ -140,6 +140,8 @@
                                 <p-table class="table table-striped table-responsive" [value]=officers>
                                     <ng-template pTemplate="header">
                                         <tr>
+                                            <th><span jhiTranslate="global.field.id">ID</span></th>
+
                                             <th><span jhiTranslate="officerManagementApp.officer.fullName">Full
                                                     Name</span>
                                             </th>
@@ -148,11 +150,13 @@
                                             <th><span jhiTranslate="officerManagementApp.officer.unit">Unit</span></th>
                                         </tr>
                                     </ng-template>
-                                    <ng-template pTemplate="body" let-officer>
+                                    <ng-template pTemplate="body" let-officer let-i="rowIndex">
                                         <tr>
 
-
-                                            <td>{{officer.fullName}}</td>
+                                            <td>{{i+1}}</td>
+                                            <td><a
+                                                    [routerLink]="['/officer', officer?.id, 'view' ]">{{officer.fullName}}</a>
+                                            </td>
 
                                             <td
                                                 jhiTranslate="{{'officerManagementApp.enum.officer.degree.' + officer.degree}}">

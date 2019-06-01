@@ -49,7 +49,9 @@ export class OfficerComponent implements OnInit, OnDestroy {
   ) {
     this.loadUnits();
   }
-
+  /**
+   * reload page
+   */
   loadAll() {
     this.officerService
       .query()
@@ -97,7 +99,9 @@ export class OfficerComponent implements OnInit, OnDestroy {
   registerChangeInOfficers() {
     this.eventSubscriber = this.eventManager.subscribe('officerListModification', response => this.loadAll());
   }
-
+  /**
+   * search officer by unit, degree and type
+   */
   searchOfficer() {
     let unitName: string;
     if (this.searchUnit == null) {
@@ -118,7 +122,9 @@ export class OfficerComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
-
+  /**
+   * load all unit
+   */
   loadUnits() {
     this.unitService
       .query()
@@ -133,6 +139,9 @@ export class OfficerComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
+  /**
+   * find officer by name
+   */
   findByName() {
     this.officerService
       .findByName(this.officerSearch.fullName)
@@ -147,6 +156,10 @@ export class OfficerComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
+  /**
+   * auto complete search officer by names
+   * @param event 
+   */
   search(event) {
     let query = event.query;
     this.officerService
@@ -173,12 +186,18 @@ export class OfficerComponent implements OnInit, OnDestroy {
     }
     return filtered;
   }
+  /**
+   * check if current account is admin or not
+   */
   isAdmin() {
     return this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER']);
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
+  /**
+   * create tree of research area
+   */
   createTree() {
     this.trees = [];
     const trees: TreeNode[] = [];
@@ -209,12 +228,17 @@ export class OfficerComponent implements OnInit, OnDestroy {
       }
     });
   }
+  /**
+   * expand all tree
+   */
   expandAll() {
     this.trees.forEach(node => {
       this.expandRecursive(node, true);
     });
   }
-
+  /**
+   * collapse all tree
+   */
   collapseAll() {
     this.trees.forEach(node => {
       this.expandRecursive(node, false);
@@ -228,6 +252,9 @@ export class OfficerComponent implements OnInit, OnDestroy {
       });
     }
   }
+  /**
+   * filter officer by unit
+   */
   filterByUnit() {
     this.officerService
       .search(this.selectedUnit.name, null, null)
@@ -242,6 +269,10 @@ export class OfficerComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
+  /**
+   * filter officer by research area
+   * @param event click on tree
+   */
   findByResearch(event){
     this.officerService
     .findByResearch(event.node.data)

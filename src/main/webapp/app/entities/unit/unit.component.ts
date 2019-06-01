@@ -30,7 +30,9 @@ export class UnitComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected accountService: AccountService
   ) {}
-
+    /**
+     * load and reload page
+     */
   loadAll() {
     this.unitService
       .query()
@@ -45,7 +47,9 @@ export class UnitComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
-
+  /**
+   * load page on init
+   */
   ngOnInit() {
     this.loadAll();
     this.accountService.identity().then(account => {
@@ -69,7 +73,9 @@ export class UnitComponent implements OnInit, OnDestroy {
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
-
+  /**
+   * find unit by type
+   */
   findByType() {
     if (this.search == this.all) {
       this.loadAll();
@@ -87,6 +93,9 @@ export class UnitComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
+  /**
+   * find unit by name
+   */
   findByName() {
     this.unitService
       .findByName(this.unitsearch.name)
@@ -101,6 +110,10 @@ export class UnitComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
+  /**
+   * search unit by name
+   * @param event 
+   */
   searchUnit(event) {
     let query = event.query;
     this.unitService
@@ -117,6 +130,11 @@ export class UnitComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
+  /**
+   * auto complete 
+   * @param query text user enter
+   * @param units list return
+   */
   filterUnit(query, units: any[]): any[] {
     let filtered: any[] = [];
     for (let i = 0; i < units.length; i++) {

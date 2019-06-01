@@ -108,7 +108,7 @@
                                         <option [ngValue]="null"></option>
                                         <option
                                             [ngValue]="unitOption.id === officer.unit?.id ? officer.unit : unitOption"
-                                            *ngFor="let unitOption of units; trackBy: trackUnitById">{{unitOption.id}}
+                                            *ngFor="let unitOption of units; trackBy: trackUnitById">{{unitOption.name}}
                                         </option>
                                     </select>
                                 </div>

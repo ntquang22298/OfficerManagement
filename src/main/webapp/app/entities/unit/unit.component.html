@@ -47,13 +47,13 @@
                     <th></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-unit >
+            <ng-template pTemplate="body" let-unit let-i="rowIndex" >
                 <tr>
-                    <td><a [routerLink]="['/unit', unit.id, 'view' ]">{{unit.id}}</a></td>
+                    <td><a [routerLink]="['/unit', unit.id, 'view' ]">{{i+1}}</a></td>
                     <td>{{unit.name}}</td>
                     <td>{{unit.address}}</td>
                     <td>{{unit.phone}}</td>
-                    <td>{{unit.website}}</td>
+                    <td><a href="{{unit.website}}" type="_blank">{{unit.website}}</a></td>
                     <td jhiTranslate="{{'officerManagementApp.enum.unit.'+unit.type}}">{{unit.type}}</td>
                     <td >
                         <div class="btn-group">
