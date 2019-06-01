@@ -6,7 +6,8 @@ import { IConcernArea } from 'app/shared/model/concern-area.model';
 
 @Component({
   selector: 'jhi-concern-area-detail',
-  templateUrl: './concern-area-detail.component.html'
+  templateUrl: './concern-area-detail.component.html',
+  styleUrls: ['concern-area-detail.scss']
 })
 export class ConcernAreaDetailComponent implements OnInit {
   concernArea: IConcernArea;

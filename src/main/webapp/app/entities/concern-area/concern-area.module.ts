@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
+import { TableModule } from 'primeng/table';
 
 import { OfficerManagementSharedModule } from 'app/shared';
 import {
@@ -17,13 +18,14 @@ import {
 const ENTITY_STATES = [...concernAreaRoute, ...concernAreaPopupRoute];
 
 @NgModule({
-  imports: [OfficerManagementSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [OfficerManagementSharedModule, RouterModule.forChild(ENTITY_STATES),    TableModule],
   declarations: [
     ConcernAreaComponent,
     ConcernAreaDetailComponent,
     ConcernAreaUpdateComponent,
     ConcernAreaDeleteDialogComponent,
-    ConcernAreaDeletePopupComponent
+    ConcernAreaDeletePopupComponent,
+
   ],
   entryComponents: [ConcernAreaComponent, ConcernAreaUpdateComponent, ConcernAreaDeleteDialogComponent, ConcernAreaDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],

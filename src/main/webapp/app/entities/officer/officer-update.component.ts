@@ -17,7 +17,8 @@ import { UnitService } from 'app/entities/unit';
 
 @Component({
   selector: 'jhi-officer-update',
-  templateUrl: './officer-update.component.html'
+  templateUrl: './officer-update.component.html',
+  styleUrls :['officer-update.scss']
 })
 export class OfficerUpdateComponent implements OnInit {
   officer: IOfficer;

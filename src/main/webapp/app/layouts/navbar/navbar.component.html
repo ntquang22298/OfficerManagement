@@ -46,7 +46,7 @@
                             <span jhiTranslate="global.menu.entities.officer">Officer</span>
                         </a>
                     </li>
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="research-area" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
@@ -61,14 +61,14 @@
                             <span jhiTranslate="global.menu.entities.concernArea">Concern Area</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <li *jhiHasAnyAuthority="'ROLE_USER'">
                         <a class="dropdown-item" routerLink="diary" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.diary">Diary</span>
                         </a>
                     </li>
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active"
                             (click)="collapseNavbar()">
                             <fa-icon icon="user" fixedWidth="true"></fa-icon>
@@ -151,15 +151,15 @@
             <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
-                    <span *ngIf="!getImageUrl()">
+                    <span>
                         <fa-icon icon="user"></fa-icon>
                         <span jhiTranslate="global.menu.account.main">
                             Account
                         </span>
                     </span>
-                    <span *ngIf="getImageUrl()">
+                    <!-- <span *ngIf="getImageUrl()">
                         <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
-                    </span> </a>
+                    </span> </a> -->
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
                     <li *ngSwitchCase="true">
                         <a *jhiHasAnyAuthority="'ROLE_USER'" class="dropdown-item" routerLink="settings"

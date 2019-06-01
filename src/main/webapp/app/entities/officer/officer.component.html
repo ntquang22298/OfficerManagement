@@ -105,7 +105,7 @@
 
             <div class="col">
                 <p-tabView>
-                    <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
+                    <p-tabPanel  header="Lĩnh vực" leftIcon="pi pi-briefcase">
 
                         <p-scrollPanel styleClass="custombar1" [style]="{width: '100%', height: '600px'}">
                             <div>
@@ -119,9 +119,6 @@
                                                     {{tree.label}}
                                                 </ng-template>
                                             </p-tree>
-                                            <div>Selected Nodes: <span *ngFor="let file of selectedFiles">{{file.label}}
-                                                </span>
-                                            </div>
                                         </div>
 
                                     </div>
@@ -129,16 +126,15 @@
                             </div>
                         </p-scrollPanel>
                     </p-tabPanel>
-                    <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
+                    <p-tabPanel header="Đơn vị" leftIcon="pi pi-inbox">
                         <p-listbox (click)="filterByUnit()" [options]="units" [(ngModel)]="selectedUnit"
                             optionLabel="name" filter="filter"> </p-listbox>
-                        <p>Selected Unit: {{selectedUnit ? selectedUnit.name : 'none'}}</p>
                     </p-tabPanel>
                 </p-tabView>
             </div>
             <div class="col">
                 <p-tabView>
-                    <p-tabPanel header="Godfather II" leftIcon="pi pi-inbox">
+                    <p-tabPanel header="Cán bộ" leftIcon="pi pi-users">
                         <p-scrollPanel styleClass="custombar1" [style]="{width: '100%', height: '600px'}">
                             <div class="table-responsive" *ngIf="officers">
                                 <p-table class="table table-striped table-responsive" [value]=officers>

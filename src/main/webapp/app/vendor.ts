@@ -7,6 +7,8 @@ import '../content/scss/vendor.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faIdBadge,
+  faMarker,
+  faPhone,
   faBriefcase,
   faUserGraduate,
   faMapMarkedAlt,
@@ -45,10 +47,19 @@ import {
   faTrashAlt,
   faAsterisk,
   faTasks,
-  faHome
+  faHome,
+  faMapMarker,
+  faIdCard,
+  faSignature,
+  faGlobe
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
+library.add(faGlobe);
+library.add(faSignature);
+library.add(faIdCard);
+library.add(faMapMarker);
+library.add(faPhone);
 library.add(faIdBadge);
 library.add(faBriefcase);
 library.add(faUserGraduate);

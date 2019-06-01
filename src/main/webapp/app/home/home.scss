@@ -6,7 +6,7 @@ Main page styles
   display: inline-block;
   width: 347px;
   height: 497px;
-  background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
+  background: url('../../../../../images/gear7-01.png') no-repeat center top;
   background-size: contain;
 }
 
@@ -17,7 +17,7 @@ Main page styles
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   .hipster {
-    background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
+    background: url('../../../../../images/gear7-01.png') no-repeat center top;
     background-size: contain;
   }
 }
@@ -34,7 +34,7 @@ Main page styles
   text-align: left;
 }
 img {
-  max-width: 100%;
+  width: 236px;
   height: 315px;
   vertical-align: middle;
   border-radius: 6px;
@@ -42,14 +42,16 @@ img {
 }
 .gv-name {
   margin-top: 16px;
-  margin-bottom: 1px;
+  margin-bottom: 20px;
   color: #1c9ad6;
   font-weight: bold;
   text-transform: capitalize;
+  min-height: 10px;
 }
 .gv-unit {
   font-weight: bold;
   min-height: 30px;
+  color: #17dcf3;
 }
 p {
   font-family: 'Roboto', Tahoma, sans-serif;
@@ -60,6 +62,7 @@ p {
 .gv-viewmore {
   margin-top: 30px;
   text-align: right;
+  color: #1c9ad6;
 }
 .gv-desc {
   font-size: 13px;
@@ -108,10 +111,11 @@ p {
   border: none;
   margin-left: -3px;
   color: white;
+  float: left;
 }
 
 .selection {
-  width: 200px;
+  width: 180px;
   height: 41px;
   background-color: #0070ba;
   color: #ffffff;
@@ -123,12 +127,10 @@ p {
 }
 .search {
   padding-bottom: 50px;
-  padding-left: 60px;
 }
 ::ng-deep.ui-autocomplete .ui-autocomplete-input {
   width: 265px;
   height: 41px;
-  border: 1px solid #828080;
   font-size: 12px;
   padding-left: 42px;
 }
@@ -141,8 +143,18 @@ p {
 }
 .banner {
   margin-top: -30px;
+  margin-bottom: 50px;
 }
 
 h3 {
   color: #ffffff;
+}
+::ng-deep .ui-widget-content{
+  border: 0 !important;
+}
+.icon{
+width: 500px;
+height: 500px;
+box-shadow:none
+
 }

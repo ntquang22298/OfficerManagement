@@ -16,6 +16,7 @@ export class OfficerService {
   public findByNameUrl = SERVER_API_URL + 'api/officers-by-name';
   public findByUserUrl = SERVER_API_URL + 'api/officers-by-user';
   public findByResearchUrl =SERVER_API_URL + 'api/officers-by-research';
+  public getAllPageUrl = SERVER_API_URL + 'api/officers-page';
   constructor(protected http: HttpClient) {}
 
   create(officer: IOfficer): Observable<EntityResponseType> {
@@ -50,4 +51,9 @@ export class OfficerService {
   findByResearch(id: number): Observable<EntityArrayResponseType> {
     return this.http.get<IOfficer[]>(`${this.findByResearchUrl}/${id}`, { observe: 'response' });
   }
+  getAllPage(req?: any): Observable<HttpResponse<IOfficer[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<IOfficer[]>(this.getAllPageUrl, { params: options, observe: 'response' });
+  }
+
 }

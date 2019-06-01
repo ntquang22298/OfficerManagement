@@ -33,6 +33,7 @@
       "operator": "VNU Operator",
       "amphitheater": "G2 Amphitheater",
       "lecture": "UET lectures"
-    }
+    },
+    "detail":"Detail"
   }
 }

@@ -5,7 +5,8 @@ import { IUnit } from 'app/shared/model/unit.model';
 
 @Component({
   selector: 'jhi-unit-detail',
-  templateUrl: './unit-detail.component.html'
+  templateUrl: './unit-detail.component.html',
+  styleUrls :['unit-detail.scss']
 })
 export class UnitDetailComponent implements OnInit {
   unit: IUnit;

@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit {
   units: IUnit[];
   settingsForm = this.fb.group({
     firstName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-    lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+    lastName: undefined,
     email: [undefined, [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     VNUemail: [undefined, [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     activated: [false],

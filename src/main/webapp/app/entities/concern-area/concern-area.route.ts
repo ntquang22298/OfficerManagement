@@ -45,7 +45,7 @@ export const concernAreaRoute: Routes = [
       concernArea: ConcernAreaResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'officerManagementApp.concernArea.home.title'
     },
     canActivate: [UserRouteAccessService]

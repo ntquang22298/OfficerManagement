@@ -31,15 +31,9 @@ export class NavbarComponent implements OnInit {
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     private router: Router,
-    config: NgbCarouselConfig
     
   ) {
-    this.version = VERSION ? 'v' + VERSION : '';
-    this.isNavbarCollapsed = true;
-    config.interval = 3000;
-    config.wrap = false;
-    config.keyboard = false;
-    config.pauseOnHover = false;
+
   }
 
   ngOnInit() {

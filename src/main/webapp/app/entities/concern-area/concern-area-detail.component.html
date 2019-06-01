@@ -1,31 +1,52 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="concernArea">
-            <h2><span jhiTranslate="officerManagementApp.concernArea.detail.title">Concern Area</span> {{concernArea.id}}</h2>
+            <h2><span jhiTranslate="officerManagementApp.concernArea.detail.title">Concern Area</span>
+                {{concernArea.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="officerManagementApp.concernArea.name">Name</span></dt>
-                <dd>
-                    <span>{{concernArea.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="officerManagementApp.concernArea.description">Description</span></dt>
-                <dd>
-                    <span>{{concernArea.description}}</span>
-                </dd>
-            </dl>
+            <div class="detail">
+                <div class="info">
+                    <div class="row">
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
+                        <div class="col">
+                            <div class="icon-left">
+                                <fa-icon class="icon-left" icon="signature"></fa-icon>
+                            </div>
+                            <div class="text">
+                                <strong>
+                                    <span jhiTranslate="officerManagementApp.concernArea.name">Name</span>
+                                </strong>
+                            </div>
+                            <p> {{concernArea.name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
 
-            <button type="button"
-                    [routerLink]="['/concern-area', concernArea.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                        <div class="col">
+                            <div class="icon-left">
+                                <fa-icon class="icon-left" icon="book"></fa-icon>
+                            </div>
+
+                            <div class="text"><strong>
+                                    <span jhiTranslate="officerManagementApp.concernArea.description">Description</span>
+                                </strong></div>
+                            <span>{{concernArea.description}}</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                        <button type="submit" (click)="previousState()" class="btn btn-info">
+                                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                            </button>
+            
+                            <button type="button" [routerLink]="['/concern-area', concernArea.id, 'edit']" class="btn btn-primary">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                            </button>
+                </div>
+               
+            </div>
         </div>
     </div>
 </div>
