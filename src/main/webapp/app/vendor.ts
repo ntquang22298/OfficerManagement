@@ -51,10 +51,12 @@ import {
   faMapMarker,
   faIdCard,
   faSignature,
-  faGlobe
+  faGlobe,
+  faUnlockAlt
 } from '@fortawesome/free-solid-svg-icons';
 
-// Adds the SVG icon to the library so you can use it in your page
+// Adds the SVG icon to the library so you can use it in your page,
+library.add(faUnlockAlt);
 library.add(faGlobe);
 library.add(faSignature);
 library.add(faIdCard);
