@@ -9,7 +9,7 @@
         "main": "Entities",
         "unit": "Unit",
         "officer": "Officer",
-        "researchArea": "Research Area",
+        "researchArea": "Interest Area",
         "concernArea": "Concern Area",
         "diary": "Diary",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
